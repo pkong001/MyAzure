@@ -1,0 +1,9 @@
+{
+	"name": "adf-pongpisut",
+	"location": "southeastasia",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "9f1b49ee-f438-4bf6-a924-98a8173af40d",
+		"tenantId": "955ebd7f-b597-44e8-a47a-378925afa7a2"
+	}
+}
