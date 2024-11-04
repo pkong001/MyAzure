@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "Report",
+    "displayName": "RawBiConnected"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "b2cd231f-d2e7-429f-8025-c0c1a35a3a01"
+  }
+}

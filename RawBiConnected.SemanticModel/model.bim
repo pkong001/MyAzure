@@ -1,0 +1,2373 @@
+{
+  "compatibilityLevel": 1550,
+  "model": {
+    "annotations": [
+      {
+        "name": "__PBI_TimeIntelligenceEnabled",
+        "value": "0"
+      },
+      {
+        "name": "PBIDesktopVersion",
+        "value": "2.137.1102.0 (24.10)"
+      },
+      {
+        "name": "PBI_QueryOrder",
+        "value": "[\"SalesLT vGetAllCategories\",\"SalesLT vProductAndDescription\",\"SalesLT vProductModelCatalogDescription\",\"BuildVersion\",\"ErrorLog\",\"SalesLT Address\",\"SalesLT Customer\",\"SalesLT CustomerAddress\",\"SalesLT Product\",\"SalesLT ProductCategory\",\"SalesLT ProductModel\",\"SalesLT ProductModelProductDescription\",\"SalesLT SalesOrderDetail\",\"SalesLT SalesOrderHeader\"]"
+      },
+      {
+        "name": "PBI_ProTooling",
+        "value": "[\"DevMode\"]"
+      },
+      {
+        "name": "PBI_RemovedChildren",
+        "value": "[{\"remoteItemId\":{\"foreignKeyRelationship\":{\"fromTableLocalLineageTag\":\"1974c9d0-336d-4cca-9216-e30ede07e9f9\",\"fromColumnLocalLineageTag\":\"a48c614c-0e88-4c12-bfad-6f8f975ddaee\",\"toTableLocalLineageTag\":\"42492cb0-5ce7-4340-b526-bc6a2cb9a6d0\",\"toColumnLocalLineageTag\":\"a4b67a0d-4069-4625-b168-a25bc374fed1\"}},\"objectType\":\"Relationship\"},{\"remoteItemId\":{\"foreignKeyRelationship\":{\"fromTableLocalLineageTag\":\"1974c9d0-336d-4cca-9216-e30ede07e9f9\",\"fromColumnLocalLineageTag\":\"ffe9a2b6-16a4-472c-a766-af0354cc3fc7\",\"toTableLocalLineageTag\":\"83a2d9a3-f2ef-4b60-9bcc-c508e5c49276\",\"toColumnLocalLineageTag\":\"9a9a2c7d-a182-47fb-ab46-df628f88d3ad\"}},\"objectType\":\"Relationship\"}]"
+      }
+    ],
+    "culture": "en-US",
+    "cultures": [
+      {
+        "name": "en-US",
+        "linguisticMetadata": {
+          "content": {
+            "Language": "en-US",
+            "Version": "1.0.0"
+          },
+          "contentType": "json"
+        }
+      }
+    ],
+    "dataAccessOptions": {
+      "legacyRedirects": true,
+      "returnErrorValuesAsNull": true
+    },
+    "defaultPowerBIDataSourceVersion": "powerBI_V3",
+    "relationships": [
+      {
+        "name": "8e0a5bdb-e26c-42d2-a2c3-429f1ebd5f8c",
+        "annotations": [
+          {
+            "name": "PBI_IsFromSource",
+            "value": "FS"
+          }
+        ],
+        "crossFilteringBehavior": "bothDirections",
+        "fromCardinality": "one",
+        "fromColumn": "AddressID",
+        "fromTable": "SalesLT CustomerAddress",
+        "toColumn": "AddressID",
+        "toTable": "SalesLT Address"
+      },
+      {
+        "name": "f4603973-1db3-4009-ba3e-7f4df081091d",
+        "annotations": [
+          {
+            "name": "PBI_IsFromSource",
+            "value": "FS"
+          }
+        ],
+        "fromColumn": "CustomerID",
+        "fromTable": "SalesLT CustomerAddress",
+        "toColumn": "CustomerID",
+        "toTable": "SalesLT Customer"
+      },
+      {
+        "name": "bcf34784-7b8b-47ef-85b0-b4071091fc4e",
+        "annotations": [
+          {
+            "name": "PBI_IsFromSource",
+            "value": "FS"
+          }
+        ],
+        "fromColumn": "ProductCategoryID",
+        "fromTable": "SalesLT Product",
+        "toColumn": "ProductCategoryID",
+        "toTable": "SalesLT ProductCategory"
+      },
+      {
+        "name": "ef686e43-0047-44d4-bb0b-cd087c22b13c",
+        "annotations": [
+          {
+            "name": "PBI_IsFromSource",
+            "value": "FS"
+          }
+        ],
+        "fromColumn": "ProductModelID",
+        "fromTable": "SalesLT Product",
+        "toColumn": "ProductModelID",
+        "toTable": "SalesLT ProductModel"
+      },
+      {
+        "name": "d7bac857-ce4a-466e-908e-90157aa58d2f",
+        "annotations": [
+          {
+            "name": "PBI_IsFromSource",
+            "value": "FS"
+          }
+        ],
+        "fromColumn": "ProductModelID",
+        "fromTable": "SalesLT ProductModelProductDescription",
+        "toColumn": "ProductModelID",
+        "toTable": "SalesLT ProductModel"
+      },
+      {
+        "name": "29d5c0ec-2d7a-4b77-a7fd-e48170cecec5",
+        "annotations": [
+          {
+            "name": "PBI_IsFromSource",
+            "value": "FS"
+          }
+        ],
+        "fromColumn": "ProductID",
+        "fromTable": "SalesLT SalesOrderDetail",
+        "toColumn": "ProductID",
+        "toTable": "SalesLT Product"
+      },
+      {
+        "name": "e2310590-5048-4041-b585-7c64c9e89687",
+        "annotations": [
+          {
+            "name": "PBI_IsFromSource",
+            "value": "FS"
+          }
+        ],
+        "fromColumn": "SalesOrderID",
+        "fromTable": "SalesLT SalesOrderDetail",
+        "toColumn": "SalesOrderID",
+        "toTable": "SalesLT SalesOrderHeader"
+      },
+      {
+        "name": "3dad616b-11b8-4044-8256-c6aec0b25651",
+        "annotations": [
+          {
+            "name": "PBI_IsFromSource",
+            "value": "FS"
+          }
+        ],
+        "crossFilteringBehavior": "bothDirections",
+        "fromCardinality": "one",
+        "fromColumn": "BillToAddressID",
+        "fromTable": "SalesLT SalesOrderHeader",
+        "toColumn": "AddressID",
+        "toTable": "SalesLT Address"
+      }
+    ],
+    "sourceQueryCulture": "en-GB",
+    "tables": [
+      {
+        "name": "SalesLT vGetAllCategories",
+        "columns": [
+          {
+            "name": "ParentProductCategoryName",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "a3f31510-7807-460d-9394-c8689be32ff5",
+            "sourceColumn": "ParentProductCategoryName",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "ProductCategoryName",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "bf38eb76-23ed-4769-9234-6fad5807feea",
+            "sourceColumn": "ProductCategoryName",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "ProductCategoryID",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "int64",
+            "formatString": "0",
+            "lineageTag": "d99d36ac-c41b-4fc2-b492-58b2689334f1",
+            "sourceColumn": "ProductCategoryID",
+            "summarizeBy": "count"
+          }
+        ],
+        "lineageTag": "2d81fe04-580e-4d0e-b0ec-16a256142af2",
+        "partitions": [
+          {
+            "name": "SalesLT vGetAllCategories",
+            "mode": "import",
+            "source": {
+              "expression": [
+                "let",
+                "    Source = Sql.Databases(\"ISDNB-00H99812A\"),",
+                "    AdventureWorksLT2022 = Source{[Name=\"AdventureWorksLT2022\"]}[Data],",
+                "    SalesLT_vGetAllCategories = AdventureWorksLT2022{[Schema=\"SalesLT\",Item=\"vGetAllCategories\"]}[Data]",
+                "in",
+                "    SalesLT_vGetAllCategories"
+              ],
+              "type": "m"
+            }
+          }
+        ]
+      },
+      {
+        "name": "SalesLT vProductAndDescription",
+        "columns": [
+          {
+            "name": "ProductID",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "int64",
+            "formatString": "0",
+            "lineageTag": "d04b74e2-d3d2-4b00-b78a-93c241bd0ad6",
+            "sourceColumn": "ProductID",
+            "summarizeBy": "count"
+          },
+          {
+            "name": "Name",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "c800093d-b196-47f0-b0f8-f154f61ccd6a",
+            "sourceColumn": "Name",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "ProductModel",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "5ca7c375-d2d5-4f8a-89ae-ba6e9278ee20",
+            "sourceColumn": "ProductModel",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "Culture",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "59a232d0-e8bb-45d7-a6f9-5d44c1706153",
+            "sourceColumn": "Culture",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "Description",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "e3af34dd-6159-4cf9-aa61-9e88ec3ceb51",
+            "sourceColumn": "Description",
+            "summarizeBy": "none"
+          }
+        ],
+        "lineageTag": "d5585cc9-de90-40ba-b6d0-d1e4452c61de",
+        "partitions": [
+          {
+            "name": "SalesLT vProductAndDescription",
+            "mode": "import",
+            "source": {
+              "expression": [
+                "let",
+                "    Source = Sql.Databases(\"ISDNB-00H99812A\"),",
+                "    AdventureWorksLT2022 = Source{[Name=\"AdventureWorksLT2022\"]}[Data],",
+                "    SalesLT_vProductAndDescription = AdventureWorksLT2022{[Schema=\"SalesLT\",Item=\"vProductAndDescription\"]}[Data]",
+                "in",
+                "    SalesLT_vProductAndDescription"
+              ],
+              "type": "m"
+            }
+          }
+        ]
+      },
+      {
+        "name": "SalesLT vProductModelCatalogDescription",
+        "columns": [
+          {
+            "name": "ProductModelID",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "int64",
+            "formatString": "0",
+            "lineageTag": "92675d1b-c897-4579-b08b-31d7eb9b0dc2",
+            "sourceColumn": "ProductModelID",
+            "summarizeBy": "count"
+          },
+          {
+            "name": "Name",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "4cb72b9e-b8e3-4394-8f58-0a95796f6675",
+            "sourceColumn": "Name",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "Summary",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "97139fb3-b251-4b39-8a60-e181eae6a5f8",
+            "sourceColumn": "Summary",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "Manufacturer",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "de693882-86f2-4a57-9599-6d9229642ebe",
+            "sourceColumn": "Manufacturer",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "Copyright",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "cb689301-aa4c-453d-9a8a-1e61a41741c7",
+            "sourceColumn": "Copyright",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "ProductURL",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "9ff39298-8dac-42da-a991-3856ee8aaa73",
+            "sourceColumn": "ProductURL",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "WarrantyPeriod",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "37c44013-1588-4ea9-9440-5b5426c4caa1",
+            "sourceColumn": "WarrantyPeriod",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "WarrantyDescription",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "f52d939f-e23a-4a2d-8500-3f0bd91b94a3",
+            "sourceColumn": "WarrantyDescription",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "NoOfYears",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "9b81fc32-e3f7-4b86-bb3a-595594014546",
+            "sourceColumn": "NoOfYears",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "MaintenanceDescription",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "39c92ba0-faf7-488d-a42e-60f737d5606b",
+            "sourceColumn": "MaintenanceDescription",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "Wheel",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "79fcbcec-735b-47bf-9829-e3e953faf57c",
+            "sourceColumn": "Wheel",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "Saddle",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "66d512c4-90d0-41c7-aace-69cbc3f3ad7c",
+            "sourceColumn": "Saddle",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "Pedal",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "2c4c2162-21c5-4ddd-aa31-a3a18395fc24",
+            "sourceColumn": "Pedal",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "BikeFrame",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "2c54e238-1db8-483b-ae69-541d80d97de5",
+            "sourceColumn": "BikeFrame",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "Crankset",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "c88c576e-4ffd-4356-9fd8-dc5f106989b3",
+            "sourceColumn": "Crankset",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "PictureAngle",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "1d46a4fd-aa0e-4299-9d1f-c4a41b8987da",
+            "sourceColumn": "PictureAngle",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "PictureSize",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "296a7828-1104-4e33-88f3-15db85f364c1",
+            "sourceColumn": "PictureSize",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "ProductPhotoID",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "e1f4cd7b-3df9-4796-b571-b0520067ec75",
+            "sourceColumn": "ProductPhotoID",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "Material",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "7729e8e3-9075-4f44-8c2f-4cd2b45bacf5",
+            "sourceColumn": "Material",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "Color",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "603c97df-654f-4130-8b1f-fbc0f47135ac",
+            "sourceColumn": "Color",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "ProductLine",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "7c31bd5d-af0f-4e60-b9d0-bd8e40662c42",
+            "sourceColumn": "ProductLine",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "Style",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "ef8499a2-d59c-407b-a1a9-659217cc0da0",
+            "sourceColumn": "Style",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "RiderExperience",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "9f485162-a7cf-4511-8da7-b0281680e25c",
+            "sourceColumn": "RiderExperience",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "rowguid",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "c6341f36-cf23-48fe-8111-c84f8b2fc099",
+            "sourceColumn": "rowguid",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "ModifiedDate",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "dateTime",
+            "formatString": "General Date",
+            "lineageTag": "8fbc23da-3cec-4ec1-b8a0-760a0aa9f514",
+            "sourceColumn": "ModifiedDate",
+            "summarizeBy": "none"
+          }
+        ],
+        "lineageTag": "70346fd1-20e9-452d-8598-9debb6a7db89",
+        "partitions": [
+          {
+            "name": "SalesLT vProductModelCatalogDescription",
+            "mode": "import",
+            "source": {
+              "expression": [
+                "let",
+                "    Source = Sql.Databases(\"ISDNB-00H99812A\"),",
+                "    AdventureWorksLT2022 = Source{[Name=\"AdventureWorksLT2022\"]}[Data],",
+                "    SalesLT_vProductModelCatalogDescription = AdventureWorksLT2022{[Schema=\"SalesLT\",Item=\"vProductModelCatalogDescription\"]}[Data]",
+                "in",
+                "    SalesLT_vProductModelCatalogDescription"
+              ],
+              "type": "m"
+            }
+          }
+        ]
+      },
+      {
+        "name": "BuildVersion",
+        "columns": [
+          {
+            "name": "SystemInformationID",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "int64",
+            "formatString": "0",
+            "lineageTag": "964a976e-a75d-4f32-b477-e946adf99274",
+            "sourceColumn": "SystemInformationID",
+            "summarizeBy": "count"
+          },
+          {
+            "name": "Database Version",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "5d0584e6-4b85-446d-9507-3d9b401528f6",
+            "sourceColumn": "Database Version",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "VersionDate",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "dateTime",
+            "formatString": "General Date",
+            "lineageTag": "f7fca751-9688-42db-9bff-d1cb7c5de0ac",
+            "sourceColumn": "VersionDate",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "ModifiedDate",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "dateTime",
+            "formatString": "General Date",
+            "lineageTag": "51d41a71-1e16-4c11-aeda-62427aa52e5b",
+            "sourceColumn": "ModifiedDate",
+            "summarizeBy": "none"
+          }
+        ],
+        "lineageTag": "38ba5b2d-776e-4bf3-913e-9ee322f8e590",
+        "partitions": [
+          {
+            "name": "BuildVersion",
+            "mode": "import",
+            "source": {
+              "expression": [
+                "let",
+                "    Source = Sql.Databases(\"ISDNB-00H99812A\"),",
+                "    AdventureWorksLT2022 = Source{[Name=\"AdventureWorksLT2022\"]}[Data],",
+                "    dbo_BuildVersion = AdventureWorksLT2022{[Schema=\"dbo\",Item=\"BuildVersion\"]}[Data]",
+                "in",
+                "    dbo_BuildVersion"
+              ],
+              "type": "m"
+            }
+          }
+        ]
+      },
+      {
+        "name": "ErrorLog",
+        "columns": [
+          {
+            "name": "ErrorLogID",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "int64",
+            "formatString": "0",
+            "lineageTag": "f4da7977-6905-46ec-a3d7-4bb19fe9e730",
+            "sourceColumn": "ErrorLogID",
+            "summarizeBy": "count"
+          },
+          {
+            "name": "ErrorTime",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "dateTime",
+            "formatString": "General Date",
+            "lineageTag": "99000b8b-bd3a-4111-b573-88fafc889404",
+            "sourceColumn": "ErrorTime",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "UserName",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "a18a96ba-9a8e-4db2-9bc4-acfdf489f79a",
+            "sourceColumn": "UserName",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "ErrorNumber",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "int64",
+            "formatString": "0",
+            "lineageTag": "648c16a9-9816-44ed-bb8c-90ef3975bcbe",
+            "sourceColumn": "ErrorNumber",
+            "summarizeBy": "sum"
+          },
+          {
+            "name": "ErrorSeverity",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "int64",
+            "formatString": "0",
+            "lineageTag": "820d8ca8-7680-4122-b622-06d5655bf0d5",
+            "sourceColumn": "ErrorSeverity",
+            "summarizeBy": "sum"
+          },
+          {
+            "name": "ErrorState",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "int64",
+            "formatString": "0",
+            "lineageTag": "e0aa3006-b762-4882-b592-9377119d9712",
+            "sourceColumn": "ErrorState",
+            "summarizeBy": "sum"
+          },
+          {
+            "name": "ErrorProcedure",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "692fcba8-6f1f-4827-aa6b-602f4eb67445",
+            "sourceColumn": "ErrorProcedure",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "ErrorLine",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "int64",
+            "formatString": "0",
+            "lineageTag": "dfffb628-0e0b-44b3-bf84-055a0193904f",
+            "sourceColumn": "ErrorLine",
+            "summarizeBy": "sum"
+          },
+          {
+            "name": "ErrorMessage",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "3c962b93-a478-444b-8783-0d0247993d1c",
+            "sourceColumn": "ErrorMessage",
+            "summarizeBy": "none"
+          }
+        ],
+        "lineageTag": "a04a76cf-6c0e-4875-b752-72363166ea4d",
+        "partitions": [
+          {
+            "name": "ErrorLog",
+            "mode": "import",
+            "source": {
+              "expression": [
+                "let",
+                "    Source = Sql.Databases(\"ISDNB-00H99812A\"),",
+                "    AdventureWorksLT2022 = Source{[Name=\"AdventureWorksLT2022\"]}[Data],",
+                "    dbo_ErrorLog = AdventureWorksLT2022{[Schema=\"dbo\",Item=\"ErrorLog\"]}[Data]",
+                "in",
+                "    dbo_ErrorLog"
+              ],
+              "type": "m"
+            }
+          }
+        ]
+      },
+      {
+        "name": "SalesLT Address",
+        "columns": [
+          {
+            "name": "AddressID",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "int64",
+            "formatString": "0",
+            "lineageTag": "a4b67a0d-4069-4625-b168-a25bc374fed1",
+            "sourceColumn": "AddressID",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "AddressLine1",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "e7c81e95-05e4-429b-9878-deae3a354021",
+            "sourceColumn": "AddressLine1",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "AddressLine2",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "872f311b-e8ee-4048-a28b-f91fd24475e4",
+            "sourceColumn": "AddressLine2",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "City",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "eab962b6-09e5-415e-9a75-8b04f083b815",
+            "sourceColumn": "City",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "StateProvince",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "f1aa9006-2549-47c8-b0ad-1d127abd2c18",
+            "sourceColumn": "StateProvince",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "CountryRegion",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "7b74c275-3e5a-4fc8-aac5-1784ea2ef595",
+            "sourceColumn": "CountryRegion",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "PostalCode",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "eac0c9f8-3a26-46d4-afc7-fc9035ff4f8d",
+            "sourceColumn": "PostalCode",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "rowguid",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "167bf2f5-0ad5-4382-9f40-14b2ee8a86e9",
+            "sourceColumn": "rowguid",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "ModifiedDate",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "dateTime",
+            "formatString": "General Date",
+            "lineageTag": "238477b6-afb5-43fa-936f-9bc361f4e6c0",
+            "sourceColumn": "ModifiedDate",
+            "summarizeBy": "none"
+          }
+        ],
+        "lineageTag": "42492cb0-5ce7-4340-b526-bc6a2cb9a6d0",
+        "partitions": [
+          {
+            "name": "SalesLT Address",
+            "mode": "import",
+            "source": {
+              "expression": [
+                "let",
+                "    Source = Sql.Databases(\"ISDNB-00H99812A\"),",
+                "    AdventureWorksLT2022 = Source{[Name=\"AdventureWorksLT2022\"]}[Data],",
+                "    SalesLT_Address = AdventureWorksLT2022{[Schema=\"SalesLT\",Item=\"Address\"]}[Data]",
+                "in",
+                "    SalesLT_Address"
+              ],
+              "type": "m"
+            }
+          }
+        ]
+      },
+      {
+        "name": "SalesLT Customer",
+        "columns": [
+          {
+            "name": "CustomerID",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "int64",
+            "formatString": "0",
+            "lineageTag": "9a9a2c7d-a182-47fb-ab46-df628f88d3ad",
+            "sourceColumn": "CustomerID",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "NameStyle",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "boolean",
+            "formatString": "\"TRUE\";\"TRUE\";\"FALSE\"",
+            "lineageTag": "9b8d0d45-fd54-4d6d-b083-f2187e931160",
+            "sourceColumn": "NameStyle",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "Title",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "5fedde13-289f-4eb7-8dc0-daacc3b31ae1",
+            "sourceColumn": "Title",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "FirstName",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "b3fdf8a3-277f-4ad0-9bc2-d6d9df2dd4ec",
+            "sourceColumn": "FirstName",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "MiddleName",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "323071c5-1b1f-494e-a713-c666ad886c00",
+            "sourceColumn": "MiddleName",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "LastName",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "4eec9fde-3ceb-4416-bdfd-d774c2aeb188",
+            "sourceColumn": "LastName",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "Suffix",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "ae5a4873-27bf-42f0-81f7-ca288451b61f",
+            "sourceColumn": "Suffix",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "CompanyName",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "a8509d17-3be7-4764-b581-c41db2acb407",
+            "sourceColumn": "CompanyName",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "SalesPerson",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "8b7b5fa8-e0de-4724-926d-a4f94079c7d4",
+            "sourceColumn": "SalesPerson",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "EmailAddress",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "ab539303-de4f-4e76-addf-f9d3c46be41c",
+            "sourceColumn": "EmailAddress",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "Phone",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "5b082da7-223b-4709-8523-381f00b90be5",
+            "sourceColumn": "Phone",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "PasswordHash",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "59321fcd-b9f5-42bd-bd07-d34551560237",
+            "sourceColumn": "PasswordHash",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "PasswordSalt",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "e2efaace-c9f0-4430-a7f6-87c7674e11ab",
+            "sourceColumn": "PasswordSalt",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "rowguid",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "f5112c9c-666e-46f5-9fe4-c8cbd941c0cd",
+            "sourceColumn": "rowguid",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "ModifiedDate",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "dateTime",
+            "formatString": "General Date",
+            "lineageTag": "fe858606-7e13-4054-97ea-837f3d5e39a5",
+            "sourceColumn": "ModifiedDate",
+            "summarizeBy": "none"
+          }
+        ],
+        "lineageTag": "83a2d9a3-f2ef-4b60-9bcc-c508e5c49276",
+        "partitions": [
+          {
+            "name": "SalesLT Customer",
+            "mode": "import",
+            "source": {
+              "expression": [
+                "let",
+                "    Source = Sql.Databases(\"ISDNB-00H99812A\"),",
+                "    AdventureWorksLT2022 = Source{[Name=\"AdventureWorksLT2022\"]}[Data],",
+                "    SalesLT_Customer = AdventureWorksLT2022{[Schema=\"SalesLT\",Item=\"Customer\"]}[Data]",
+                "in",
+                "    SalesLT_Customer"
+              ],
+              "type": "m"
+            }
+          }
+        ]
+      },
+      {
+        "name": "SalesLT CustomerAddress",
+        "columns": [
+          {
+            "name": "CustomerID",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "int64",
+            "formatString": "0",
+            "lineageTag": "88ea8f6d-4ded-4fcc-a969-e183dd1dd12c",
+            "sourceColumn": "CustomerID",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "AddressID",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "int64",
+            "formatString": "0",
+            "lineageTag": "9f53c519-5ea5-461c-a50f-56d7688f0492",
+            "sourceColumn": "AddressID",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "AddressType",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "d5371059-bbae-4bed-b200-9038a2e93739",
+            "sourceColumn": "AddressType",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "rowguid",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "5be70c59-0dca-4e33-90b5-c319253705aa",
+            "sourceColumn": "rowguid",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "ModifiedDate",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "dateTime",
+            "formatString": "General Date",
+            "lineageTag": "9510716a-30ca-4faa-aeba-6490d546bd55",
+            "sourceColumn": "ModifiedDate",
+            "summarizeBy": "none"
+          }
+        ],
+        "lineageTag": "453603a1-8a2d-495b-9037-e550fdcf218a",
+        "partitions": [
+          {
+            "name": "SalesLT CustomerAddress",
+            "mode": "import",
+            "source": {
+              "expression": [
+                "let",
+                "    Source = Sql.Databases(\"ISDNB-00H99812A\"),",
+                "    AdventureWorksLT2022 = Source{[Name=\"AdventureWorksLT2022\"]}[Data],",
+                "    SalesLT_CustomerAddress = AdventureWorksLT2022{[Schema=\"SalesLT\",Item=\"CustomerAddress\"]}[Data]",
+                "in",
+                "    SalesLT_CustomerAddress"
+              ],
+              "type": "m"
+            }
+          }
+        ]
+      },
+      {
+        "name": "SalesLT Product",
+        "columns": [
+          {
+            "name": "ProductID",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "int64",
+            "formatString": "0",
+            "lineageTag": "6afa5cd0-f68a-4f7a-8604-8ecfc3e99ad1",
+            "sourceColumn": "ProductID",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "Name",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "ed19ca38-30a4-45c4-9600-8705b38d6e31",
+            "sourceColumn": "Name",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "ProductNumber",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "4cb11a09-828f-4c68-bb66-6887b1ee282d",
+            "sourceColumn": "ProductNumber",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "Color",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "6773a9b3-8a7e-4692-814a-9c7cd3e768cd",
+            "sourceColumn": "Color",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "StandardCost",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              },
+              {
+                "name": "PBI_FormatHint",
+                "value": "{\"currencyCulture\":\"en-GB\"}"
+              }
+            ],
+            "dataType": "decimal",
+            "formatString": "\"£\"#,0.###############;-\"£\"#,0.###############;\"£\"#,0.###############",
+            "lineageTag": "0272fa40-6670-4b14-934c-f3a7fd2e486e",
+            "sourceColumn": "StandardCost",
+            "summarizeBy": "sum"
+          },
+          {
+            "name": "ListPrice",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              },
+              {
+                "name": "PBI_FormatHint",
+                "value": "{\"currencyCulture\":\"en-GB\"}"
+              }
+            ],
+            "dataType": "decimal",
+            "formatString": "\"£\"#,0.###############;-\"£\"#,0.###############;\"£\"#,0.###############",
+            "lineageTag": "a3822f24-3a70-4154-a864-616dbe1daf5d",
+            "sourceColumn": "ListPrice",
+            "summarizeBy": "sum"
+          },
+          {
+            "name": "Size",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "ebd75ded-49f6-472a-8142-d1a616711f32",
+            "sourceColumn": "Size",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "Weight",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              },
+              {
+                "name": "PBI_FormatHint",
+                "value": "{\"isGeneralNumber\":true}"
+              }
+            ],
+            "dataType": "double",
+            "lineageTag": "5d6c9462-d0cf-422f-ba60-f5484579fc8e",
+            "sourceColumn": "Weight",
+            "summarizeBy": "sum"
+          },
+          {
+            "name": "ProductCategoryID",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "int64",
+            "formatString": "0",
+            "lineageTag": "4107fd25-8fe3-488e-9225-df3edbf0b68f",
+            "sourceColumn": "ProductCategoryID",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "ProductModelID",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "int64",
+            "formatString": "0",
+            "lineageTag": "d49aaf19-2da0-4f7e-9861-3d63f84131ac",
+            "sourceColumn": "ProductModelID",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "SellStartDate",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "dateTime",
+            "formatString": "General Date",
+            "lineageTag": "df72e0c9-a98c-4630-9198-537a12c4a5eb",
+            "sourceColumn": "SellStartDate",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "SellEndDate",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "dateTime",
+            "formatString": "General Date",
+            "lineageTag": "6cf706df-2969-4e88-86dd-e09f8fc5f61d",
+            "sourceColumn": "SellEndDate",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "DiscontinuedDate",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "dateTime",
+            "formatString": "General Date",
+            "lineageTag": "cc9d0d9c-fbec-438a-b704-7f8bc6580b66",
+            "sourceColumn": "DiscontinuedDate",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "ThumbnailPhotoFileName",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "0cd69810-acbe-4fd4-acd9-0c240fdd8161",
+            "sourceColumn": "ThumbnailPhotoFileName",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "rowguid",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "0a3d9519-3951-4cf0-a0bd-7d4f81a4ad08",
+            "sourceColumn": "rowguid",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "ModifiedDate",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "dateTime",
+            "formatString": "General Date",
+            "lineageTag": "dfcd0ef8-48e9-4443-87e4-0d213cf3ccc2",
+            "sourceColumn": "ModifiedDate",
+            "summarizeBy": "none"
+          }
+        ],
+        "lineageTag": "cea2a861-e22f-470a-b94d-7c9ede10ac1b",
+        "partitions": [
+          {
+            "name": "SalesLT Product",
+            "mode": "import",
+            "source": {
+              "expression": [
+                "let",
+                "    Source = Sql.Databases(\"ISDNB-00H99812A\"),",
+                "    AdventureWorksLT2022 = Source{[Name=\"AdventureWorksLT2022\"]}[Data],",
+                "    SalesLT_Product = AdventureWorksLT2022{[Schema=\"SalesLT\",Item=\"Product\"]}[Data]",
+                "in",
+                "    SalesLT_Product"
+              ],
+              "type": "m"
+            }
+          }
+        ]
+      },
+      {
+        "name": "SalesLT ProductCategory",
+        "columns": [
+          {
+            "name": "ProductCategoryID",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "int64",
+            "formatString": "0",
+            "lineageTag": "5b9773d7-90a2-49a9-91d4-2454c6463539",
+            "sourceColumn": "ProductCategoryID",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "ParentProductCategoryID",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "int64",
+            "formatString": "0",
+            "lineageTag": "df225c37-a4d9-42de-afda-f5d6901a6e1d",
+            "sourceColumn": "ParentProductCategoryID",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "Name",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "bbb8f922-25f2-419a-928a-10c2b5b1b4ea",
+            "sourceColumn": "Name",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "rowguid",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "5483f6f6-fb1f-4e5a-add0-816fa5456954",
+            "sourceColumn": "rowguid",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "ModifiedDate",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "dateTime",
+            "formatString": "General Date",
+            "lineageTag": "db6f6d4f-7328-4b9b-9ecf-49ce0d0d2cda",
+            "sourceColumn": "ModifiedDate",
+            "summarizeBy": "none"
+          }
+        ],
+        "lineageTag": "3e809f3b-82d0-4ab0-9437-609151589426",
+        "partitions": [
+          {
+            "name": "SalesLT ProductCategory",
+            "mode": "import",
+            "source": {
+              "expression": [
+                "let",
+                "    Source = Sql.Databases(\"ISDNB-00H99812A\"),",
+                "    AdventureWorksLT2022 = Source{[Name=\"AdventureWorksLT2022\"]}[Data],",
+                "    SalesLT_ProductCategory = AdventureWorksLT2022{[Schema=\"SalesLT\",Item=\"ProductCategory\"]}[Data]",
+                "in",
+                "    SalesLT_ProductCategory"
+              ],
+              "type": "m"
+            }
+          }
+        ]
+      },
+      {
+        "name": "SalesLT ProductModel",
+        "columns": [
+          {
+            "name": "ProductModelID",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "int64",
+            "formatString": "0",
+            "lineageTag": "225ee264-65d0-410a-b7f8-642ca382a9da",
+            "sourceColumn": "ProductModelID",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "Name",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "97b24bee-6039-432b-bacd-32ce0bdcba56",
+            "sourceColumn": "Name",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "CatalogDescription",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "2147e747-12e0-441f-8419-669e81957a16",
+            "sourceColumn": "CatalogDescription",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "rowguid",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "fd21fda5-b8ea-4c72-915e-2b5f5800b749",
+            "sourceColumn": "rowguid",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "ModifiedDate",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "dateTime",
+            "formatString": "General Date",
+            "lineageTag": "3e3651f7-ab9a-4a09-afb8-e949d9fcfaa8",
+            "sourceColumn": "ModifiedDate",
+            "summarizeBy": "none"
+          }
+        ],
+        "lineageTag": "e0ca7d85-22f3-433d-aa6a-844479ee0d96",
+        "partitions": [
+          {
+            "name": "SalesLT ProductModel",
+            "mode": "import",
+            "source": {
+              "expression": [
+                "let",
+                "    Source = Sql.Databases(\"ISDNB-00H99812A\"),",
+                "    AdventureWorksLT2022 = Source{[Name=\"AdventureWorksLT2022\"]}[Data],",
+                "    SalesLT_ProductModel = AdventureWorksLT2022{[Schema=\"SalesLT\",Item=\"ProductModel\"]}[Data]",
+                "in",
+                "    SalesLT_ProductModel"
+              ],
+              "type": "m"
+            }
+          }
+        ]
+      },
+      {
+        "name": "SalesLT ProductModelProductDescription",
+        "columns": [
+          {
+            "name": "ProductModelID",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "int64",
+            "formatString": "0",
+            "lineageTag": "4cdec5ad-0809-48ac-9ccd-32612e54e25b",
+            "sourceColumn": "ProductModelID",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "ProductDescriptionID",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "int64",
+            "formatString": "0",
+            "lineageTag": "0088268b-32ae-43c5-b1b7-82bf23c0b202",
+            "sourceColumn": "ProductDescriptionID",
+            "summarizeBy": "count"
+          },
+          {
+            "name": "Culture",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "c2e0698c-8e39-468c-8971-2a3c93a45646",
+            "sourceColumn": "Culture",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "rowguid",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "e162d1e1-1b77-4ef4-a90c-a262dd631b5e",
+            "sourceColumn": "rowguid",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "ModifiedDate",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "dateTime",
+            "formatString": "General Date",
+            "lineageTag": "252dac0c-f50f-4972-a2f1-4eac34703148",
+            "sourceColumn": "ModifiedDate",
+            "summarizeBy": "none"
+          }
+        ],
+        "lineageTag": "290f8c73-66b5-4ff9-91c8-b147e91ba356",
+        "partitions": [
+          {
+            "name": "SalesLT ProductModelProductDescription",
+            "mode": "import",
+            "source": {
+              "expression": [
+                "let",
+                "    Source = Sql.Databases(\"ISDNB-00H99812A\"),",
+                "    AdventureWorksLT2022 = Source{[Name=\"AdventureWorksLT2022\"]}[Data],",
+                "    SalesLT_ProductModelProductDescription = AdventureWorksLT2022{[Schema=\"SalesLT\",Item=\"ProductModelProductDescription\"]}[Data]",
+                "in",
+                "    SalesLT_ProductModelProductDescription"
+              ],
+              "type": "m"
+            }
+          }
+        ]
+      },
+      {
+        "name": "SalesLT SalesOrderDetail",
+        "annotations": [
+          {
+            "name": "PBI_ResultType",
+            "value": "Table"
+          }
+        ],
+        "columns": [
+          {
+            "name": "SalesOrderID",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "int64",
+            "formatString": "0",
+            "lineageTag": "b26b910f-7f8a-484d-b784-087f93e82219",
+            "sourceColumn": "SalesOrderID",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "SalesOrderDetailID",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "int64",
+            "formatString": "0",
+            "lineageTag": "9a9330eb-88fa-4e20-8aaf-249786ad90da",
+            "sourceColumn": "SalesOrderDetailID",
+            "summarizeBy": "count"
+          },
+          {
+            "name": "OrderQty",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "int64",
+            "formatString": "0",
+            "lineageTag": "c4908642-b192-4221-8a68-550b02ef8a7d",
+            "sourceColumn": "OrderQty",
+            "summarizeBy": "sum"
+          },
+          {
+            "name": "ProductID",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "int64",
+            "formatString": "0",
+            "lineageTag": "53d19fc0-a29a-4c18-9988-23dcfd86a754",
+            "sourceColumn": "ProductID",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "UnitPrice",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              },
+              {
+                "name": "PBI_FormatHint",
+                "value": "{\"currencyCulture\":\"en-GB\"}"
+              }
+            ],
+            "dataType": "decimal",
+            "formatString": "\"£\"#,0.###############;-\"£\"#,0.###############;\"£\"#,0.###############",
+            "lineageTag": "46301d26-9e54-447c-adf8-f3682af86622",
+            "sourceColumn": "UnitPrice",
+            "summarizeBy": "sum"
+          },
+          {
+            "name": "UnitPriceDiscount",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              },
+              {
+                "name": "PBI_FormatHint",
+                "value": "{\"currencyCulture\":\"en-GB\"}"
+              }
+            ],
+            "dataType": "decimal",
+            "formatString": "\"£\"#,0.###############;-\"£\"#,0.###############;\"£\"#,0.###############",
+            "lineageTag": "77842af8-c329-41a0-97cc-100e31bd3527",
+            "sourceColumn": "UnitPriceDiscount",
+            "summarizeBy": "sum"
+          },
+          {
+            "name": "LineTotal",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              },
+              {
+                "name": "PBI_FormatHint",
+                "value": "{\"isGeneralNumber\":true}"
+              }
+            ],
+            "dataType": "double",
+            "lineageTag": "ded1d60f-ae5f-4c7d-91dc-8ef79b2c2958",
+            "sourceColumn": "LineTotal",
+            "summarizeBy": "sum"
+          },
+          {
+            "name": "rowguid",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "eeebb157-2403-469c-9419-81c7467a09b8",
+            "sourceColumn": "rowguid",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "ModifiedDate",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "dateTime",
+            "formatString": "General Date",
+            "lineageTag": "c5ae583c-eece-446d-929d-114b9d25a2ef",
+            "sourceColumn": "ModifiedDate",
+            "summarizeBy": "none"
+          }
+        ],
+        "lineageTag": "a7b7e521-d4f0-4ffe-9f0a-cd940c8fe2e3",
+        "partitions": [
+          {
+            "name": "SalesLT SalesOrderDetail",
+            "mode": "import",
+            "source": {
+              "expression": [
+                "let",
+                "    Source = Sql.Databases(\"ISDNB-00H99812A\"),",
+                "    AdventureWorksLT2022 = Source{[Name=\"AdventureWorksLT2022\"]}[Data],",
+                "    SalesLT_SalesOrderDetail = AdventureWorksLT2022{[Schema=\"SalesLT\",Item=\"SalesOrderDetail\"]}[Data]",
+                "in",
+                "    SalesLT_SalesOrderDetail"
+              ],
+              "type": "m"
+            }
+          }
+        ]
+      },
+      {
+        "name": "SalesLT SalesOrderHeader",
+        "annotations": [
+          {
+            "name": "PBI_ResultType",
+            "value": "Table"
+          }
+        ],
+        "columns": [
+          {
+            "name": "SalesOrderID",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "int64",
+            "formatString": "0",
+            "lineageTag": "fe18ab9e-2def-4296-a395-5a8cd50a9746",
+            "sourceColumn": "SalesOrderID",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "RevisionNumber",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "int64",
+            "formatString": "0",
+            "lineageTag": "856a30e1-8689-4a96-beb9-7cf172b9f743",
+            "sourceColumn": "RevisionNumber",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "OrderDate",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "dateTime",
+            "formatString": "General Date",
+            "lineageTag": "a8ef09db-c832-49b9-a366-e1006bd20611",
+            "sourceColumn": "OrderDate",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "DueDate",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "dateTime",
+            "formatString": "General Date",
+            "lineageTag": "9973b459-a2c1-4c20-a0f9-f7c5b07b1618",
+            "sourceColumn": "DueDate",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "ShipDate",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "dateTime",
+            "formatString": "General Date",
+            "lineageTag": "a066691d-115e-4c14-a700-cf3e64ceb1c0",
+            "sourceColumn": "ShipDate",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "Status",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "int64",
+            "formatString": "0",
+            "lineageTag": "c567e68b-e570-4efb-8113-9a487026a3ba",
+            "sourceColumn": "Status",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "OnlineOrderFlag",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "boolean",
+            "formatString": "\"TRUE\";\"TRUE\";\"FALSE\"",
+            "lineageTag": "b50d47e4-6005-4cdd-87bf-849ddc6a2b3a",
+            "sourceColumn": "OnlineOrderFlag",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "SalesOrderNumber",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "e6f7487d-dbdd-4acc-bcc7-d2fcd46dad1a",
+            "sourceColumn": "SalesOrderNumber",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "PurchaseOrderNumber",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "0b21d304-3cb0-4c38-9e3e-f8edd7e2520e",
+            "sourceColumn": "PurchaseOrderNumber",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "AccountNumber",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "9621f6fd-9716-484a-9d1b-d6419e229137",
+            "sourceColumn": "AccountNumber",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "CustomerID",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "int64",
+            "formatString": "0",
+            "lineageTag": "ffe9a2b6-16a4-472c-a766-af0354cc3fc7",
+            "sourceColumn": "CustomerID",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "ShipToAddressID",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "int64",
+            "formatString": "0",
+            "lineageTag": "a48c614c-0e88-4c12-bfad-6f8f975ddaee",
+            "sourceColumn": "ShipToAddressID",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "BillToAddressID",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "int64",
+            "formatString": "0",
+            "lineageTag": "076b2038-82ed-4431-aec1-8fc93117e52a",
+            "sourceColumn": "BillToAddressID",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "ShipMethod",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "c27c90fd-27fc-41c5-8d21-51be84e3e0be",
+            "sourceColumn": "ShipMethod",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "CreditCardApprovalCode",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "07aef621-a23e-46a2-8309-f3d4d014ed79",
+            "sourceColumn": "CreditCardApprovalCode",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "SubTotal",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              },
+              {
+                "name": "PBI_FormatHint",
+                "value": "{\"currencyCulture\":\"en-GB\"}"
+              }
+            ],
+            "dataType": "decimal",
+            "formatString": "\"£\"#,0.###############;-\"£\"#,0.###############;\"£\"#,0.###############",
+            "lineageTag": "2141fc80-21af-431c-bb6a-7432d6f182a5",
+            "sourceColumn": "SubTotal",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "TaxAmt",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              },
+              {
+                "name": "PBI_FormatHint",
+                "value": "{\"currencyCulture\":\"en-GB\"}"
+              }
+            ],
+            "dataType": "decimal",
+            "formatString": "\"£\"#,0.###############;-\"£\"#,0.###############;\"£\"#,0.###############",
+            "lineageTag": "b32ea68e-130a-4c50-85b7-91fa44cf394a",
+            "sourceColumn": "TaxAmt",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "Freight",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              },
+              {
+                "name": "PBI_FormatHint",
+                "value": "{\"currencyCulture\":\"en-GB\"}"
+              }
+            ],
+            "dataType": "decimal",
+            "formatString": "\"£\"#,0.###############;-\"£\"#,0.###############;\"£\"#,0.###############",
+            "lineageTag": "57f0b6aa-19e3-445e-9a59-7ee91ab88219",
+            "sourceColumn": "Freight",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "TotalDue",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              },
+              {
+                "name": "PBI_FormatHint",
+                "value": "{\"currencyCulture\":\"en-GB\"}"
+              }
+            ],
+            "dataType": "decimal",
+            "formatString": "\"£\"#,0.###############;-\"£\"#,0.###############;\"£\"#,0.###############",
+            "lineageTag": "43698a46-182b-4a33-a3ea-5e49d1298ebb",
+            "sourceColumn": "TotalDue",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "Comment",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "70ff260f-1d29-46d2-8391-9b9819d1808c",
+            "sourceColumn": "Comment",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "rowguid",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "0c936504-90fc-4f00-a415-79cdd102a813",
+            "sourceColumn": "rowguid",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "ModifiedDate",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "dateTime",
+            "formatString": "General Date",
+            "lineageTag": "d46edf3e-41b4-4e73-b9e0-90ddd098a4e8",
+            "sourceColumn": "ModifiedDate",
+            "summarizeBy": "none"
+          }
+        ],
+        "lineageTag": "1974c9d0-336d-4cca-9216-e30ede07e9f9",
+        "partitions": [
+          {
+            "name": "SalesLT SalesOrderHeader",
+            "mode": "import",
+            "source": {
+              "expression": [
+                "let",
+                "    Source = Sql.Databases(\"ISDNB-00H99812A\"),",
+                "    AdventureWorksLT2022 = Source{[Name=\"AdventureWorksLT2022\"]}[Data],",
+                "    SalesLT_SalesOrderHeader = AdventureWorksLT2022{[Schema=\"SalesLT\",Item=\"SalesOrderHeader\"]}[Data]",
+                "in",
+                "    SalesLT_SalesOrderHeader"
+              ],
+              "type": "m"
+            }
+          }
+        ]
+      }
+    ]
+  }
+}

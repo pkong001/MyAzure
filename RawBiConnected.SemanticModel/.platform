@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "SemanticModel",
+    "displayName": "RawBiConnected"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "fa2f104e-831d-4f1c-9474-9a26356f8d14"
+  }
+}
