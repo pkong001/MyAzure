@@ -1,2 +1,2 @@
-# MyAzure
-repository for my Azure products
+# Azure Repo
+repository for my Azure related resources
