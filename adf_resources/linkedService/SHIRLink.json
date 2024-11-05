@@ -1,0 +1,27 @@
+{
+	"name": "SHIRLink",
+	"properties": {
+		"annotations": [],
+		"type": "SqlServer",
+		"typeProperties": {
+			"server": "ISDNB-00H99812A",
+			"database": "STLight",
+			"encrypt": "mandatory",
+			"trustServerCertificate": true,
+			"authenticationType": "SQL",
+			"userName": "mrv",
+			"password": {
+				"type": "AzureKeyVaultSecret",
+				"store": {
+					"referenceName": "AzureKeyVault1",
+					"type": "LinkedServiceReference"
+				},
+				"secretName": "mrvpassword"
+			}
+		},
+		"connectVia": {
+			"referenceName": "SHIR01",
+			"type": "IntegrationRuntimeReference"
+		}
+	}
+}
