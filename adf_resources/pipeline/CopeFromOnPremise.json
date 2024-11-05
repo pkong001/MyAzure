@@ -3,7 +3,7 @@
 	"properties": {
 		"activities": [
 			{
-				"name": "AdressTable",
+				"name": "AddressTable",
 				"type": "Copy",
 				"dependsOn": [],
 				"policy": {
@@ -26,15 +26,7 @@
 						"storeSettings": {
 							"type": "AzureBlobFSWriteSettings",
 							"maxConcurrentConnections": 2,
-							"copyBehavior": "FlattenHierarchy",
-							"metadata": [
-								{
-									"value": ""
-								},
-								{
-									"value": ""
-								}
-							]
+							"copyBehavior": "FlattenHierarchy"
 						},
 						"formatSettings": {
 							"type": "ParquetWriteSettings"
