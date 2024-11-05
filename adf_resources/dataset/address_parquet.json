@@ -2,7 +2,7 @@
 	"name": "address_parquet",
 	"properties": {
 		"linkedServiceName": {
-			"referenceName": "ADLS",
+			"referenceName": "AzureDataLakeStorage1",
 			"type": "LinkedServiceReference"
 		},
 		"annotations": [],
