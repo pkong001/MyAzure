@@ -1,6 +1,33 @@
 {
 	"name": "CopyFromOnPremiseAll",
 	"properties": {
+		"activities": [
+			{
+				"name": "FindTableName",
+				"type": "Lookup",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "SqlServerSource",
+						"sqlReaderQuery": "SELECT\n    [TABLE_SCHEMA],\n    [TABLE_NAME]\nFROM\n    information_schema.tables\nWHERE\n    [TABLE_TYPE] = 'BASE TABLE'\n\tAND [TABLE_SCHEMA] = 'SalesLT'\nORDER BY\n[TABLE_NAME]\n\n\n",
+						"queryTimeout": "02:00:00",
+						"partitionOption": "None"
+					},
+					"dataset": {
+						"referenceName": "SqlServerTable1",
+						"type": "DatasetReference"
+					}
+				}
+			}
+		],
 		"annotations": []
 	}
 }
