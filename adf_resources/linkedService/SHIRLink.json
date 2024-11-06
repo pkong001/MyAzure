@@ -5,7 +5,7 @@
 		"type": "SqlServer",
 		"typeProperties": {
 			"server": "ISDNB-00H99812A",
-			"database": "STLight",
+			"database": "ST",
 			"encrypt": "mandatory",
 			"trustServerCertificate": true,
 			"authenticationType": "SQL",
