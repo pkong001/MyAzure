@@ -1,0 +1,42 @@
+{
+	"$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"value": "adf-pongpisut"
+		},
+		"ADLS_accountKey": {
+			"value": ""
+		},
+		"AzureBlobStorage1_connectionString": {
+			"value": ""
+		},
+		"AzureDataLakeStorage1_accountKey": {
+			"value": ""
+		},
+		"ADLS_properties_typeProperties_url": {
+			"value": "https://straccpongpisut.dfs.core.windows.net/"
+		},
+		"AzureDataLakeStorage1_properties_typeProperties_url": {
+			"value": "https://stapongpisutg2.dfs.core.windows.net/"
+		},
+		"AzureKeyVault1_properties_typeProperties_baseUrl": {
+			"value": "https://kvpong.vault.azure.net/"
+		},
+		"SHIRLink_properties_typeProperties_server": {
+			"value": "ISDNB-00H99812A"
+		},
+		"SHIRLink_properties_typeProperties_database": {
+			"value": "ST"
+		},
+		"SHIRLink_properties_typeProperties_userName": {
+			"value": "mrv"
+		},
+		"containerUri": {
+			"value": ""
+		},
+		"containerSasToken": {
+			"value": ""
+		}
+	}
+}
