@@ -24,7 +24,70 @@
 					"dataset": {
 						"referenceName": "SqlServerTable1",
 						"type": "DatasetReference"
+					},
+					"firstRowOnly": false
+				}
+			},
+			{
+				"name": "ParameterizeForQuery",
+				"type": "ForEach",
+				"dependsOn": [
+					{
+						"activity": "FindTableName",
+						"dependencyConditions": [
+							"Succeeded"
+						]
 					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"items": {
+						"value": "@activity('FindTableName').output.value",
+						"type": "Expression"
+					},
+					"activities": [
+						{
+							"name": "CopyEachTable",
+							"type": "Copy",
+							"dependsOn": [],
+							"policy": {
+								"timeout": "0.12:00:00",
+								"retry": 0,
+								"retryIntervalInSeconds": 30,
+								"secureOutput": false,
+								"secureInput": false
+							},
+							"userProperties": [],
+							"typeProperties": {
+								"sink": {
+									"type": "ParquetSink",
+									"storeSettings": {
+										"type": "AzureBlobFSWriteSettings"
+									},
+									"formatSettings": {
+										"type": "ParquetWriteSettings"
+									}
+								},
+								"enableStaging": false
+							},
+							"outputs": [
+								{
+									"referenceName": "ParquetTables",
+									"type": "DatasetReference",
+									"parameters": {
+										"TableName": {
+											"value": "item().TABLE_NAME",
+											"type": "Expression"
+										},
+										"SchemaName": {
+											"value": "item().TABLE_SCHEMA",
+											"type": "Expression"
+										}
+									}
+								}
+							]
+						}
+					]
 				}
 			}
 		],
