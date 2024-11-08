@@ -32,6 +32,9 @@
 		"SHIRLink_properties_typeProperties_userName": {
 			"value": "mrv"
 		},
+		"AzureDatabricks1_properties_typeProperties_existingClusterId": {
+			"value": "1021-042950-mvc1m70c"
+		},
 		"containerUri": {
 			"value": ""
 		},

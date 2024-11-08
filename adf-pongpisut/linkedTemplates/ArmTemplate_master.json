@@ -43,6 +43,10 @@
 			"type": "string",
 			"defaultValue": "mrv"
 		},
+		"AzureDatabricks1_properties_typeProperties_existingClusterId": {
+			"type": "string",
+			"defaultValue": "1021-042950-mvc1m70c"
+		},
 		"containerUri": {
 			"type": "string",
 			"metadata": "URI to storage account containing linked ARM templates"
@@ -96,6 +100,9 @@
 					},
 					"SHIRLink_properties_typeProperties_userName": {
 						"value": "[parameters('SHIRLink_properties_typeProperties_userName')]"
+					},
+					"AzureDatabricks1_properties_typeProperties_existingClusterId": {
+						"value": "[parameters('AzureDatabricks1_properties_typeProperties_existingClusterId')]"
 					}
 				}
 			},
