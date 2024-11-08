@@ -366,6 +366,30 @@
 			]
 		},
 		{
+			"name": "[concat(parameters('factoryName'), '/AzureDatabricksDeltaLake1')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureDatabricksDeltaLake",
+				"typeProperties": {
+					"domain": "https://adb-1346410883415134.14.azuredatabricks.net",
+					"clusterId": "1021-042950-mvc1m70c",
+					"accessToken": {
+						"type": "AzureKeyVaultSecret",
+						"store": {
+							"referenceName": "AzureKeyVault1",
+							"type": "LinkedServiceReference"
+						},
+						"secretName": "Token01"
+					}
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/AzureKeyVault1')]"
+			]
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/CopyPipeline_g3g')]",
 			"type": "Microsoft.DataFactory/factories/pipelines",
 			"apiVersion": "2018-06-01",
@@ -729,11 +753,11 @@
 											"type": "DatasetReference",
 											"parameters": {
 												"TableName": {
-													"value": "item().TABLE_NAME",
+													"value": "@item().TABLE_NAME",
 													"type": "Expression"
 												},
 												"SchemaName": {
-													"value": "item().TABLE_SCHEMA",
+													"value": "@item().TABLE_SCHEMA",
 													"type": "Expression"
 												}
 											}
