@@ -32,7 +32,12 @@
 						"type": "ParquetSink",
 						"storeSettings": {
 							"type": "AzureBlobFSWriteSettings",
-							"copyBehavior": "FlattenHierarchy"
+							"copyBehavior": "FlattenHierarchy",
+							"metadata": [
+								{
+									"value": ""
+								}
+							]
 						},
 						"formatSettings": {
 							"type": "ParquetWriteSettings"
@@ -57,7 +62,13 @@
 				"outputs": [
 					{
 						"referenceName": "ParquetDW01",
-						"type": "DatasetReference"
+						"type": "DatasetReference",
+						"parameters": {
+							"TableName": {
+								"value": "@variables('TableName')",
+								"type": "Expression"
+							}
+						}
 					}
 				]
 			},
