@@ -20,6 +20,9 @@
 		"AzureDataLakeStorage1_properties_typeProperties_url": {
 			"value": "https://stapongpisutg2.dfs.core.windows.net/"
 		},
+		"AzureDatabricks1_properties_typeProperties_existingClusterId": {
+			"value": "1021-042950-mvc1m70c"
+		},
 		"AzureKeyVault1_properties_typeProperties_baseUrl": {
 			"value": "https://kvpong.vault.azure.net/"
 		},
@@ -31,9 +34,6 @@
 		},
 		"SHIRLink_properties_typeProperties_userName": {
 			"value": "mrv"
-		},
-		"AzureDatabricks1_properties_typeProperties_existingClusterId": {
-			"value": "1021-042950-mvc1m70c"
 		},
 		"containerUri": {
 			"value": ""
