@@ -331,10 +331,7 @@
 						"referenceName": "ParquetDW01",
 						"type": "DatasetReference",
 						"parameters": {
-							"TableName": {
-								"value": "@variables('TableName')",
-								"type": "Expression"
-							}
+							"TableName": "@variables('TableName')"
 						}
 					}
 				]
