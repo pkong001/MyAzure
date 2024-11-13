@@ -32,12 +32,7 @@
 						"type": "ParquetSink",
 						"storeSettings": {
 							"type": "AzureBlobFSWriteSettings",
-							"copyBehavior": "FlattenHierarchy",
-							"metadata": [
-								{
-									"value": ""
-								}
-							]
+							"copyBehavior": "FlattenHierarchy"
 						},
 						"formatSettings": {
 							"type": "ParquetWriteSettings"
@@ -84,27 +79,6 @@
 				"typeProperties": {
 					"variableName": "TableName",
 					"value": "DimCompany"
-				}
-			},
-			{
-				"name": "Set DimDistributionChannelname",
-				"type": "SetVariable",
-				"dependsOn": [
-					{
-						"activity": "Company",
-						"dependencyConditions": [
-							"Succeeded"
-						]
-					}
-				],
-				"policy": {
-					"secureOutput": false,
-					"secureInput": false
-				},
-				"userProperties": [],
-				"typeProperties": {
-					"variableName": "TableName",
-					"value": "DimDistributionChannel"
 				}
 			}
 		],
