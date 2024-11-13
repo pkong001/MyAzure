@@ -480,7 +480,12 @@
 							{
 								"referenceName": "ParquetDW01",
 								"type": "DatasetReference",
-								"parameters": {}
+								"parameters": {
+									"TableName": {
+										"value": "@variables('TableName')",
+										"type": "Expression"
+									}
+								}
 							}
 						]
 					},
@@ -496,27 +501,6 @@
 						"typeProperties": {
 							"variableName": "TableName",
 							"value": "DimCompany"
-						}
-					},
-					{
-						"name": "Set DimDistributionChannelname",
-						"type": "SetVariable",
-						"dependsOn": [
-							{
-								"activity": "Company",
-								"dependencyConditions": [
-									"Succeeded"
-								]
-							}
-						],
-						"policy": {
-							"secureOutput": false,
-							"secureInput": false
-						},
-						"userProperties": [],
-						"typeProperties": {
-							"variableName": "TableName",
-							"value": "DimDistributionChannel"
 						}
 					}
 				],
@@ -749,17 +733,22 @@
 					"referenceName": "ADLS",
 					"type": "LinkedServiceReference"
 				},
+				"parameters": {
+					"TableName": {
+						"type": "string"
+					}
+				},
 				"annotations": [],
 				"type": "Parquet",
 				"typeProperties": {
 					"location": {
 						"type": "AzureBlobFSLocation",
 						"fileName": {
-							"value": "{concat(TableName,'.parquet')}",
+							"value": "@{concat(dataset().TableName,'.parquet')}",
 							"type": "Expression"
 						},
 						"folderPath": {
-							"value": "TableName",
+							"value": "@dataset().TableName",
 							"type": "Expression"
 						},
 						"fileSystem": "dw01"
