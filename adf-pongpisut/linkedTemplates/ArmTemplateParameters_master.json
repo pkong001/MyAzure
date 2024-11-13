@@ -35,6 +35,15 @@
 		"SHIRLink_properties_typeProperties_userName": {
 			"value": "mrv"
 		},
+		"SHIR_DW01_properties_typeProperties_server": {
+			"value": "ISDNB-00H99812A"
+		},
+		"SHIR_DW01_properties_typeProperties_database": {
+			"value": "DW01"
+		},
+		"SHIR_DW01_properties_typeProperties_userName": {
+			"value": "mrv"
+		},
 		"containerUri": {
 			"value": ""
 		},

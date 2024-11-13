@@ -47,6 +47,18 @@
 			"type": "string",
 			"defaultValue": "mrv"
 		},
+		"SHIR_DW01_properties_typeProperties_server": {
+			"type": "string",
+			"defaultValue": "ISDNB-00H99812A"
+		},
+		"SHIR_DW01_properties_typeProperties_database": {
+			"type": "string",
+			"defaultValue": "DW01"
+		},
+		"SHIR_DW01_properties_typeProperties_userName": {
+			"type": "string",
+			"defaultValue": "mrv"
+		},
 		"containerUri": {
 			"type": "string",
 			"metadata": "URI to storage account containing linked ARM templates"
@@ -103,10 +115,39 @@
 					},
 					"SHIRLink_properties_typeProperties_userName": {
 						"value": "[parameters('SHIRLink_properties_typeProperties_userName')]"
+					},
+					"SHIR_DW01_properties_typeProperties_server": {
+						"value": "[parameters('SHIR_DW01_properties_typeProperties_server')]"
+					},
+					"SHIR_DW01_properties_typeProperties_database": {
+						"value": "[parameters('SHIR_DW01_properties_typeProperties_database')]"
+					},
+					"SHIR_DW01_properties_typeProperties_userName": {
+						"value": "[parameters('SHIR_DW01_properties_typeProperties_userName')]"
 					}
 				}
 			},
 			"dependsOn": []
+		},
+		{
+			"name": "adf-pongpisut_ArmTemplate_1",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2024-03-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_1.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					}
+				}
+			},
+			"dependsOn": [
+				"[resourceId('Microsoft.Resources/deployments', 'adf-pongpisut_ArmTemplate_0')]"
+			]
 		}
 	]
 }
