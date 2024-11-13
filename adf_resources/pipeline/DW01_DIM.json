@@ -70,7 +70,14 @@
 			{
 				"name": "Set DimCompany Name",
 				"type": "SetVariable",
-				"dependsOn": [],
+				"dependsOn": [
+					{
+						"activity": "DimCustomer",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
 				"policy": {
 					"secureOutput": false,
 					"secureInput": false
@@ -107,27 +114,6 @@
 				"type": "SetVariable",
 				"dependsOn": [
 					{
-						"activity": "DimCustomer",
-						"dependencyConditions": [
-							"Succeeded"
-						]
-					}
-				],
-				"policy": {
-					"secureOutput": false,
-					"secureInput": false
-				},
-				"userProperties": [],
-				"typeProperties": {
-					"variableName": "TableName",
-					"value": "DimProfitCenterData"
-				}
-			},
-			{
-				"name": "Set DimCustomer Name",
-				"type": "SetVariable",
-				"dependsOn": [
-					{
 						"activity": "DimDistributionChannel",
 						"dependencyConditions": [
 							"Succeeded"
@@ -141,7 +127,7 @@
 				"userProperties": [],
 				"typeProperties": {
 					"variableName": "TableName",
-					"value": "DimCustomer\n"
+					"value": "DimProfitCenterData"
 				}
 			},
 			{
@@ -210,11 +196,11 @@
 				]
 			},
 			{
-				"name": "DimCustomer",
+				"name": "DimProfitCenterData",
 				"type": "Copy",
 				"dependsOn": [
 					{
-						"activity": "Set DimCustomer Name",
+						"activity": "Set DimProfitCenterDAta Name",
 						"dependencyConditions": [
 							"Succeeded"
 						]
@@ -231,7 +217,7 @@
 				"typeProperties": {
 					"source": {
 						"type": "SqlServerSource",
-						"sqlReaderQuery": "SELECT\nCustomerCode\n,CustomerName\nFROM [dbo].[DimCustomer]",
+						"sqlReaderQuery": "SELECT *\nFROM [dbo].[DimProfitCenterData]",
 						"queryTimeout": "02:01:00",
 						"partitionOption": "None"
 					},
@@ -275,11 +261,25 @@
 				]
 			},
 			{
-				"name": "DimProfitCenterData",
+				"name": "Set DimCustomer Name",
+				"type": "SetVariable",
+				"dependsOn": [],
+				"policy": {
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"variableName": "TableName",
+					"value": "DimCustomer"
+				}
+			},
+			{
+				"name": "DimCustomer",
 				"type": "Copy",
 				"dependsOn": [
 					{
-						"activity": "Set DimProfitCenterDAta Name",
+						"activity": "Set DimCustomer Name",
 						"dependencyConditions": [
 							"Succeeded"
 						]
@@ -296,7 +296,7 @@
 				"typeProperties": {
 					"source": {
 						"type": "SqlServerSource",
-						"sqlReaderQuery": "SELECT *\nFROM [dbo].[DimProfitCenterData]",
+						"sqlReaderQuery": "SELECT\nCustomerCode\n,CustomerName\nFROM [dbo].[DimCustomer]",
 						"queryTimeout": "02:01:00",
 						"partitionOption": "None"
 					},
