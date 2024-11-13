@@ -13,6 +13,22 @@
 	},
 	"resources": [
 		{
+			"name": "[concat(parameters('factoryName'), '/SqlServerTableDW01')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "SHIR_DW01",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "SqlServerTable",
+				"schema": [],
+				"typeProperties": {}
+			},
+			"dependsOn": []
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/CopyFromOnPremise')]",
 			"type": "Microsoft.DataFactory/factories/pipelines",
 			"apiVersion": "2018-06-01",
@@ -337,7 +353,14 @@
 					{
 						"name": "Set DimCompany Name",
 						"type": "SetVariable",
-						"dependsOn": [],
+						"dependsOn": [
+							{
+								"activity": "DimCustomer",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
 						"policy": {
 							"secureOutput": false,
 							"secureInput": false
@@ -374,27 +397,6 @@
 						"type": "SetVariable",
 						"dependsOn": [
 							{
-								"activity": "DimCustomer",
-								"dependencyConditions": [
-									"Succeeded"
-								]
-							}
-						],
-						"policy": {
-							"secureOutput": false,
-							"secureInput": false
-						},
-						"userProperties": [],
-						"typeProperties": {
-							"variableName": "TableName",
-							"value": "DimProfitCenterData"
-						}
-					},
-					{
-						"name": "Set DimCustomer Name",
-						"type": "SetVariable",
-						"dependsOn": [
-							{
 								"activity": "DimDistributionChannel",
 								"dependencyConditions": [
 									"Succeeded"
@@ -408,7 +410,7 @@
 						"userProperties": [],
 						"typeProperties": {
 							"variableName": "TableName",
-							"value": "DimCustomer\n"
+							"value": "DimProfitCenterData"
 						}
 					},
 					{
@@ -434,72 +436,6 @@
 							"source": {
 								"type": "SqlServerSource",
 								"sqlReaderQuery": "SELECT\nDistributionChannelCode\n,DistributionChannelName\nFROM [dbo].[DimDistributionChannel]",
-								"queryTimeout": "02:01:00",
-								"partitionOption": "None"
-							},
-							"sink": {
-								"type": "ParquetSink",
-								"storeSettings": {
-									"type": "AzureBlobFSWriteSettings",
-									"copyBehavior": "FlattenHierarchy"
-								},
-								"formatSettings": {
-									"type": "ParquetWriteSettings"
-								}
-							},
-							"enableStaging": false,
-							"translator": {
-								"type": "TabularTranslator",
-								"typeConversion": true,
-								"typeConversionSettings": {
-									"allowDataTruncation": true,
-									"treatBooleanAsNumber": false
-								}
-							}
-						},
-						"inputs": [
-							{
-								"referenceName": "SqlServerTableDW01",
-								"type": "DatasetReference",
-								"parameters": {}
-							}
-						],
-						"outputs": [
-							{
-								"referenceName": "ParquetDW01",
-								"type": "DatasetReference",
-								"parameters": {
-									"TableName": {
-										"value": "@variables('TableName')",
-										"type": "Expression"
-									}
-								}
-							}
-						]
-					},
-					{
-						"name": "DimCustomer",
-						"type": "Copy",
-						"dependsOn": [
-							{
-								"activity": "Set DimCustomer Name",
-								"dependencyConditions": [
-									"Succeeded"
-								]
-							}
-						],
-						"policy": {
-							"timeout": "0.12:00:00",
-							"retry": 0,
-							"retryIntervalInSeconds": 30,
-							"secureOutput": false,
-							"secureInput": false
-						},
-						"userProperties": [],
-						"typeProperties": {
-							"source": {
-								"type": "SqlServerSource",
-								"sqlReaderQuery": "SELECT\nCustomerCode\n,CustomerName\nFROM [dbo].[DimCustomer]",
 								"queryTimeout": "02:01:00",
 								"partitionOption": "None"
 							},
@@ -608,6 +544,83 @@
 								}
 							}
 						]
+					},
+					{
+						"name": "Set DimCustomer Name",
+						"type": "SetVariable",
+						"dependsOn": [],
+						"policy": {
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"variableName": "TableName",
+							"value": "DimCustomer"
+						}
+					},
+					{
+						"name": "DimCustomer",
+						"type": "Copy",
+						"dependsOn": [
+							{
+								"activity": "Set DimCustomer Name",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "0.12:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "SqlServerSource",
+								"sqlReaderQuery": "SELECT\nCustomerCode\n,CustomerName\nFROM [dbo].[DimCustomer]",
+								"queryTimeout": "02:01:00",
+								"partitionOption": "None"
+							},
+							"sink": {
+								"type": "ParquetSink",
+								"storeSettings": {
+									"type": "AzureBlobFSWriteSettings",
+									"copyBehavior": "FlattenHierarchy"
+								},
+								"formatSettings": {
+									"type": "ParquetWriteSettings"
+								}
+							},
+							"enableStaging": false,
+							"translator": {
+								"type": "TabularTranslator",
+								"typeConversion": true,
+								"typeConversionSettings": {
+									"allowDataTruncation": true,
+									"treatBooleanAsNumber": false
+								}
+							}
+						},
+						"inputs": [
+							{
+								"referenceName": "SqlServerTableDW01",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "ParquetDW01",
+								"type": "DatasetReference",
+								"parameters": {
+									"TableName": "@variables('TableName')"
+								}
+							}
+						]
 					}
 				],
 				"policy": {
@@ -623,7 +636,9 @@
 				},
 				"annotations": []
 			},
-			"dependsOn": []
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/datasets/SqlServerTableDW01')]"
+			]
 		}
 	]
 }
