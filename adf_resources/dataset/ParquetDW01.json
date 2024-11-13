@@ -11,11 +11,7 @@
 			"location": {
 				"type": "AzureBlobFSLocation",
 				"fileName": {
-					"value": "{concat(TableName,'.parquet')}",
-					"type": "Expression"
-				},
-				"folderPath": {
-					"value": "TableName",
+					"value": "@{concat(dataset().TableName,'.parquet')}",
 					"type": "Expression"
 				},
 				"fileSystem": "dw01"
