@@ -258,11 +258,6 @@
 				"policy": {
 					"elapsedTimeMetric": {}
 				},
-				"variables": {
-					"TableName": {
-						"type": "String"
-					}
-				},
 				"annotations": []
 			},
 			"dependsOn": []
@@ -274,7 +269,7 @@
 			"properties": {
 				"activities": [
 					{
-						"name": "Company",
+						"name": "DimCompany",
 						"type": "Copy",
 						"dependsOn": [
 							{
@@ -352,6 +347,267 @@
 							"variableName": "TableName",
 							"value": "DimCompany"
 						}
+					},
+					{
+						"name": "Set DimDistributionChannelName",
+						"type": "SetVariable",
+						"dependsOn": [
+							{
+								"activity": "DimCompany",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"variableName": "TableName",
+							"value": "DimDistributionChannel"
+						}
+					},
+					{
+						"name": "Set DimProfitCenterDAta Name",
+						"type": "SetVariable",
+						"dependsOn": [
+							{
+								"activity": "DimCustomer",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"variableName": "TableName",
+							"value": "DimProfitCenterData"
+						}
+					},
+					{
+						"name": "Set DimCustomer Name",
+						"type": "SetVariable",
+						"dependsOn": [
+							{
+								"activity": "DimDistributionChannel",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"variableName": "TableName",
+							"value": "DimCustomer\n"
+						}
+					},
+					{
+						"name": "DimDistributionChannel",
+						"type": "Copy",
+						"dependsOn": [
+							{
+								"activity": "Set DimDistributionChannelName",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "0.12:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "SqlServerSource",
+								"sqlReaderQuery": "SELECT\nDistributionChannelCode\n,DistributionChannelName\nFROM [dbo].[DimDistributionChannel]",
+								"queryTimeout": "02:01:00",
+								"partitionOption": "None"
+							},
+							"sink": {
+								"type": "ParquetSink",
+								"storeSettings": {
+									"type": "AzureBlobFSWriteSettings",
+									"copyBehavior": "FlattenHierarchy"
+								},
+								"formatSettings": {
+									"type": "ParquetWriteSettings"
+								}
+							},
+							"enableStaging": false,
+							"translator": {
+								"type": "TabularTranslator",
+								"typeConversion": true,
+								"typeConversionSettings": {
+									"allowDataTruncation": true,
+									"treatBooleanAsNumber": false
+								}
+							}
+						},
+						"inputs": [
+							{
+								"referenceName": "SqlServerTableDW01",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "ParquetDW01",
+								"type": "DatasetReference",
+								"parameters": {
+									"TableName": {
+										"value": "@variables('TableName')",
+										"type": "Expression"
+									}
+								}
+							}
+						]
+					},
+					{
+						"name": "DimCustomer",
+						"type": "Copy",
+						"dependsOn": [
+							{
+								"activity": "Set DimCustomer Name",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "0.12:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "SqlServerSource",
+								"sqlReaderQuery": "SELECT\nCustomerCode\n,CustomerName\nFROM [dbo].[DimCustomer]",
+								"queryTimeout": "02:01:00",
+								"partitionOption": "None"
+							},
+							"sink": {
+								"type": "ParquetSink",
+								"storeSettings": {
+									"type": "AzureBlobFSWriteSettings",
+									"copyBehavior": "FlattenHierarchy"
+								},
+								"formatSettings": {
+									"type": "ParquetWriteSettings"
+								}
+							},
+							"enableStaging": false,
+							"translator": {
+								"type": "TabularTranslator",
+								"typeConversion": true,
+								"typeConversionSettings": {
+									"allowDataTruncation": true,
+									"treatBooleanAsNumber": false
+								}
+							}
+						},
+						"inputs": [
+							{
+								"referenceName": "SqlServerTableDW01",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "ParquetDW01",
+								"type": "DatasetReference",
+								"parameters": {
+									"TableName": {
+										"value": "@variables('TableName')",
+										"type": "Expression"
+									}
+								}
+							}
+						]
+					},
+					{
+						"name": "DimProfitCenterData",
+						"type": "Copy",
+						"dependsOn": [
+							{
+								"activity": "Set DimProfitCenterDAta Name",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "0.12:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "SqlServerSource",
+								"sqlReaderQuery": "SELECT *\nFROM [dbo].[DimProfitCenterData]",
+								"queryTimeout": "02:01:00",
+								"partitionOption": "None"
+							},
+							"sink": {
+								"type": "ParquetSink",
+								"storeSettings": {
+									"type": "AzureBlobFSWriteSettings",
+									"copyBehavior": "FlattenHierarchy"
+								},
+								"formatSettings": {
+									"type": "ParquetWriteSettings"
+								}
+							},
+							"enableStaging": false,
+							"translator": {
+								"type": "TabularTranslator",
+								"typeConversion": true,
+								"typeConversionSettings": {
+									"allowDataTruncation": true,
+									"treatBooleanAsNumber": false
+								}
+							}
+						},
+						"inputs": [
+							{
+								"referenceName": "SqlServerTableDW01",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "ParquetDW01",
+								"type": "DatasetReference",
+								"parameters": {
+									"TableName": {
+										"value": "@variables('TableName')",
+										"type": "Expression"
+									}
+								}
+							}
+						]
 					}
 				],
 				"policy": {
