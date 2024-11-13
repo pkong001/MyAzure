@@ -10,6 +10,14 @@
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobFSLocation",
+				"fileName": {
+					"value": "{concat(TableName,'.parquet')}",
+					"type": "Expression"
+				},
+				"folderPath": {
+					"value": "TableName",
+					"type": "Expression"
+				},
 				"fileSystem": "dw01"
 			},
 			"compressionCodec": "snappy"

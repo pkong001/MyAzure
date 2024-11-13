@@ -5,7 +5,14 @@
 			{
 				"name": "Company",
 				"type": "Copy",
-				"dependsOn": [],
+				"dependsOn": [
+					{
+						"activity": "Set DimCompany Name",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
 				"policy": {
 					"timeout": "0.12:00:00",
 					"retry": 0,
@@ -53,10 +60,48 @@
 						"type": "DatasetReference"
 					}
 				]
+			},
+			{
+				"name": "Set DimCompany Name",
+				"type": "SetVariable",
+				"dependsOn": [],
+				"policy": {
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"variableName": "TableName",
+					"value": "DimCompany"
+				}
+			},
+			{
+				"name": "Set DimDistributionChannelname",
+				"type": "SetVariable",
+				"dependsOn": [
+					{
+						"activity": "Company",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"variableName": "TableName",
+					"value": "DimDistributionChannel"
+				}
 			}
 		],
 		"variables": {
 			"var1": {
+				"type": "String"
+			},
+			"TableName": {
 				"type": "String"
 			}
 		},
