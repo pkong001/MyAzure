@@ -1,0 +1,28 @@
+{
+	"name": "SHIR_DW01",
+	"properties": {
+		"description": "SHIR_DW01",
+		"annotations": [],
+		"type": "SqlServer",
+		"typeProperties": {
+			"server": "ISDNB-00H99812A",
+			"database": "DW01",
+			"encrypt": "mandatory",
+			"trustServerCertificate": true,
+			"authenticationType": "SQL",
+			"userName": "mrv",
+			"password": {
+				"type": "AzureKeyVaultSecret",
+				"store": {
+					"referenceName": "AzureKeyVault1",
+					"type": "LinkedServiceReference"
+				},
+				"secretName": "mrvpassword"
+			}
+		},
+		"connectVia": {
+			"referenceName": "SHIR01",
+			"type": "IntegrationRuntimeReference"
+		}
+	}
+}
