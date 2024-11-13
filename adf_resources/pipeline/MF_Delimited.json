@@ -1,5 +1,5 @@
 {
-	"name": "pipeline1",
+	"name": "MF_Delimited",
 	"properties": {
 		"activities": [
 			{
