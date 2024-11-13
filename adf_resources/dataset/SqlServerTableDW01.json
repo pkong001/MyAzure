@@ -1,0 +1,12 @@
+{
+	"name": "SqlServerTableDW01",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "SHIR_DW01",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "SqlServerTable",
+		"schema": []
+	}
+}

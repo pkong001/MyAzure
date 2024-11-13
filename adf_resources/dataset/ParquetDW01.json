@@ -1,0 +1,19 @@
+{
+	"name": "ParquetDW01",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "ADLS",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Parquet",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"fileSystem": "dw01"
+			},
+			"compressionCodec": "snappy"
+		},
+		"schema": []
+	}
+}
