@@ -15,7 +15,11 @@
 				},
 				"userProperties": [],
 				"typeProperties": {
-					"notebookPath": "/Users/pkongdan01@gmail.com/P01/_P1-ELT-dim-profit&loss-source-to-pre-tx-bronze"
+					"notebookPath": "/Users/pkongdan01@gmail.com/P01/_P1-ELT-dim-profit&loss-source-to-pre-tx-bronze",
+					"baseParameters": {
+						"extract_criteria": "full",
+						"extract_date_fix": "2020-12-11 00:00:00.000"
+					}
 				},
 				"linkedServiceName": {
 					"referenceName": "AzureDatabricksP01",
