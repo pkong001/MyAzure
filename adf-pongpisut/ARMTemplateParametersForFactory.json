@@ -43,6 +43,9 @@
 		},
 		"SHIR_DW01_properties_typeProperties_userName": {
 			"value": "mrv"
+		},
+		"AzureDatabricksP01_properties_typeProperties_existingClusterId": {
+			"value": "0106-072230-b2rauefw"
 		}
 	}
 }
