@@ -142,7 +142,7 @@
 										"type": "Expression"
 									},
 									"LoopCount": {
-										"value": "@variables('LoopCount')",
+										"value": "@string(variables('LoopCount'))",
 										"type": "Expression"
 									}
 								}
