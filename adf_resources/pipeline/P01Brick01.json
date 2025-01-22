@@ -3,7 +3,7 @@
 	"properties": {
 		"activities": [
 			{
-				"name": "Switch Container",
+				"name": "ELT Container",
 				"type": "Switch",
 				"dependsOn": [],
 				"userProperties": [],
@@ -276,6 +276,79 @@
 							}
 						}
 					]
+				}
+			},
+			{
+				"name": "P01Brick02",
+				"type": "ExecutePipeline",
+				"dependsOn": [
+					{
+						"activity": "ELT Container",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "P01Brick02",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true,
+					"parameters": {
+						"Condition1": {
+							"value": "@pipeline().parameters.Condition1",
+							"type": "Expression"
+						},
+						"Condition2": {
+							"value": "@pipeline().parameters.Condition2",
+							"type": "Expression"
+						},
+						"Condition3": {
+							"value": "@pipeline().parameters.Condition3",
+							"type": "Expression"
+						},
+						"extract_criteria_dim": {
+							"value": "@variables('extract_criteria_dim')",
+							"type": "Expression"
+						},
+						"extract_date_fix_dim": {
+							"value": "@variables('extract_date_fix_dim')",
+							"type": "Expression"
+						},
+						"dummy": {
+							"value": "@equals(1,1)",
+							"type": "Expression"
+						},
+						"end_date_fact": {
+							"value": "@variables('end_date_fact')",
+							"type": "Expression"
+						},
+						"start_date_fact": {
+							"value": "@variables('start_date_fact')",
+							"type": "Expression"
+						},
+						"extract_criteria_fact": {
+							"value": "@variables('extract_criteria_fact')",
+							"type": "Expression"
+						},
+						"extract_date_fix_fact": {
+							"value": "@variables('extract_date_fix_fact')",
+							"type": "Expression"
+						},
+						"mode": {
+							"value": "@variables('mode')",
+							"type": "Expression"
+						},
+						"table_name": {
+							"value": "@variables('table_name')",
+							"type": "Expression"
+						}
+					}
 				}
 			}
 		],
