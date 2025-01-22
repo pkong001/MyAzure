@@ -119,7 +119,13 @@
 									},
 									"userProperties": [],
 									"typeProperties": {
-										"notebookPath": "/Users/pkongdan01@gmail.com/P01/_P1-Load-fact-bronze-to-silver"
+										"notebookPath": "/Users/pkongdan01@gmail.com/P01/_P1-Load-fact-bronze-to-silver",
+										"baseParameters": {
+											"table_name": {
+												"value": "@variables('table_name')",
+												"type": "Expression"
+											}
+										}
 									},
 									"linkedServiceName": {
 										"referenceName": "AzureDatabricksP01",
@@ -146,7 +152,33 @@
 									},
 									"userProperties": [],
 									"typeProperties": {
-										"notebookPath": "/Users/pkongdan01@gmail.com/P01/_P1-ELT-fact-profit&loss-source-to-pre-tx-bronze"
+										"notebookPath": "/Users/pkongdan01@gmail.com/P01/_P1-ELT-fact-profit&loss-source-to-pre-tx-bronze",
+										"baseParameters": {
+											"start_date": {
+												"value": "@variables('start_date_fact')",
+												"type": "Expression"
+											},
+											"end_date": {
+												"value": "@variables('end_date_fact')",
+												"type": "Expression"
+											},
+											"extract_criteria": {
+												"value": "@variables('extract_criteria_fact')",
+												"type": "Expression"
+											},
+											"extrace_date_fix": {
+												"value": "@variables('extract_date_fix_fact')",
+												"type": "Expression"
+											},
+											"mode": {
+												"value": "@variables('mode')",
+												"type": "Expression"
+											},
+											"table_name": {
+												"value": "@variables('table_name')",
+												"type": "Expression"
+											}
+										}
 									},
 									"linkedServiceName": {
 										"referenceName": "AzureDatabricksP01",
@@ -173,6 +205,92 @@
 											"value": "@equals(1, 1)\n",
 											"type": "Expression"
 										}
+									}
+								},
+								{
+									"name": "FACT-bronze-to-silver_copy1",
+									"type": "DatabricksNotebook",
+									"dependsOn": [
+										{
+											"activity": "FACT-source-to-bronze_copy1",
+											"dependencyConditions": [
+												"Succeeded"
+											]
+										}
+									],
+									"policy": {
+										"timeout": "0.12:00:00",
+										"retry": 0,
+										"retryIntervalInSeconds": 30,
+										"secureOutput": false,
+										"secureInput": false
+									},
+									"userProperties": [],
+									"typeProperties": {
+										"notebookPath": "/Users/pkongdan01@gmail.com/P01/_P1-Load-fact-bronze-to-silver",
+										"baseParameters": {
+											"table_name": {
+												"value": "@variables('table_name')",
+												"type": "Expression"
+											}
+										}
+									},
+									"linkedServiceName": {
+										"referenceName": "AzureDatabricksP01",
+										"type": "LinkedServiceReference"
+									}
+								},
+								{
+									"name": "FACT-source-to-bronze_copy1",
+									"type": "DatabricksNotebook",
+									"dependsOn": [
+										{
+											"activity": "dummy fact",
+											"dependencyConditions": [
+												"Succeeded"
+											]
+										}
+									],
+									"policy": {
+										"timeout": "0.12:00:00",
+										"retry": 0,
+										"retryIntervalInSeconds": 30,
+										"secureOutput": false,
+										"secureInput": false
+									},
+									"userProperties": [],
+									"typeProperties": {
+										"notebookPath": "/Users/pkongdan01@gmail.com/P01/_P1-ELT-fact-profit&loss-source-to-pre-tx-bronze",
+										"baseParameters": {
+											"start_date": {
+												"value": "@variables('start_date_fact')",
+												"type": "Expression"
+											},
+											"end_date": {
+												"value": "@variables('end_date_fact')",
+												"type": "Expression"
+											},
+											"extract_criteria": {
+												"value": "@variables('extract_criteria_fact')",
+												"type": "Expression"
+											},
+											"extrace_date_fix": {
+												"value": "@variables('extract_date_fix_fact')",
+												"type": "Expression"
+											},
+											"mode": {
+												"value": "@variables('mode')",
+												"type": "Expression"
+											},
+											"table_name": {
+												"value": "@variables('table_name')",
+												"type": "Expression"
+											}
+										}
+									},
+									"linkedServiceName": {
+										"referenceName": "AzureDatabricksP01",
+										"type": "LinkedServiceReference"
 									}
 								}
 							]
@@ -220,45 +338,6 @@
 						}
 					]
 				}
-			},
-			{
-				"name": "If Condition1",
-				"type": "IfCondition",
-				"dependsOn": [
-					{
-						"activity": "Custom1",
-						"dependencyConditions": [
-							"Succeeded"
-						]
-					}
-				],
-				"userProperties": []
-			},
-			{
-				"name": "Custom1",
-				"type": "Custom",
-				"dependsOn": [
-					{
-						"activity": "Switch Container",
-						"dependencyConditions": [
-							"Succeeded"
-						]
-					}
-				],
-				"policy": {
-					"timeout": "0.12:00:00",
-					"retry": 0,
-					"retryIntervalInSeconds": 30,
-					"secureOutput": false,
-					"secureInput": false
-				},
-				"userProperties": [],
-				"typeProperties": {
-					"referenceObjects": {
-						"linkedServices": [],
-						"datasets": []
-					}
-				}
 			}
 		],
 		"parameters": {
@@ -282,11 +361,35 @@
 			},
 			"extract_date_fix_dim": {
 				"type": "String",
-				"defaultValue": "2020-12-11 00:00:00.000"
+				"defaultValue": "2025-12-11"
 			},
 			"dummy": {
 				"type": "Boolean",
 				"defaultValue": true
+			},
+			"end_date_fact": {
+				"type": "String",
+				"defaultValue": "2023-12-31"
+			},
+			"start_date_fact": {
+				"type": "String",
+				"defaultValue": "2023-12-01"
+			},
+			"extract_criteria_fact": {
+				"type": "String",
+				"defaultValue": "full"
+			},
+			"extract_date_fix_fact": {
+				"type": "String",
+				"defaultValue": "2000-01-01"
+			},
+			"mode": {
+				"type": "String",
+				"defaultValue": "dev"
+			},
+			"table_name": {
+				"type": "String",
+				"defaultValue": "Z1FI3MP02"
 			}
 		},
 		"annotations": []
