@@ -3,7 +3,7 @@
 	"properties": {
 		"activities": [
 			{
-				"name": "Switch1",
+				"name": "dummy default",
 				"type": "Switch",
 				"dependsOn": [],
 				"userProperties": [],
@@ -63,10 +63,58 @@
 							]
 						},
 						{
-							"value": "fact"
+							"value": "fact",
+							"activities": [
+								{
+									"name": "dummy fact",
+									"type": "SetVariable",
+									"dependsOn": [],
+									"policy": {
+										"secureOutput": false,
+										"secureInput": false
+									},
+									"userProperties": [],
+									"typeProperties": {
+										"variableName": "dummy",
+										"value": true
+									}
+								}
+							]
 						},
 						{
-							"value": "dim"
+							"value": "dim",
+							"activities": [
+								{
+									"name": "dummy dim",
+									"type": "SetVariable",
+									"dependsOn": [],
+									"policy": {
+										"secureOutput": false,
+										"secureInput": false
+									},
+									"userProperties": [],
+									"typeProperties": {
+										"variableName": "dummy",
+										"value": true
+									}
+								}
+							]
+						}
+					],
+					"defaultActivities": [
+						{
+							"name": "dummy",
+							"type": "SetVariable",
+							"dependsOn": [],
+							"policy": {
+								"secureOutput": false,
+								"secureInput": false
+							},
+							"userProperties": [],
+							"typeProperties": {
+								"variableName": "dummy",
+								"value": true
+							}
 						}
 					]
 				}
@@ -94,6 +142,10 @@
 			"extract_date_fix_dim": {
 				"type": "String",
 				"defaultValue": "2020-12-11 00:00:00.000"
+			},
+			"dummy": {
+				"type": "Boolean",
+				"defaultValue": true
 			}
 		},
 		"annotations": []
