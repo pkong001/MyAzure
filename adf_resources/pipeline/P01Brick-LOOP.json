@@ -114,7 +114,7 @@
 								"notebookPath": "/Users/pkongdan01@gmail.com/P01/_P1-VARIABLES-CONTROL",
 								"baseParameters": {
 									"extract_date_fix_dim": {
-										"value": "@variables('extract_date_fix_dim')",
+										"value": "@pipeline().parameters.extract_date_fix_dim",
 										"type": "Expression"
 									},
 									"extract_criteria_dim": {
@@ -150,6 +150,54 @@
 							"linkedServiceName": {
 								"referenceName": "AzureDatabricksP01",
 								"type": "LinkedServiceReference"
+							}
+						},
+						{
+							"name": "Increment Loop Count",
+							"type": "SetVariable",
+							"dependsOn": [
+								{
+									"activity": "P01Brick01",
+									"dependencyConditions": [
+										"Succeeded"
+									]
+								}
+							],
+							"policy": {
+								"secureOutput": false,
+								"secureInput": false
+							},
+							"userProperties": [],
+							"typeProperties": {
+								"variableName": "LoopCount",
+								"value": {
+									"value": "@add(variables('TempCount'),1)",
+									"type": "Expression"
+								}
+							}
+						},
+						{
+							"name": "Increment Temp Count",
+							"type": "SetVariable",
+							"dependsOn": [
+								{
+									"activity": "Increment Loop Count",
+									"dependencyConditions": [
+										"Succeeded"
+									]
+								}
+							],
+							"policy": {
+								"secureOutput": false,
+								"secureInput": false
+							},
+							"userProperties": [],
+							"typeProperties": {
+								"variableName": "TempCount",
+								"value": {
+									"value": "@variables('LoopCount')",
+									"type": "Expression"
+								}
 							}
 						}
 					],
@@ -327,6 +375,10 @@
 				"type": "String"
 			},
 			"LoopCount": {
+				"type": "Integer",
+				"defaultValue": 1
+			},
+			"TempCount": {
 				"type": "Integer",
 				"defaultValue": 1
 			}
