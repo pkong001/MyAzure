@@ -203,6 +203,42 @@
 		],
 		"parameters": {
 			"Condition1": {
+				"type": "string",
+				"defaultValue": "fact"
+			},
+			"Condition2": {
+				"type": "string",
+				"defaultValue": "pnl"
+			},
+			"Condition3": {
+				"type": "string",
+				"defaultValue": "full"
+			},
+			"extract_criteria_dim": {
+				"type": "string"
+			},
+			"extract_date_fix_dim": {
+				"type": "string"
+			},
+			"dummy": {
+				"type": "string"
+			},
+			"end_date_fact": {
+				"type": "string"
+			},
+			"start_date_fact": {
+				"type": "string"
+			},
+			"extract_criteria_fact": {
+				"type": "string"
+			},
+			"extract_date_fix_fact": {
+				"type": "string"
+			},
+			"mode": {
+				"type": "string"
+			},
+			"table_name": {
 				"type": "string"
 			}
 		},
