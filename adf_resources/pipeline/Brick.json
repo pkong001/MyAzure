@@ -98,6 +98,60 @@
 											"type": "Expression"
 										}
 									}
+								},
+								{
+									"name": "FACT-bronze-to-silver",
+									"type": "DatabricksNotebook",
+									"dependsOn": [
+										{
+											"activity": "FACT-source-to-bronze",
+											"dependencyConditions": [
+												"Succeeded"
+											]
+										}
+									],
+									"policy": {
+										"timeout": "0.12:00:00",
+										"retry": 0,
+										"retryIntervalInSeconds": 30,
+										"secureOutput": false,
+										"secureInput": false
+									},
+									"userProperties": [],
+									"typeProperties": {
+										"notebookPath": "/Users/pkongdan01@gmail.com/P01/_P1-Load-fact-bronze-to-silver"
+									},
+									"linkedServiceName": {
+										"referenceName": "AzureDatabricksP01",
+										"type": "LinkedServiceReference"
+									}
+								},
+								{
+									"name": "FACT-source-to-bronze",
+									"type": "DatabricksNotebook",
+									"dependsOn": [
+										{
+											"activity": "DIM-bronze-to-silver",
+											"dependencyConditions": [
+												"Succeeded"
+											]
+										}
+									],
+									"policy": {
+										"timeout": "0.12:00:00",
+										"retry": 0,
+										"retryIntervalInSeconds": 30,
+										"secureOutput": false,
+										"secureInput": false
+									},
+									"userProperties": [],
+									"typeProperties": {
+										"notebookPath": "/Users/pkongdan01@gmail.com/P01/_P1-ELT-fact-profit&loss-source-to-pre-tx-bronze"
+									},
+									"linkedServiceName": {
+										"referenceName": "AzureDatabricksP01",
+										"type": "LinkedServiceReference"
+									}
 								}
 							]
 						},
@@ -165,6 +219,45 @@
 							}
 						}
 					]
+				}
+			},
+			{
+				"name": "If Condition1",
+				"type": "IfCondition",
+				"dependsOn": [
+					{
+						"activity": "Custom1",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": []
+			},
+			{
+				"name": "Custom1",
+				"type": "Custom",
+				"dependsOn": [
+					{
+						"activity": "Switch Container",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"referenceObjects": {
+						"linkedServices": [],
+						"datasets": []
+					}
 				}
 			}
 		],
