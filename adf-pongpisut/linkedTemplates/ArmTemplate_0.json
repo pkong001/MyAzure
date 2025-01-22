@@ -35,6 +35,10 @@
 			"type": "string",
 			"defaultValue": "1021-042950-mvc1m70c"
 		},
+		"AzureDatabricksP01_properties_typeProperties_existingClusterId": {
+			"type": "string",
+			"defaultValue": "0106-072230-b2rauefw"
+		},
 		"SHIRLink_properties_typeProperties_server": {
 			"type": "string",
 			"defaultValue": "ISDNB-00H99812A"
@@ -58,10 +62,6 @@
 		"SHIR_DW01_properties_typeProperties_userName": {
 			"type": "string",
 			"defaultValue": "mrv"
-		},
-		"AzureDatabricksP01_properties_typeProperties_existingClusterId": {
-			"type": "string",
-			"defaultValue": "0106-072230-b2rauefw"
 		}
 	},
 	"variables": {
@@ -390,6 +390,31 @@
 			]
 		},
 		{
+			"name": "[concat(parameters('factoryName'), '/AzureDatabrickDeltaLake')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"description": "For P 01",
+				"annotations": [],
+				"type": "AzureDatabricksDeltaLake",
+				"typeProperties": {
+					"domain": "https://adb-1346410883415134.14.azuredatabricks.net",
+					"clusterId": "0106-072230-b2rauefw",
+					"accessToken": {
+						"type": "AzureKeyVaultSecret",
+						"store": {
+							"referenceName": "AzureKeyVault1",
+							"type": "LinkedServiceReference"
+						},
+						"secretName": "TokenP01"
+					}
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/AzureKeyVault1')]"
+			]
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/AzureDatabricks1')]",
 			"type": "Microsoft.DataFactory/factories/linkedServices",
 			"apiVersion": "2018-06-01",
@@ -431,6 +456,30 @@
 						},
 						"secretName": "Token01"
 					}
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/AzureKeyVault1')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/AzureDatabricksP01')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureDatabricks",
+				"typeProperties": {
+					"domain": "https://adb-1346410883415134.14.azuredatabricks.net",
+					"accessToken": {
+						"type": "AzureKeyVaultSecret",
+						"store": {
+							"referenceName": "AzureKeyVault1",
+							"type": "LinkedServiceReference"
+						},
+						"secretName": "TokenP01"
+					},
+					"existingClusterId": "[parameters('AzureDatabricksP01_properties_typeProperties_existingClusterId')]"
 				}
 			},
 			"dependsOn": [
@@ -501,55 +550,6 @@
 			},
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/integrationRuntimes/SHIR01')]",
-				"[concat(variables('factoryId'), '/linkedServices/AzureKeyVault1')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/AzureDatabrickDeltaLake')]",
-			"type": "Microsoft.DataFactory/factories/linkedServices",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"description": "For P 01",
-				"annotations": [],
-				"type": "AzureDatabricksDeltaLake",
-				"typeProperties": {
-					"domain": "https://adb-1346410883415134.14.azuredatabricks.net",
-					"clusterId": "0106-072230-b2rauefw",
-					"accessToken": {
-						"type": "AzureKeyVaultSecret",
-						"store": {
-							"referenceName": "AzureKeyVault1",
-							"type": "LinkedServiceReference"
-						},
-						"secretName": "TokenP01"
-					}
-				}
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/AzureKeyVault1')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/AzureDatabricksP01')]",
-			"type": "Microsoft.DataFactory/factories/linkedServices",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"annotations": [],
-				"type": "AzureDatabricks",
-				"typeProperties": {
-					"domain": "https://adb-1346410883415134.14.azuredatabricks.net",
-					"accessToken": {
-						"type": "AzureKeyVaultSecret",
-						"store": {
-							"referenceName": "AzureKeyVault1",
-							"type": "LinkedServiceReference"
-						},
-						"secretName": "TokenP01"
-					},
-					"existingClusterId": "[parameters('AzureDatabricksP01_properties_typeProperties_existingClusterId')]"
-				}
-			},
-			"dependsOn": [
 				"[concat(variables('factoryId'), '/linkedServices/AzureKeyVault1')]"
 			]
 		},

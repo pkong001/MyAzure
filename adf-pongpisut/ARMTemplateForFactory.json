@@ -31,6 +31,10 @@
 			"type": "string",
 			"defaultValue": "1021-042950-mvc1m70c"
 		},
+		"AzureDatabricksP01_properties_typeProperties_existingClusterId": {
+			"type": "string",
+			"defaultValue": "0106-072230-b2rauefw"
+		},
 		"AzureKeyVault1_properties_typeProperties_baseUrl": {
 			"type": "string",
 			"defaultValue": "https://kvpong.vault.azure.net/"
@@ -58,10 +62,6 @@
 		"SHIR_DW01_properties_typeProperties_userName": {
 			"type": "string",
 			"defaultValue": "mrv"
-		},
-		"AzureDatabricksP01_properties_typeProperties_existingClusterId": {
-			"type": "string",
-			"defaultValue": "0106-072230-b2rauefw"
 		}
 	},
 	"variables": {
@@ -858,6 +858,215 @@
 			]
 		},
 		{
+			"name": "[concat(parameters('factoryName'), '/Brick')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "Switch Container",
+						"type": "Switch",
+						"dependsOn": [],
+						"userProperties": [],
+						"typeProperties": {
+							"on": {
+								"value": "@pipeline().parameters.Condition1",
+								"type": "Expression"
+							},
+							"cases": [
+								{
+									"value": "full",
+									"activities": [
+										{
+											"name": "DIM-source-to-bronze",
+											"description": "ELT",
+											"type": "DatabricksNotebook",
+											"dependsOn": [
+												{
+													"activity": "dummy full",
+													"dependencyConditions": [
+														"Succeeded"
+													]
+												}
+											],
+											"policy": {
+												"timeout": "0.12:00:00",
+												"retry": 0,
+												"retryIntervalInSeconds": 30,
+												"secureOutput": false,
+												"secureInput": false
+											},
+											"userProperties": [],
+											"typeProperties": {
+												"notebookPath": "/Users/pkongdan01@gmail.com/P01/_P1-ELT-dim-profit&loss-source-to-pre-tx-bronze",
+												"baseParameters": {
+													"extract_criteria": {
+														"value": "@variables('extract_criteria_dim')",
+														"type": "Expression"
+													},
+													"extract_date_fix": {
+														"value": "@variables('extract_date_fix_dim')",
+														"type": "Expression"
+													}
+												}
+											},
+											"linkedServiceName": {
+												"referenceName": "AzureDatabricksP01",
+												"type": "LinkedServiceReference"
+											}
+										},
+										{
+											"name": "DIM-bronze-to-silver",
+											"description": "ETL",
+											"type": "DatabricksNotebook",
+											"dependsOn": [
+												{
+													"activity": "DIM-source-to-bronze",
+													"dependencyConditions": [
+														"Succeeded"
+													]
+												}
+											],
+											"policy": {
+												"timeout": "0.12:00:00",
+												"retry": 0,
+												"retryIntervalInSeconds": 30,
+												"secureOutput": false,
+												"secureInput": false
+											},
+											"userProperties": [],
+											"typeProperties": {
+												"notebookPath": "/Users/pkongdan01@gmail.com/P01/_P1-Load-dim-bronze-to-silver"
+											},
+											"linkedServiceName": {
+												"referenceName": "AzureDatabricksP01",
+												"type": "LinkedServiceReference"
+											}
+										},
+										{
+											"name": "dummy full",
+											"type": "SetVariable",
+											"dependsOn": [],
+											"policy": {
+												"secureOutput": false,
+												"secureInput": false
+											},
+											"userProperties": [],
+											"typeProperties": {
+												"variableName": "dummy",
+												"value": {
+													"value": "@equals(1, 1)",
+													"type": "Expression"
+												}
+											}
+										}
+									]
+								},
+								{
+									"value": "fact",
+									"activities": [
+										{
+											"name": "dummy fact",
+											"type": "SetVariable",
+											"dependsOn": [],
+											"policy": {
+												"secureOutput": false,
+												"secureInput": false
+											},
+											"userProperties": [],
+											"typeProperties": {
+												"variableName": "dummy",
+												"value": {
+													"value": "@equals(1, 1)\n",
+													"type": "Expression"
+												}
+											}
+										}
+									]
+								},
+								{
+									"value": "dim",
+									"activities": [
+										{
+											"name": "dummy dim",
+											"type": "SetVariable",
+											"dependsOn": [],
+											"policy": {
+												"secureOutput": false,
+												"secureInput": false
+											},
+											"userProperties": [],
+											"typeProperties": {
+												"variableName": "dummy",
+												"value": {
+													"value": "@equals(1, 1)\n",
+													"type": "Expression"
+												}
+											}
+										}
+									]
+								}
+							],
+							"defaultActivities": [
+								{
+									"name": "dummy",
+									"type": "SetVariable",
+									"dependsOn": [],
+									"policy": {
+										"secureOutput": false,
+										"secureInput": false
+									},
+									"userProperties": [],
+									"typeProperties": {
+										"variableName": "dummy",
+										"value": {
+											"value": "@equals(1, 1)\n",
+											"type": "Expression"
+										}
+									}
+								}
+							]
+						}
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {}
+				},
+				"parameters": {
+					"Condition1": {
+						"type": "string",
+						"defaultValue": "fact"
+					},
+					"Condition2": {
+						"type": "string",
+						"defaultValue": "pnl"
+					},
+					"Condition3": {
+						"type": "string",
+						"defaultValue": "full"
+					}
+				},
+				"variables": {
+					"extract_criteria_dim": {
+						"type": "String",
+						"defaultValue": "full"
+					},
+					"extract_date_fix_dim": {
+						"type": "String",
+						"defaultValue": "2020-12-11 00:00:00.000"
+					},
+					"dummy": {
+						"type": "Boolean",
+						"defaultValue": true
+					}
+				},
+				"annotations": []
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/AzureDatabricksP01')]"
+			]
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/DelimitedText1')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
@@ -1191,6 +1400,31 @@
 			"dependsOn": []
 		},
 		{
+			"name": "[concat(parameters('factoryName'), '/AzureDatabrickDeltaLake')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"description": "For P 01",
+				"annotations": [],
+				"type": "AzureDatabricksDeltaLake",
+				"typeProperties": {
+					"domain": "https://adb-1346410883415134.14.azuredatabricks.net",
+					"clusterId": "0106-072230-b2rauefw",
+					"accessToken": {
+						"type": "AzureKeyVaultSecret",
+						"store": {
+							"referenceName": "AzureKeyVault1",
+							"type": "LinkedServiceReference"
+						},
+						"secretName": "TokenP01"
+					}
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/AzureKeyVault1')]"
+			]
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/AzureDatabricks1')]",
 			"type": "Microsoft.DataFactory/factories/linkedServices",
 			"apiVersion": "2018-06-01",
@@ -1232,6 +1466,30 @@
 						},
 						"secretName": "Token01"
 					}
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/AzureKeyVault1')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/AzureDatabricksP01')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureDatabricks",
+				"typeProperties": {
+					"domain": "https://adb-1346410883415134.14.azuredatabricks.net",
+					"accessToken": {
+						"type": "AzureKeyVaultSecret",
+						"store": {
+							"referenceName": "AzureKeyVault1",
+							"type": "LinkedServiceReference"
+						},
+						"secretName": "TokenP01"
+					},
+					"existingClusterId": "[parameters('AzureDatabricksP01_properties_typeProperties_existingClusterId')]"
 				}
 			},
 			"dependsOn": [
@@ -1328,95 +1586,6 @@
 				"typeProperties": {}
 			},
 			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/AzureDatabrickDeltaLake')]",
-			"type": "Microsoft.DataFactory/factories/linkedServices",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"description": "For P 01",
-				"annotations": [],
-				"type": "AzureDatabricksDeltaLake",
-				"typeProperties": {
-					"domain": "https://adb-1346410883415134.14.azuredatabricks.net",
-					"clusterId": "0106-072230-b2rauefw",
-					"accessToken": {
-						"type": "AzureKeyVaultSecret",
-						"store": {
-							"referenceName": "AzureKeyVault1",
-							"type": "LinkedServiceReference"
-						},
-						"secretName": "TokenP01"
-					}
-				}
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/AzureKeyVault1')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/pipeline1')]",
-			"type": "Microsoft.DataFactory/factories/pipelines",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"activities": [
-					{
-						"name": "Notebook1",
-						"type": "DatabricksNotebook",
-						"dependsOn": [],
-						"policy": {
-							"timeout": "0.12:00:00",
-							"retry": 0,
-							"retryIntervalInSeconds": 30,
-							"secureOutput": false,
-							"secureInput": false
-						},
-						"userProperties": [],
-						"typeProperties": {
-							"notebookPath": "/Users/pkongdan01@gmail.com/P01/_P1-ELT-dim-profit&loss-source-to-pre-tx-bronze",
-							"baseParameters": {
-								"extract_criteria": "full",
-								"extract_date_fix": "2020-12-11 00:00:00.000"
-							}
-						},
-						"linkedServiceName": {
-							"referenceName": "AzureDatabricksP01",
-							"type": "LinkedServiceReference"
-						}
-					}
-				],
-				"policy": {
-					"elapsedTimeMetric": {}
-				},
-				"annotations": []
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/AzureDatabricksP01')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/AzureDatabricksP01')]",
-			"type": "Microsoft.DataFactory/factories/linkedServices",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"annotations": [],
-				"type": "AzureDatabricks",
-				"typeProperties": {
-					"domain": "https://adb-1346410883415134.14.azuredatabricks.net",
-					"accessToken": {
-						"type": "AzureKeyVaultSecret",
-						"store": {
-							"referenceName": "AzureKeyVault1",
-							"type": "LinkedServiceReference"
-						},
-						"secretName": "TokenP01"
-					},
-					"existingClusterId": "[parameters('AzureDatabricksP01_properties_typeProperties_existingClusterId')]"
-				}
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/AzureKeyVault1')]"
-			]
 		}
 	]
 }

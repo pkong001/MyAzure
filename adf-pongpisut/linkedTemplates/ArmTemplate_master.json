@@ -31,6 +31,10 @@
 			"type": "string",
 			"defaultValue": "1021-042950-mvc1m70c"
 		},
+		"AzureDatabricksP01_properties_typeProperties_existingClusterId": {
+			"type": "string",
+			"defaultValue": "0106-072230-b2rauefw"
+		},
 		"AzureKeyVault1_properties_typeProperties_baseUrl": {
 			"type": "string",
 			"defaultValue": "https://kvpong.vault.azure.net/"
@@ -58,10 +62,6 @@
 		"SHIR_DW01_properties_typeProperties_userName": {
 			"type": "string",
 			"defaultValue": "mrv"
-		},
-		"AzureDatabricksP01_properties_typeProperties_existingClusterId": {
-			"type": "string",
-			"defaultValue": "0106-072230-b2rauefw"
 		},
 		"containerUri": {
 			"type": "string",
@@ -111,6 +111,9 @@
 					"AzureDatabricks1_properties_typeProperties_existingClusterId": {
 						"value": "[parameters('AzureDatabricks1_properties_typeProperties_existingClusterId')]"
 					},
+					"AzureDatabricksP01_properties_typeProperties_existingClusterId": {
+						"value": "[parameters('AzureDatabricksP01_properties_typeProperties_existingClusterId')]"
+					},
 					"SHIRLink_properties_typeProperties_server": {
 						"value": "[parameters('SHIRLink_properties_typeProperties_server')]"
 					},
@@ -128,9 +131,6 @@
 					},
 					"SHIR_DW01_properties_typeProperties_userName": {
 						"value": "[parameters('SHIR_DW01_properties_typeProperties_userName')]"
-					},
-					"AzureDatabricksP01_properties_typeProperties_existingClusterId": {
-						"value": "[parameters('AzureDatabricksP01_properties_typeProperties_existingClusterId')]"
 					}
 				}
 			},

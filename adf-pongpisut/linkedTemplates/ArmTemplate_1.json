@@ -13,6 +13,213 @@
 	},
 	"resources": [
 		{
+			"name": "[concat(parameters('factoryName'), '/Brick')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "Switch Container",
+						"type": "Switch",
+						"dependsOn": [],
+						"userProperties": [],
+						"typeProperties": {
+							"on": {
+								"value": "@pipeline().parameters.Condition1",
+								"type": "Expression"
+							},
+							"cases": [
+								{
+									"value": "full",
+									"activities": [
+										{
+											"name": "DIM-source-to-bronze",
+											"description": "ELT",
+											"type": "DatabricksNotebook",
+											"dependsOn": [
+												{
+													"activity": "dummy full",
+													"dependencyConditions": [
+														"Succeeded"
+													]
+												}
+											],
+											"policy": {
+												"timeout": "0.12:00:00",
+												"retry": 0,
+												"retryIntervalInSeconds": 30,
+												"secureOutput": false,
+												"secureInput": false
+											},
+											"userProperties": [],
+											"typeProperties": {
+												"notebookPath": "/Users/pkongdan01@gmail.com/P01/_P1-ELT-dim-profit&loss-source-to-pre-tx-bronze",
+												"baseParameters": {
+													"extract_criteria": {
+														"value": "@variables('extract_criteria_dim')",
+														"type": "Expression"
+													},
+													"extract_date_fix": {
+														"value": "@variables('extract_date_fix_dim')",
+														"type": "Expression"
+													}
+												}
+											},
+											"linkedServiceName": {
+												"referenceName": "AzureDatabricksP01",
+												"type": "LinkedServiceReference"
+											}
+										},
+										{
+											"name": "DIM-bronze-to-silver",
+											"description": "ETL",
+											"type": "DatabricksNotebook",
+											"dependsOn": [
+												{
+													"activity": "DIM-source-to-bronze",
+													"dependencyConditions": [
+														"Succeeded"
+													]
+												}
+											],
+											"policy": {
+												"timeout": "0.12:00:00",
+												"retry": 0,
+												"retryIntervalInSeconds": 30,
+												"secureOutput": false,
+												"secureInput": false
+											},
+											"userProperties": [],
+											"typeProperties": {
+												"notebookPath": "/Users/pkongdan01@gmail.com/P01/_P1-Load-dim-bronze-to-silver"
+											},
+											"linkedServiceName": {
+												"referenceName": "AzureDatabricksP01",
+												"type": "LinkedServiceReference"
+											}
+										},
+										{
+											"name": "dummy full",
+											"type": "SetVariable",
+											"dependsOn": [],
+											"policy": {
+												"secureOutput": false,
+												"secureInput": false
+											},
+											"userProperties": [],
+											"typeProperties": {
+												"variableName": "dummy",
+												"value": {
+													"value": "@equals(1, 1)",
+													"type": "Expression"
+												}
+											}
+										}
+									]
+								},
+								{
+									"value": "fact",
+									"activities": [
+										{
+											"name": "dummy fact",
+											"type": "SetVariable",
+											"dependsOn": [],
+											"policy": {
+												"secureOutput": false,
+												"secureInput": false
+											},
+											"userProperties": [],
+											"typeProperties": {
+												"variableName": "dummy",
+												"value": {
+													"value": "@equals(1, 1)\n",
+													"type": "Expression"
+												}
+											}
+										}
+									]
+								},
+								{
+									"value": "dim",
+									"activities": [
+										{
+											"name": "dummy dim",
+											"type": "SetVariable",
+											"dependsOn": [],
+											"policy": {
+												"secureOutput": false,
+												"secureInput": false
+											},
+											"userProperties": [],
+											"typeProperties": {
+												"variableName": "dummy",
+												"value": {
+													"value": "@equals(1, 1)\n",
+													"type": "Expression"
+												}
+											}
+										}
+									]
+								}
+							],
+							"defaultActivities": [
+								{
+									"name": "dummy",
+									"type": "SetVariable",
+									"dependsOn": [],
+									"policy": {
+										"secureOutput": false,
+										"secureInput": false
+									},
+									"userProperties": [],
+									"typeProperties": {
+										"variableName": "dummy",
+										"value": {
+											"value": "@equals(1, 1)\n",
+											"type": "Expression"
+										}
+									}
+								}
+							]
+						}
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {}
+				},
+				"parameters": {
+					"Condition1": {
+						"type": "string",
+						"defaultValue": "fact"
+					},
+					"Condition2": {
+						"type": "string",
+						"defaultValue": "pnl"
+					},
+					"Condition3": {
+						"type": "string",
+						"defaultValue": "full"
+					}
+				},
+				"variables": {
+					"extract_criteria_dim": {
+						"type": "String",
+						"defaultValue": "full"
+					},
+					"extract_date_fix_dim": {
+						"type": "String",
+						"defaultValue": "2020-12-11 00:00:00.000"
+					},
+					"dummy": {
+						"type": "Boolean",
+						"defaultValue": true
+					}
+				},
+				"annotations": []
+			},
+			"dependsOn": []
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/SqlServerTable1')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
@@ -41,44 +248,6 @@
 				"type": "SqlServerTable",
 				"schema": [],
 				"typeProperties": {}
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/pipeline1')]",
-			"type": "Microsoft.DataFactory/factories/pipelines",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"activities": [
-					{
-						"name": "Notebook1",
-						"type": "DatabricksNotebook",
-						"dependsOn": [],
-						"policy": {
-							"timeout": "0.12:00:00",
-							"retry": 0,
-							"retryIntervalInSeconds": 30,
-							"secureOutput": false,
-							"secureInput": false
-						},
-						"userProperties": [],
-						"typeProperties": {
-							"notebookPath": "/Users/pkongdan01@gmail.com/P01/_P1-ELT-dim-profit&loss-source-to-pre-tx-bronze",
-							"baseParameters": {
-								"extract_criteria": "full",
-								"extract_date_fix": "2020-12-11 00:00:00.000"
-							}
-						},
-						"linkedServiceName": {
-							"referenceName": "AzureDatabricksP01",
-							"type": "LinkedServiceReference"
-						}
-					}
-				],
-				"policy": {
-					"elapsedTimeMetric": {}
-				},
-				"annotations": []
 			},
 			"dependsOn": []
 		},

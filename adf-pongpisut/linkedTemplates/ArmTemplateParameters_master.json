@@ -23,6 +23,9 @@
 		"AzureDatabricks1_properties_typeProperties_existingClusterId": {
 			"value": "1021-042950-mvc1m70c"
 		},
+		"AzureDatabricksP01_properties_typeProperties_existingClusterId": {
+			"value": "0106-072230-b2rauefw"
+		},
 		"AzureKeyVault1_properties_typeProperties_baseUrl": {
 			"value": "https://kvpong.vault.azure.net/"
 		},
@@ -43,9 +46,6 @@
 		},
 		"SHIR_DW01_properties_typeProperties_userName": {
 			"value": "mrv"
-		},
-		"AzureDatabricksP01_properties_typeProperties_existingClusterId": {
-			"value": "0106-072230-b2rauefw"
 		},
 		"containerUri": {
 			"value": ""
