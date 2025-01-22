@@ -3,61 +3,87 @@
 	"properties": {
 		"activities": [
 			{
-				"name": "DIM-source-to-bronze",
-				"description": "ELT",
-				"type": "DatabricksNotebook",
+				"name": "Switch1",
+				"type": "Switch",
 				"dependsOn": [],
-				"policy": {
-					"timeout": "0.12:00:00",
-					"retry": 0,
-					"retryIntervalInSeconds": 30,
-					"secureOutput": false,
-					"secureInput": false
-				},
 				"userProperties": [],
 				"typeProperties": {
-					"notebookPath": "/Users/pkongdan01@gmail.com/P01/_P1-ELT-dim-profit&loss-source-to-pre-tx-bronze",
-					"baseParameters": {
-						"extract_criteria": {
-							"value": "@variables('extract_criteria_dim')",
-							"type": "Expression"
+					"on": {
+						"value": "@pipeline().parameters.Condition1",
+						"type": "Expression"
+					},
+					"cases": [
+						{
+							"value": "full",
+							"activities": [
+								{
+									"name": "DIM-source-to-bronze",
+									"description": "ELT",
+									"type": "DatabricksNotebook",
+									"dependsOn": [],
+									"policy": {
+										"timeout": "0.12:00:00",
+										"retry": 0,
+										"retryIntervalInSeconds": 30,
+										"secureOutput": false,
+										"secureInput": false
+									},
+									"userProperties": [],
+									"typeProperties": {
+										"notebookPath": "/Users/pkongdan01@gmail.com/P01/_P1-ELT-dim-profit&loss-source-to-pre-tx-bronze",
+										"baseParameters": {
+											"extract_criteria": {
+												"value": "@variables('extract_criteria_dim')",
+												"type": "Expression"
+											},
+											"extract_date_fix": {
+												"value": "@variables('extract_date_fix_dim')",
+												"type": "Expression"
+											}
+										}
+									},
+									"linkedServiceName": {
+										"referenceName": "AzureDatabricksP01",
+										"type": "LinkedServiceReference"
+									}
+								},
+								{
+									"name": "Notebook1",
+									"type": "DatabricksNotebook",
+									"dependsOn": [],
+									"policy": {
+										"timeout": "0.12:00:00",
+										"retry": 0,
+										"retryIntervalInSeconds": 30,
+										"secureOutput": false,
+										"secureInput": false
+									},
+									"userProperties": []
+								}
+							]
 						},
-						"extract_date_fix": {
-							"value": "@variables('extract_date_fix_dim')",
-							"type": "Expression"
+						{
+							"value": "fact"
+						},
+						{
+							"value": "dim"
 						}
-					}
-				},
-				"linkedServiceName": {
-					"referenceName": "AzureDatabricksP01",
-					"type": "LinkedServiceReference"
+					]
 				}
-			},
-			{
-				"name": "Notebook1",
-				"type": "DatabricksNotebook",
-				"dependsOn": [
-					{
-						"activity": "DIM-source-to-bronze",
-						"dependencyConditions": [
-							"Succeeded"
-						]
-					}
-				],
-				"policy": {
-					"timeout": "0.12:00:00",
-					"retry": 0,
-					"retryIntervalInSeconds": 30,
-					"secureOutput": false,
-					"secureInput": false
-				},
-				"userProperties": []
 			}
 		],
 		"parameters": {
-			"Hmmmm": {
+			"Condition1": {
 				"type": "string",
-				"defaultValue": "IsThisTheParameters"
+				"defaultValue": "fact"
+			},
+			"Condition2": {
+				"type": "string",
+				"defaultValue": "pnl"
+			},
+			"Condition3": {
+				"type": "string",
+				"defaultValue": "full"
 			}
 		},
 		"variables": {
