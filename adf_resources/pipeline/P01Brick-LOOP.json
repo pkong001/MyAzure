@@ -1,9 +1,9 @@
 {
-	"name": "Brick-LOOP",
+	"name": "P01Brick-LOOP",
 	"properties": {
 		"activities": [
 			{
-				"name": "Set variable1",
+				"name": "extract_date_fix_dim",
 				"type": "SetVariable",
 				"dependsOn": [],
 				"policy": {
@@ -12,18 +12,323 @@
 				},
 				"userProperties": [],
 				"typeProperties": {
-					"variableName": "dummy",
+					"variableName": "extract_date_fix_dim",
 					"value": {
-						"value": "@equals(1,1)",
+						"value": "@pipeline().parameters.extract_date_fix_dim",
+						"type": "Expression"
+					}
+				}
+			},
+			{
+				"name": "Until1",
+				"type": "Until",
+				"dependsOn": [
+					{
+						"activity": "extract_date_fix_dim",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					},
+					{
+						"activity": "extract_criteria_dim",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					},
+					{
+						"activity": "extract_date_fix_fact",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					},
+					{
+						"activity": "extract_criteria_fact",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					},
+					{
+						"activity": "table_name",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					},
+					{
+						"activity": "start_date_fact",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					},
+					{
+						"activity": "end_date_fact",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"expression": {
+						"value": "@equals(variables('LoopCount'),12)",
+						"type": "Expression"
+					},
+					"activities": [
+						{
+							"name": "P01Brick01",
+							"type": "ExecutePipeline",
+							"state": "Inactive",
+							"onInactiveMarkAs": "Skipped",
+							"dependsOn": [
+								{
+									"activity": "Notebook1_copy1",
+									"dependencyConditions": [
+										"Succeeded"
+									]
+								}
+							],
+							"policy": {
+								"secureInput": false
+							},
+							"userProperties": [],
+							"typeProperties": {
+								"pipeline": {
+									"referenceName": "P01Brick01",
+									"type": "PipelineReference"
+								},
+								"waitOnCompletion": true
+							}
+						},
+						{
+							"name": "Notebook1_copy1",
+							"type": "DatabricksNotebook",
+							"dependsOn": [],
+							"policy": {
+								"timeout": "0.12:00:00",
+								"retry": 0,
+								"retryIntervalInSeconds": 30,
+								"secureOutput": false,
+								"secureInput": false
+							},
+							"userProperties": [],
+							"typeProperties": {
+								"notebookPath": "/Users/pkongdan01@gmail.com/P01/_P1-VARIABLES-CONTROL",
+								"baseParameters": {
+									"extract_date_fix_dim": {
+										"value": "@variables('extract_date_fix_dim')",
+										"type": "Expression"
+									},
+									"extract_criteria_dim": {
+										"value": "@pipeline().parameters.extract_criteria_dim",
+										"type": "Expression"
+									},
+									"extract_date_fix_fact": {
+										"value": "@pipeline().parameters.extract_date_fix_fact",
+										"type": "Expression"
+									},
+									"extract_criteria_fact": {
+										"value": "@pipeline().parameters.extract_criteria_fact",
+										"type": "Expression"
+									},
+									"start_date_fact": {
+										"value": "@pipeline().parameters.start_date_fact",
+										"type": "Expression"
+									},
+									"end_date_fact": {
+										"value": "@pipeline().parameters.end_date_fact",
+										"type": "Expression"
+									},
+									"table_name": {
+										"value": "@pipeline().parameters.table_name",
+										"type": "Expression"
+									},
+									"LoopCount": {
+										"value": "@variables('LoopCount')",
+										"type": "Expression"
+									}
+								}
+							},
+							"linkedServiceName": {
+								"referenceName": "AzureDatabricksP01",
+								"type": "LinkedServiceReference"
+							}
+						}
+					],
+					"timeout": "0.12:00:00"
+				}
+			},
+			{
+				"name": "extract_criteria_dim",
+				"type": "SetVariable",
+				"dependsOn": [],
+				"policy": {
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"variableName": "extract_criteria_dim",
+					"value": {
+						"value": "@pipeline().parameters.extract_criteria_dim",
+						"type": "Expression"
+					}
+				}
+			},
+			{
+				"name": "extract_date_fix_fact",
+				"type": "SetVariable",
+				"dependsOn": [],
+				"policy": {
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"variableName": "extract_date_fix_fact",
+					"value": {
+						"value": "@pipeline().parameters.extract_date_fix_fact",
+						"type": "Expression"
+					}
+				}
+			},
+			{
+				"name": "extract_criteria_fact",
+				"type": "SetVariable",
+				"dependsOn": [],
+				"policy": {
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"variableName": "extract_criteria_fact",
+					"value": {
+						"value": "@pipeline().parameters.extract_criteria_fact",
+						"type": "Expression"
+					}
+				}
+			},
+			{
+				"name": "table_name",
+				"type": "SetVariable",
+				"dependsOn": [],
+				"policy": {
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"variableName": "table_name",
+					"value": {
+						"value": "@pipeline().parameters.table_name",
+						"type": "Expression"
+					}
+				}
+			},
+			{
+				"name": "start_date_fact",
+				"type": "SetVariable",
+				"dependsOn": [],
+				"policy": {
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"variableName": "start_date_fact",
+					"value": {
+						"value": "@pipeline().parameters.start_date_fact",
+						"type": "Expression"
+					}
+				}
+			},
+			{
+				"name": "end_date_fact",
+				"type": "SetVariable",
+				"dependsOn": [],
+				"policy": {
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"variableName": "end_date_fact",
+					"value": {
+						"value": "@pipeline().parameters.end_date_fact",
 						"type": "Expression"
 					}
 				}
 			}
 		],
+		"parameters": {
+			"Condition1": {
+				"type": "string",
+				"defaultValue": "fact"
+			},
+			"Condition2": {
+				"type": "string",
+				"defaultValue": "pnl"
+			},
+			"Condition3": {
+				"type": "string",
+				"defaultValue": "full"
+			},
+			"extract_criteria_dim": {
+				"type": "string"
+			},
+			"extract_date_fix_dim": {
+				"type": "string"
+			},
+			"dummy": {
+				"type": "string"
+			},
+			"end_date_fact": {
+				"type": "string"
+			},
+			"start_date_fact": {
+				"type": "string"
+			},
+			"extract_criteria_fact": {
+				"type": "string"
+			},
+			"extract_date_fix_fact": {
+				"type": "string"
+			},
+			"mode": {
+				"type": "string"
+			},
+			"table_name": {
+				"type": "string"
+			}
+		},
 		"variables": {
 			"dummy": {
 				"type": "Boolean",
 				"defaultValue": true
+			},
+			"extract_criteria_dim": {
+				"type": "String"
+			},
+			"extract_date_fix_dim": {
+				"type": "String"
+			},
+			"end_date_fact": {
+				"type": "String"
+			},
+			"start_date_fact": {
+				"type": "String"
+			},
+			"extract_criteria_fact": {
+				"type": "String"
+			},
+			"extract_date_fix_fact": {
+				"type": "String"
+			},
+			"table_name": {
+				"type": "String"
+			},
+			"LoopCount": {
+				"type": "Integer",
+				"defaultValue": 1
 			}
 		},
 		"annotations": []
