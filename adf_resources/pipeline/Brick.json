@@ -3,7 +3,7 @@
 	"properties": {
 		"activities": [
 			{
-				"name": "dummy default",
+				"name": "Switch Container",
 				"type": "Switch",
 				"dependsOn": [],
 				"userProperties": [],
@@ -20,7 +20,14 @@
 									"name": "DIM-source-to-bronze",
 									"description": "ELT",
 									"type": "DatabricksNotebook",
-									"dependsOn": [],
+									"dependsOn": [
+										{
+											"activity": "dummy full",
+											"dependencyConditions": [
+												"Succeeded"
+											]
+										}
+									],
 									"policy": {
 										"timeout": "0.12:00:00",
 										"retry": 0,
@@ -48,9 +55,17 @@
 									}
 								},
 								{
-									"name": "Notebook1",
+									"name": "DIM-bronze-to-silver",
+									"description": "ETL",
 									"type": "DatabricksNotebook",
-									"dependsOn": [],
+									"dependsOn": [
+										{
+											"activity": "DIM-source-to-bronze",
+											"dependencyConditions": [
+												"Succeeded"
+											]
+										}
+									],
 									"policy": {
 										"timeout": "0.12:00:00",
 										"retry": 0,
@@ -58,7 +73,31 @@
 										"secureOutput": false,
 										"secureInput": false
 									},
-									"userProperties": []
+									"userProperties": [],
+									"typeProperties": {
+										"notebookPath": "/Users/pkongdan01@gmail.com/P01/_P1-Load-dim-bronze-to-silver"
+									},
+									"linkedServiceName": {
+										"referenceName": "AzureDatabricksP01",
+										"type": "LinkedServiceReference"
+									}
+								},
+								{
+									"name": "dummy full",
+									"type": "SetVariable",
+									"dependsOn": [],
+									"policy": {
+										"secureOutput": false,
+										"secureInput": false
+									},
+									"userProperties": [],
+									"typeProperties": {
+										"variableName": "dummy",
+										"value": {
+											"value": "@equals(1, 1)",
+											"type": "Expression"
+										}
+									}
 								}
 							]
 						},
@@ -76,7 +115,10 @@
 									"userProperties": [],
 									"typeProperties": {
 										"variableName": "dummy",
-										"value": true
+										"value": {
+											"value": "@equals(1, 1)\n",
+											"type": "Expression"
+										}
 									}
 								}
 							]
@@ -95,7 +137,10 @@
 									"userProperties": [],
 									"typeProperties": {
 										"variableName": "dummy",
-										"value": true
+										"value": {
+											"value": "@equals(1, 1)\n",
+											"type": "Expression"
+										}
 									}
 								}
 							]
@@ -113,7 +158,10 @@
 							"userProperties": [],
 							"typeProperties": {
 								"variableName": "dummy",
-								"value": true
+								"value": {
+									"value": "@equals(1, 1)\n",
+									"type": "Expression"
+								}
 							}
 						}
 					]
