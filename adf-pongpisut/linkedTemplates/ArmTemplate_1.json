@@ -13,81 +13,6 @@
 	},
 	"resources": [
 		{
-			"name": "[concat(parameters('factoryName'), '/MF_Delimited')]",
-			"type": "Microsoft.DataFactory/factories/pipelines",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"activities": [
-					{
-						"name": "Copy data1",
-						"type": "Copy",
-						"dependsOn": [],
-						"policy": {
-							"timeout": "0.12:00:00",
-							"retry": 0,
-							"retryIntervalInSeconds": 30,
-							"secureOutput": false,
-							"secureInput": false
-						},
-						"userProperties": [],
-						"typeProperties": {
-							"source": {
-								"type": "DelimitedTextSource",
-								"storeSettings": {
-									"type": "AzureBlobStorageReadSettings",
-									"recursive": true,
-									"enablePartitionDiscovery": false
-								},
-								"formatSettings": {
-									"type": "DelimitedTextReadSettings"
-								}
-							},
-							"sink": {
-								"type": "DelimitedTextSink",
-								"storeSettings": {
-									"type": "AzureBlobStorageWriteSettings"
-								},
-								"formatSettings": {
-									"type": "DelimitedTextWriteSettings",
-									"quoteAllText": true,
-									"fileExtension": ".txt"
-								}
-							},
-							"enableStaging": false,
-							"translator": {
-								"type": "TabularTranslator",
-								"typeConversion": true,
-								"typeConversionSettings": {
-									"allowDataTruncation": true,
-									"treatBooleanAsNumber": false
-								}
-							}
-						},
-						"inputs": [
-							{
-								"referenceName": "DelimitedText1",
-								"type": "DatasetReference",
-								"parameters": {}
-							}
-						],
-						"outputs": [
-							{
-								"referenceName": "DelimitedText2",
-								"type": "DatasetReference",
-								"parameters": {}
-							}
-						]
-					}
-				],
-				"policy": {
-					"elapsedTimeMetric": {}
-				},
-				"annotations": [],
-				"lastPublishTime": "2024-05-03T07:16:51Z"
-			},
-			"dependsOn": []
-		},
-		{
 			"name": "[concat(parameters('factoryName'), '/P01Brick02')]",
 			"type": "Microsoft.DataFactory/factories/pipelines",
 			"apiVersion": "2018-06-01",
@@ -108,39 +33,11 @@
 									"value": "full",
 									"activities": [
 										{
-											"name": "DIM-bronze-to-silver_full",
-											"description": "ETL",
-											"type": "DatabricksNotebook",
-											"dependsOn": [
-												{
-													"activity": "dummy full",
-													"dependencyConditions": [
-														"Succeeded"
-													]
-												}
-											],
-											"policy": {
-												"timeout": "0.12:00:00",
-												"retry": 0,
-												"retryIntervalInSeconds": 30,
-												"secureOutput": false,
-												"secureInput": false
-											},
-											"userProperties": [],
-											"typeProperties": {
-												"notebookPath": "/Users/pkongdan01@gmail.com/P01/_P1-Load-dim-bronze-to-silver"
-											},
-											"linkedServiceName": {
-												"referenceName": "AzureDatabricksP01",
-												"type": "LinkedServiceReference"
-											}
-										},
-										{
 											"name": "FACT-bronze-to-silver_full",
 											"type": "DatabricksNotebook",
 											"dependsOn": [
 												{
-													"activity": "DIM-bronze-to-silver_full",
+													"activity": "dummy full",
 													"dependencyConditions": [
 														"Succeeded"
 													]
@@ -245,34 +142,6 @@
 								{
 									"value": "dim",
 									"activities": [
-										{
-											"name": "DIM-bronze-to-silver_dim",
-											"description": "ETL",
-											"type": "DatabricksNotebook",
-											"dependsOn": [
-												{
-													"activity": "dummy dim",
-													"dependencyConditions": [
-														"Succeeded"
-													]
-												}
-											],
-											"policy": {
-												"timeout": "0.12:00:00",
-												"retry": 0,
-												"retryIntervalInSeconds": 30,
-												"secureOutput": false,
-												"secureInput": false
-											},
-											"userProperties": [],
-											"typeProperties": {
-												"notebookPath": "/Users/pkongdan01@gmail.com/P01/_P1-Load-dim-bronze-to-silver"
-											},
-											"linkedServiceName": {
-												"referenceName": "AzureDatabricksP01",
-												"type": "LinkedServiceReference"
-											}
-										},
 										{
 											"name": "dummy dim",
 											"type": "SetVariable",
@@ -1019,7 +888,7 @@
 									"value": "full",
 									"activities": [
 										{
-											"name": "DIM-source-to-bronze",
+											"name": "DIM-source-to-bronze_full",
 											"description": "ELT",
 											"type": "DatabricksNotebook",
 											"dependsOn": [
@@ -1074,11 +943,11 @@
 											}
 										},
 										{
-											"name": "FACT-source-to-bronze",
+											"name": "FACT-source-to-bronze_full",
 											"type": "DatabricksNotebook",
 											"dependsOn": [
 												{
-													"activity": "DIM-source-to-bronze",
+													"activity": "DIM-bronze-to-silver_full",
 													"dependencyConditions": [
 														"Succeeded"
 													]
@@ -1125,6 +994,34 @@
 												"referenceName": "AzureDatabricksP01",
 												"type": "LinkedServiceReference"
 											}
+										},
+										{
+											"name": "DIM-bronze-to-silver_full",
+											"description": "ETL",
+											"type": "DatabricksNotebook",
+											"dependsOn": [
+												{
+													"activity": "DIM-source-to-bronze_full",
+													"dependencyConditions": [
+														"Succeeded"
+													]
+												}
+											],
+											"policy": {
+												"timeout": "0.12:00:00",
+												"retry": 0,
+												"retryIntervalInSeconds": 30,
+												"secureOutput": false,
+												"secureInput": false
+											},
+											"userProperties": [],
+											"typeProperties": {
+												"notebookPath": "/Users/pkongdan01@gmail.com/P01/_P1-Load-dim-bronze-to-silver"
+											},
+											"linkedServiceName": {
+												"referenceName": "AzureDatabricksP01",
+												"type": "LinkedServiceReference"
+											}
 										}
 									]
 								},
@@ -1149,40 +1046,7 @@
 											}
 										},
 										{
-											"name": "FACT-bronze-to-silver_copy1",
-											"type": "DatabricksNotebook",
-											"dependsOn": [
-												{
-													"activity": "FACT-source-to-bronze_copy1",
-													"dependencyConditions": [
-														"Succeeded"
-													]
-												}
-											],
-											"policy": {
-												"timeout": "0.12:00:00",
-												"retry": 0,
-												"retryIntervalInSeconds": 30,
-												"secureOutput": false,
-												"secureInput": false
-											},
-											"userProperties": [],
-											"typeProperties": {
-												"notebookPath": "/Users/pkongdan01@gmail.com/P01/_P1-Load-fact-bronze-to-silver",
-												"baseParameters": {
-													"table_name": {
-														"value": "@variables('table_name')",
-														"type": "Expression"
-													}
-												}
-											},
-											"linkedServiceName": {
-												"referenceName": "AzureDatabricksP01",
-												"type": "LinkedServiceReference"
-											}
-										},
-										{
-											"name": "FACT-source-to-bronze_copy1",
+											"name": "FACT-source-to-bronze_fact",
 											"type": "DatabricksNotebook",
 											"dependsOn": [
 												{
@@ -1254,6 +1118,72 @@
 													"value": "@equals(1, 1)\n",
 													"type": "Expression"
 												}
+											}
+										},
+										{
+											"name": "DIM-source-to-bronze_dim",
+											"description": "ELT",
+											"type": "DatabricksNotebook",
+											"dependsOn": [
+												{
+													"activity": "dummy dim",
+													"dependencyConditions": [
+														"Succeeded"
+													]
+												}
+											],
+											"policy": {
+												"timeout": "0.12:00:00",
+												"retry": 0,
+												"retryIntervalInSeconds": 30,
+												"secureOutput": false,
+												"secureInput": false
+											},
+											"userProperties": [],
+											"typeProperties": {
+												"notebookPath": "/Users/pkongdan01@gmail.com/P01/_P1-ELT-dim-profit&loss-source-to-pre-tx-bronze",
+												"baseParameters": {
+													"extract_criteria": {
+														"value": "@variables('extract_criteria_dim')",
+														"type": "Expression"
+													},
+													"extract_date_fix": {
+														"value": "@variables('extract_date_fix_dim')",
+														"type": "Expression"
+													}
+												}
+											},
+											"linkedServiceName": {
+												"referenceName": "AzureDatabricksP01",
+												"type": "LinkedServiceReference"
+											}
+										},
+										{
+											"name": "DIM-bronze-to-silver_dim",
+											"description": "ETL",
+											"type": "DatabricksNotebook",
+											"dependsOn": [
+												{
+													"activity": "DIM-source-to-bronze_dim",
+													"dependencyConditions": [
+														"Succeeded"
+													]
+												}
+											],
+											"policy": {
+												"timeout": "0.12:00:00",
+												"retry": 0,
+												"retryIntervalInSeconds": 30,
+												"secureOutput": false,
+												"secureInput": false
+											},
+											"userProperties": [],
+											"typeProperties": {
+												"notebookPath": "/Users/pkongdan01@gmail.com/P01/_P1-Load-dim-bronze-to-silver"
+											},
+											"linkedServiceName": {
+												"referenceName": "AzureDatabricksP01",
+												"type": "LinkedServiceReference"
 											}
 										}
 									]
@@ -1413,6 +1343,403 @@
 			},
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/pipelines/P01Brick02')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/P01Brick-LOOP')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "extract_date_fix_dim",
+						"type": "SetVariable",
+						"dependsOn": [],
+						"policy": {
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"variableName": "extract_date_fix_dim",
+							"value": {
+								"value": "@pipeline().parameters.extract_date_fix_dim",
+								"type": "Expression"
+							}
+						}
+					},
+					{
+						"name": "Until1",
+						"type": "Until",
+						"dependsOn": [
+							{
+								"activity": "extract_date_fix_dim",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							},
+							{
+								"activity": "extract_criteria_dim",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							},
+							{
+								"activity": "extract_date_fix_fact",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							},
+							{
+								"activity": "extract_criteria_fact",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							},
+							{
+								"activity": "table_name",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							},
+							{
+								"activity": "start_date_fact",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							},
+							{
+								"activity": "end_date_fact",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"userProperties": [],
+						"typeProperties": {
+							"expression": {
+								"value": "@equals(variables('LoopCount'),12)",
+								"type": "Expression"
+							},
+							"activities": [
+								{
+									"name": "P01Brick01",
+									"type": "ExecutePipeline",
+									"state": "Inactive",
+									"onInactiveMarkAs": "Skipped",
+									"dependsOn": [
+										{
+											"activity": "Notebook1_copy1",
+											"dependencyConditions": [
+												"Succeeded"
+											]
+										}
+									],
+									"policy": {
+										"secureInput": false
+									},
+									"userProperties": [],
+									"typeProperties": {
+										"pipeline": {
+											"referenceName": "P01Brick01",
+											"type": "PipelineReference"
+										},
+										"waitOnCompletion": true,
+										"parameters": {}
+									}
+								},
+								{
+									"name": "Notebook1_copy1",
+									"type": "DatabricksNotebook",
+									"dependsOn": [],
+									"policy": {
+										"timeout": "0.12:00:00",
+										"retry": 0,
+										"retryIntervalInSeconds": 30,
+										"secureOutput": false,
+										"secureInput": false
+									},
+									"userProperties": [],
+									"typeProperties": {
+										"notebookPath": "/Users/pkongdan01@gmail.com/P01/_P1-VARIABLES-CONTROL",
+										"baseParameters": {
+											"extract_date_fix_dim": {
+												"value": "@pipeline().parameters.extract_date_fix_dim",
+												"type": "Expression"
+											},
+											"extract_criteria_dim": {
+												"value": "@pipeline().parameters.extract_criteria_dim",
+												"type": "Expression"
+											},
+											"extract_date_fix_fact": {
+												"value": "@pipeline().parameters.extract_date_fix_fact",
+												"type": "Expression"
+											},
+											"extract_criteria_fact": {
+												"value": "@pipeline().parameters.extract_criteria_fact",
+												"type": "Expression"
+											},
+											"start_date_fact": {
+												"value": "@pipeline().parameters.start_date_fact",
+												"type": "Expression"
+											},
+											"end_date_fact": {
+												"value": "@pipeline().parameters.end_date_fact",
+												"type": "Expression"
+											},
+											"table_name": {
+												"value": "@pipeline().parameters.table_name",
+												"type": "Expression"
+											},
+											"LoopCount": {
+												"value": "@variables('LoopCount')",
+												"type": "Expression"
+											}
+										}
+									},
+									"linkedServiceName": {
+										"referenceName": "AzureDatabricksP01",
+										"type": "LinkedServiceReference"
+									}
+								},
+								{
+									"name": "Increment Loop Count",
+									"type": "SetVariable",
+									"dependsOn": [
+										{
+											"activity": "P01Brick01",
+											"dependencyConditions": [
+												"Succeeded"
+											]
+										}
+									],
+									"policy": {
+										"secureOutput": false,
+										"secureInput": false
+									},
+									"userProperties": [],
+									"typeProperties": {
+										"variableName": "LoopCount",
+										"value": {
+											"value": "@add(variables('TempCount'),1)",
+											"type": "Expression"
+										}
+									}
+								},
+								{
+									"name": "Increment Temp Count",
+									"type": "SetVariable",
+									"dependsOn": [
+										{
+											"activity": "Increment Loop Count",
+											"dependencyConditions": [
+												"Succeeded"
+											]
+										}
+									],
+									"policy": {
+										"secureOutput": false,
+										"secureInput": false
+									},
+									"userProperties": [],
+									"typeProperties": {
+										"variableName": "TempCount",
+										"value": {
+											"value": "@variables('LoopCount')",
+											"type": "Expression"
+										}
+									}
+								}
+							],
+							"timeout": "0.12:00:00"
+						}
+					},
+					{
+						"name": "extract_criteria_dim",
+						"type": "SetVariable",
+						"dependsOn": [],
+						"policy": {
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"variableName": "extract_criteria_dim",
+							"value": {
+								"value": "@pipeline().parameters.extract_criteria_dim",
+								"type": "Expression"
+							}
+						}
+					},
+					{
+						"name": "extract_date_fix_fact",
+						"type": "SetVariable",
+						"dependsOn": [],
+						"policy": {
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"variableName": "extract_date_fix_fact",
+							"value": {
+								"value": "@pipeline().parameters.extract_date_fix_fact",
+								"type": "Expression"
+							}
+						}
+					},
+					{
+						"name": "extract_criteria_fact",
+						"type": "SetVariable",
+						"dependsOn": [],
+						"policy": {
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"variableName": "extract_criteria_fact",
+							"value": {
+								"value": "@pipeline().parameters.extract_criteria_fact",
+								"type": "Expression"
+							}
+						}
+					},
+					{
+						"name": "table_name",
+						"type": "SetVariable",
+						"dependsOn": [],
+						"policy": {
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"variableName": "table_name",
+							"value": {
+								"value": "@pipeline().parameters.table_name",
+								"type": "Expression"
+							}
+						}
+					},
+					{
+						"name": "start_date_fact",
+						"type": "SetVariable",
+						"dependsOn": [],
+						"policy": {
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"variableName": "start_date_fact",
+							"value": {
+								"value": "@pipeline().parameters.start_date_fact",
+								"type": "Expression"
+							}
+						}
+					},
+					{
+						"name": "end_date_fact",
+						"type": "SetVariable",
+						"dependsOn": [],
+						"policy": {
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"variableName": "end_date_fact",
+							"value": {
+								"value": "@pipeline().parameters.end_date_fact",
+								"type": "Expression"
+							}
+						}
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {}
+				},
+				"parameters": {
+					"Condition1": {
+						"type": "string",
+						"defaultValue": "fact"
+					},
+					"Condition2": {
+						"type": "string",
+						"defaultValue": "pnl"
+					},
+					"Condition3": {
+						"type": "string",
+						"defaultValue": "full"
+					},
+					"extract_criteria_dim": {
+						"type": "string"
+					},
+					"extract_date_fix_dim": {
+						"type": "string"
+					},
+					"dummy": {
+						"type": "string"
+					},
+					"end_date_fact": {
+						"type": "string"
+					},
+					"start_date_fact": {
+						"type": "string"
+					},
+					"extract_criteria_fact": {
+						"type": "string"
+					},
+					"extract_date_fix_fact": {
+						"type": "string"
+					},
+					"mode": {
+						"type": "string"
+					},
+					"table_name": {
+						"type": "string"
+					}
+				},
+				"variables": {
+					"dummy": {
+						"type": "Boolean",
+						"defaultValue": true
+					},
+					"extract_criteria_dim": {
+						"type": "String"
+					},
+					"extract_date_fix_dim": {
+						"type": "String"
+					},
+					"end_date_fact": {
+						"type": "String"
+					},
+					"start_date_fact": {
+						"type": "String"
+					},
+					"extract_criteria_fact": {
+						"type": "String"
+					},
+					"extract_date_fix_fact": {
+						"type": "String"
+					},
+					"table_name": {
+						"type": "String"
+					},
+					"LoopCount": {
+						"type": "Integer",
+						"defaultValue": 1
+					},
+					"TempCount": {
+						"type": "Integer",
+						"defaultValue": 1
+					}
+				},
+				"annotations": []
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/pipelines/P01Brick01')]"
 			]
 		}
 	]
