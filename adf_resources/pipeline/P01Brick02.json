@@ -17,39 +17,11 @@
 							"value": "full",
 							"activities": [
 								{
-									"name": "DIM-bronze-to-silver_full",
-									"description": "ETL",
-									"type": "DatabricksNotebook",
-									"dependsOn": [
-										{
-											"activity": "dummy full",
-											"dependencyConditions": [
-												"Succeeded"
-											]
-										}
-									],
-									"policy": {
-										"timeout": "0.12:00:00",
-										"retry": 0,
-										"retryIntervalInSeconds": 30,
-										"secureOutput": false,
-										"secureInput": false
-									},
-									"userProperties": [],
-									"typeProperties": {
-										"notebookPath": "/Users/pkongdan01@gmail.com/P01/_P1-Load-dim-bronze-to-silver"
-									},
-									"linkedServiceName": {
-										"referenceName": "AzureDatabricksP01",
-										"type": "LinkedServiceReference"
-									}
-								},
-								{
 									"name": "FACT-bronze-to-silver_full",
 									"type": "DatabricksNotebook",
 									"dependsOn": [
 										{
-											"activity": "DIM-bronze-to-silver_full",
+											"activity": "dummy full",
 											"dependencyConditions": [
 												"Succeeded"
 											]
@@ -154,34 +126,6 @@
 						{
 							"value": "dim",
 							"activities": [
-								{
-									"name": "DIM-bronze-to-silver_dim",
-									"description": "ETL",
-									"type": "DatabricksNotebook",
-									"dependsOn": [
-										{
-											"activity": "dummy dim",
-											"dependencyConditions": [
-												"Succeeded"
-											]
-										}
-									],
-									"policy": {
-										"timeout": "0.12:00:00",
-										"retry": 0,
-										"retryIntervalInSeconds": 30,
-										"secureOutput": false,
-										"secureInput": false
-									},
-									"userProperties": [],
-									"typeProperties": {
-										"notebookPath": "/Users/pkongdan01@gmail.com/P01/_P1-Load-dim-bronze-to-silver"
-									},
-									"linkedServiceName": {
-										"referenceName": "AzureDatabricksP01",
-										"type": "LinkedServiceReference"
-									}
-								},
 								{
 									"name": "dummy dim",
 									"type": "SetVariable",
