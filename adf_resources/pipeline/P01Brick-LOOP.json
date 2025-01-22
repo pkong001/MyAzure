@@ -334,11 +334,11 @@
 			},
 			"end_date_fact": {
 				"type": "string",
-				"defaultValue": "2024-01-01"
+				"defaultValue": "2024-12-31"
 			},
 			"start_date_fact": {
 				"type": "string",
-				"defaultValue": "2024-12-31"
+				"defaultValue": "2024-01-01"
 			},
 			"extract_criteria_fact": {
 				"type": "string",
