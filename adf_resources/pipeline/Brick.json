@@ -1,9 +1,10 @@
 {
-	"name": "pipeline1",
+	"name": "Brick",
 	"properties": {
 		"activities": [
 			{
-				"name": "Notebook1",
+				"name": "DIM-source-to-bronze",
+				"description": "ELT",
 				"type": "DatabricksNotebook",
 				"dependsOn": [],
 				"policy": {
@@ -17,16 +18,58 @@
 				"typeProperties": {
 					"notebookPath": "/Users/pkongdan01@gmail.com/P01/_P1-ELT-dim-profit&loss-source-to-pre-tx-bronze",
 					"baseParameters": {
-						"extract_criteria": "full",
-						"extract_date_fix": "2020-12-11 00:00:00.000"
+						"extract_criteria": {
+							"value": "@variables('extract_criteria_dim')",
+							"type": "Expression"
+						},
+						"extract_date_fix": {
+							"value": "@variables('extract_date_fix_dim')",
+							"type": "Expression"
+						}
 					}
 				},
 				"linkedServiceName": {
 					"referenceName": "AzureDatabricksP01",
 					"type": "LinkedServiceReference"
 				}
+			},
+			{
+				"name": "Notebook1",
+				"type": "DatabricksNotebook",
+				"dependsOn": [
+					{
+						"activity": "DIM-source-to-bronze",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": []
 			}
 		],
+		"parameters": {
+			"Hmmmm": {
+				"type": "string",
+				"defaultValue": "IsThisTheParameters"
+			}
+		},
+		"variables": {
+			"extract_criteria_dim": {
+				"type": "String",
+				"defaultValue": "full"
+			},
+			"extract_date_fix_dim": {
+				"type": "String",
+				"defaultValue": "2020-12-11 00:00:00.000"
+			}
+		},
 		"annotations": []
 	}
 }
