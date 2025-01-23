@@ -63,6 +63,54 @@
 			"type": "string",
 			"defaultValue": "mrv"
 		},
+		"Schedule01_properties_P01Brick-LOOP_parameters_Condition1": {
+			"type": "string",
+			"defaultValue": "fact"
+		},
+		"Schedule01_properties_P01Brick-LOOP_parameters_Condition2": {
+			"type": "string",
+			"defaultValue": "full"
+		},
+		"Schedule01_properties_P01Brick-LOOP_parameters_Condition3": {
+			"type": "string",
+			"defaultValue": "full"
+		},
+		"Schedule01_properties_P01Brick-LOOP_parameters_extract_criteria_dim": {
+			"type": "string",
+			"defaultValue": "full"
+		},
+		"Schedule01_properties_P01Brick-LOOP_parameters_extract_date_fix_dim": {
+			"type": "string",
+			"defaultValue": "2000-01-01"
+		},
+		"Schedule01_properties_P01Brick-LOOP_parameters_dummy": {
+			"type": "string",
+			"defaultValue": "true"
+		},
+		"Schedule01_properties_P01Brick-LOOP_parameters_end_date_fact": {
+			"type": "string",
+			"defaultValue": "2022-12-31"
+		},
+		"Schedule01_properties_P01Brick-LOOP_parameters_start_date_fact": {
+			"type": "string",
+			"defaultValue": "2022-01-01"
+		},
+		"Schedule01_properties_P01Brick-LOOP_parameters_extract_criteria_fact": {
+			"type": "string",
+			"defaultValue": "full"
+		},
+		"Schedule01_properties_P01Brick-LOOP_parameters_extract_date_fix_fact": {
+			"type": "string",
+			"defaultValue": "2000-01-01"
+		},
+		"Schedule01_properties_P01Brick-LOOP_parameters_mode": {
+			"type": "string",
+			"defaultValue": "dev"
+		},
+		"Schedule01_properties_P01Brick-LOOP_parameters_table_name": {
+			"type": "string",
+			"defaultValue": "Z1FI3MP01"
+		},
 		"containerUri": {
 			"type": "string",
 			"metadata": "URI to storage account containing linked ARM templates"
@@ -149,6 +197,42 @@
 				"parameters": {
 					"factoryName": {
 						"value": "[parameters('factoryName')]"
+					},
+					"Schedule01_properties_P01Brick-LOOP_parameters_Condition1": {
+						"value": "[parameters('Schedule01_properties_P01Brick-LOOP_parameters_Condition1')]"
+					},
+					"Schedule01_properties_P01Brick-LOOP_parameters_Condition2": {
+						"value": "[parameters('Schedule01_properties_P01Brick-LOOP_parameters_Condition2')]"
+					},
+					"Schedule01_properties_P01Brick-LOOP_parameters_Condition3": {
+						"value": "[parameters('Schedule01_properties_P01Brick-LOOP_parameters_Condition3')]"
+					},
+					"Schedule01_properties_P01Brick-LOOP_parameters_extract_criteria_dim": {
+						"value": "[parameters('Schedule01_properties_P01Brick-LOOP_parameters_extract_criteria_dim')]"
+					},
+					"Schedule01_properties_P01Brick-LOOP_parameters_extract_date_fix_dim": {
+						"value": "[parameters('Schedule01_properties_P01Brick-LOOP_parameters_extract_date_fix_dim')]"
+					},
+					"Schedule01_properties_P01Brick-LOOP_parameters_dummy": {
+						"value": "[parameters('Schedule01_properties_P01Brick-LOOP_parameters_dummy')]"
+					},
+					"Schedule01_properties_P01Brick-LOOP_parameters_end_date_fact": {
+						"value": "[parameters('Schedule01_properties_P01Brick-LOOP_parameters_end_date_fact')]"
+					},
+					"Schedule01_properties_P01Brick-LOOP_parameters_start_date_fact": {
+						"value": "[parameters('Schedule01_properties_P01Brick-LOOP_parameters_start_date_fact')]"
+					},
+					"Schedule01_properties_P01Brick-LOOP_parameters_extract_criteria_fact": {
+						"value": "[parameters('Schedule01_properties_P01Brick-LOOP_parameters_extract_criteria_fact')]"
+					},
+					"Schedule01_properties_P01Brick-LOOP_parameters_extract_date_fix_fact": {
+						"value": "[parameters('Schedule01_properties_P01Brick-LOOP_parameters_extract_date_fix_fact')]"
+					},
+					"Schedule01_properties_P01Brick-LOOP_parameters_mode": {
+						"value": "[parameters('Schedule01_properties_P01Brick-LOOP_parameters_mode')]"
+					},
+					"Schedule01_properties_P01Brick-LOOP_parameters_table_name": {
+						"value": "[parameters('Schedule01_properties_P01Brick-LOOP_parameters_table_name')]"
 					}
 				}
 			},

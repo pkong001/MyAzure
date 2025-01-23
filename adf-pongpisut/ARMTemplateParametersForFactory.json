@@ -46,6 +46,42 @@
 		},
 		"SHIR_DW01_properties_typeProperties_userName": {
 			"value": "mrv"
+		},
+		"Schedule01_properties_P01Brick-LOOP_parameters_Condition1": {
+			"value": "fact"
+		},
+		"Schedule01_properties_P01Brick-LOOP_parameters_Condition2": {
+			"value": "full"
+		},
+		"Schedule01_properties_P01Brick-LOOP_parameters_Condition3": {
+			"value": "full"
+		},
+		"Schedule01_properties_P01Brick-LOOP_parameters_extract_criteria_dim": {
+			"value": "full"
+		},
+		"Schedule01_properties_P01Brick-LOOP_parameters_extract_date_fix_dim": {
+			"value": "2000-01-01"
+		},
+		"Schedule01_properties_P01Brick-LOOP_parameters_dummy": {
+			"value": "true"
+		},
+		"Schedule01_properties_P01Brick-LOOP_parameters_end_date_fact": {
+			"value": "2022-12-31"
+		},
+		"Schedule01_properties_P01Brick-LOOP_parameters_start_date_fact": {
+			"value": "2022-01-01"
+		},
+		"Schedule01_properties_P01Brick-LOOP_parameters_extract_criteria_fact": {
+			"value": "full"
+		},
+		"Schedule01_properties_P01Brick-LOOP_parameters_extract_date_fix_fact": {
+			"value": "2000-01-01"
+		},
+		"Schedule01_properties_P01Brick-LOOP_parameters_mode": {
+			"value": "dev"
+		},
+		"Schedule01_properties_P01Brick-LOOP_parameters_table_name": {
+			"value": "Z1FI3MP01"
 		}
 	}
 }

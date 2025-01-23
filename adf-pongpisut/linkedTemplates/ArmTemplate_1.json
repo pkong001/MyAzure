@@ -6,99 +6,60 @@
 			"type": "string",
 			"metadata": "Data Factory name",
 			"defaultValue": "adf-pongpisut"
+		},
+		"Schedule01_properties_P01Brick-LOOP_parameters_Condition1": {
+			"type": "string",
+			"defaultValue": "fact"
+		},
+		"Schedule01_properties_P01Brick-LOOP_parameters_Condition2": {
+			"type": "string",
+			"defaultValue": "full"
+		},
+		"Schedule01_properties_P01Brick-LOOP_parameters_Condition3": {
+			"type": "string",
+			"defaultValue": "full"
+		},
+		"Schedule01_properties_P01Brick-LOOP_parameters_extract_criteria_dim": {
+			"type": "string",
+			"defaultValue": "full"
+		},
+		"Schedule01_properties_P01Brick-LOOP_parameters_extract_date_fix_dim": {
+			"type": "string",
+			"defaultValue": "2000-01-01"
+		},
+		"Schedule01_properties_P01Brick-LOOP_parameters_dummy": {
+			"type": "string",
+			"defaultValue": "true"
+		},
+		"Schedule01_properties_P01Brick-LOOP_parameters_end_date_fact": {
+			"type": "string",
+			"defaultValue": "2022-12-31"
+		},
+		"Schedule01_properties_P01Brick-LOOP_parameters_start_date_fact": {
+			"type": "string",
+			"defaultValue": "2022-01-01"
+		},
+		"Schedule01_properties_P01Brick-LOOP_parameters_extract_criteria_fact": {
+			"type": "string",
+			"defaultValue": "full"
+		},
+		"Schedule01_properties_P01Brick-LOOP_parameters_extract_date_fix_fact": {
+			"type": "string",
+			"defaultValue": "2000-01-01"
+		},
+		"Schedule01_properties_P01Brick-LOOP_parameters_mode": {
+			"type": "string",
+			"defaultValue": "dev"
+		},
+		"Schedule01_properties_P01Brick-LOOP_parameters_table_name": {
+			"type": "string",
+			"defaultValue": "Z1FI3MP01"
 		}
 	},
 	"variables": {
 		"factoryId": "[concat('Microsoft.DataFactory/factories/', parameters('factoryName'))]"
 	},
 	"resources": [
-		{
-			"name": "[concat(parameters('factoryName'), '/CopyPipeline_g3g')]",
-			"type": "Microsoft.DataFactory/factories/pipelines",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"activities": [
-					{
-						"name": "Copy_g3g",
-						"type": "Copy",
-						"dependsOn": [],
-						"policy": {
-							"timeout": "0.12:00:00",
-							"retry": 0,
-							"retryIntervalInSeconds": 30,
-							"secureOutput": false,
-							"secureInput": false
-						},
-						"userProperties": [
-							{
-								"name": "Source",
-								"value": "ctnpongpisut01/Test Folder/mycopy.csv"
-							},
-							{
-								"name": "Destination",
-								"value": "ctnpongpisut01/Test Folder/Mycopy_copy"
-							}
-						],
-						"typeProperties": {
-							"source": {
-								"type": "BinarySource",
-								"storeSettings": {
-									"type": "AzureBlobStorageReadSettings",
-									"recursive": false,
-									"deleteFilesAfterCompletion": false
-								},
-								"formatSettings": {
-									"type": "BinaryReadSettings"
-								}
-							},
-							"sink": {
-								"type": "BinarySink",
-								"storeSettings": {
-									"type": "AzureBlobStorageWriteSettings",
-									"maxConcurrentConnections": 1,
-									"copyBehavior": "FlattenHierarchy"
-								}
-							},
-							"enableStaging": false,
-							"logSettings": {
-								"enableCopyActivityLog": true,
-								"copyActivityLogSettings": {
-									"logLevel": "Info",
-									"enableReliableLogging": false
-								},
-								"logLocationSettings": {
-									"linkedServiceName": {
-										"referenceName": "AzureBlobStorage1",
-										"type": "LinkedServiceReference"
-									},
-									"path": "ctnpongpisut01/Test Folder"
-								}
-							}
-						},
-						"inputs": [
-							{
-								"referenceName": "SourceDataset_g3g",
-								"type": "DatasetReference",
-								"parameters": {}
-							}
-						],
-						"outputs": [
-							{
-								"referenceName": "DestinationDataset_g3g",
-								"type": "DatasetReference",
-								"parameters": {}
-							}
-						]
-					}
-				],
-				"policy": {
-					"elapsedTimeMetric": {}
-				},
-				"annotations": [],
-				"lastPublishTime": "2024-09-04T02:31:56Z"
-			},
-			"dependsOn": []
-		},
 		{
 			"name": "[concat(parameters('factoryName'), '/MF_Delimited')]",
 			"type": "Microsoft.DataFactory/factories/pipelines",
@@ -1463,28 +1424,36 @@
 						"defaultValue": "full"
 					},
 					"extract_criteria_dim": {
-						"type": "string"
+						"type": "string",
+						"defaultValue": "full"
 					},
 					"extract_date_fix_dim": {
-						"type": "string"
+						"type": "string",
+						"defaultValue": "2000-01-01"
 					},
 					"end_date_fact": {
-						"type": "string"
+						"type": "string",
+						"defaultValue": "2023-12-31"
 					},
 					"start_date_fact": {
-						"type": "string"
+						"type": "string",
+						"defaultValue": "2023-01-01"
 					},
 					"mode": {
-						"type": "string"
+						"type": "string",
+						"defaultValue": "dev"
 					},
 					"table_name": {
-						"type": "string"
+						"type": "string",
+						"defaultValue": "Z1FI3MP01"
 					},
 					"extract_criteria_fact": {
-						"type": "string"
+						"type": "string",
+						"defaultValue": "full"
 					},
 					"extract_date_fix_fact": {
-						"type": "string"
+						"type": "string",
+						"defaultValue": "2000-01-01"
 					}
 				},
 				"variables": {
@@ -1913,6 +1882,7 @@
 							],
 							"storeSettings": {
 								"type": "AzureBlobFSReadSettings",
+								"recursive": true,
 								"enablePartitionDiscovery": false
 							},
 							"formatSettings": {
@@ -2017,6 +1987,58 @@
 			},
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/pipelines/P01Brick01')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/Schedule01')]",
+			"type": "Microsoft.DataFactory/factories/triggers",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"runtimeState": "Started",
+				"pipelines": [
+					{
+						"pipelineReference": {
+							"referenceName": "P01Brick-LOOP",
+							"type": "PipelineReference"
+						},
+						"parameters": {
+							"Condition1": "[parameters('Schedule01_properties_P01Brick-LOOP_parameters_Condition1')]",
+							"Condition2": "[parameters('Schedule01_properties_P01Brick-LOOP_parameters_Condition2')]",
+							"Condition3": "[parameters('Schedule01_properties_P01Brick-LOOP_parameters_Condition3')]",
+							"extract_criteria_dim": "[parameters('Schedule01_properties_P01Brick-LOOP_parameters_extract_criteria_dim')]",
+							"extract_date_fix_dim": "[parameters('Schedule01_properties_P01Brick-LOOP_parameters_extract_date_fix_dim')]",
+							"dummy": "[parameters('Schedule01_properties_P01Brick-LOOP_parameters_dummy')]",
+							"end_date_fact": "[parameters('Schedule01_properties_P01Brick-LOOP_parameters_end_date_fact')]",
+							"start_date_fact": "[parameters('Schedule01_properties_P01Brick-LOOP_parameters_start_date_fact')]",
+							"extract_criteria_fact": "[parameters('Schedule01_properties_P01Brick-LOOP_parameters_extract_criteria_fact')]",
+							"extract_date_fix_fact": "[parameters('Schedule01_properties_P01Brick-LOOP_parameters_extract_date_fix_fact')]",
+							"mode": "[parameters('Schedule01_properties_P01Brick-LOOP_parameters_mode')]",
+							"table_name": "[parameters('Schedule01_properties_P01Brick-LOOP_parameters_table_name')]"
+						}
+					}
+				],
+				"type": "ScheduleTrigger",
+				"typeProperties": {
+					"recurrence": {
+						"frequency": "Day",
+						"interval": 1,
+						"startTime": "2025-01-23T04:03:00",
+						"endTime": "2025-01-24T18:00:00",
+						"timeZone": "SE Asia Standard Time",
+						"schedule": {
+							"minutes": [
+								0
+							],
+							"hours": [
+								7
+							]
+						}
+					}
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/pipelines/P01Brick-LOOP')]"
 			]
 		}
 	]
