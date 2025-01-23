@@ -69,7 +69,7 @@
 				"userProperties": [],
 				"typeProperties": {
 					"expression": {
-						"value": "@equals(variables('LoopCount'),variables('TotalLoop'))",
+						"value": "@equals(variables('LoopCount'),add(variables('TotalLoop'),1))",
 						"type": "Expression"
 					},
 					"activities": [
