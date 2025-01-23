@@ -187,7 +187,7 @@
 										"value": "@pipeline().parameters.table_name",
 										"type": "Expression"
 									},
-									"LoopCount": {
+									"loop_count": {
 										"value": "@string(variables('LoopCount'))",
 										"type": "Expression"
 									}
