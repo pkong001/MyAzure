@@ -13,6 +13,168 @@
 	},
 	"resources": [
 		{
+			"name": "[concat(parameters('factoryName'), '/CopyPipeline_g3g')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "Copy_g3g",
+						"type": "Copy",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "0.12:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [
+							{
+								"name": "Source",
+								"value": "ctnpongpisut01/Test Folder/mycopy.csv"
+							},
+							{
+								"name": "Destination",
+								"value": "ctnpongpisut01/Test Folder/Mycopy_copy"
+							}
+						],
+						"typeProperties": {
+							"source": {
+								"type": "BinarySource",
+								"storeSettings": {
+									"type": "AzureBlobStorageReadSettings",
+									"recursive": false,
+									"deleteFilesAfterCompletion": false
+								},
+								"formatSettings": {
+									"type": "BinaryReadSettings"
+								}
+							},
+							"sink": {
+								"type": "BinarySink",
+								"storeSettings": {
+									"type": "AzureBlobStorageWriteSettings",
+									"maxConcurrentConnections": 1,
+									"copyBehavior": "FlattenHierarchy"
+								}
+							},
+							"enableStaging": false,
+							"logSettings": {
+								"enableCopyActivityLog": true,
+								"copyActivityLogSettings": {
+									"logLevel": "Info",
+									"enableReliableLogging": false
+								},
+								"logLocationSettings": {
+									"linkedServiceName": {
+										"referenceName": "AzureBlobStorage1",
+										"type": "LinkedServiceReference"
+									},
+									"path": "ctnpongpisut01/Test Folder"
+								}
+							}
+						},
+						"inputs": [
+							{
+								"referenceName": "SourceDataset_g3g",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "DestinationDataset_g3g",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						]
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {}
+				},
+				"annotations": [],
+				"lastPublishTime": "2024-09-04T02:31:56Z"
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/MF_Delimited')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "Copy data1",
+						"type": "Copy",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "0.12:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "DelimitedTextSource",
+								"storeSettings": {
+									"type": "AzureBlobStorageReadSettings",
+									"recursive": true,
+									"enablePartitionDiscovery": false
+								},
+								"formatSettings": {
+									"type": "DelimitedTextReadSettings"
+								}
+							},
+							"sink": {
+								"type": "DelimitedTextSink",
+								"storeSettings": {
+									"type": "AzureBlobStorageWriteSettings"
+								},
+								"formatSettings": {
+									"type": "DelimitedTextWriteSettings",
+									"quoteAllText": true,
+									"fileExtension": ".txt"
+								}
+							},
+							"enableStaging": false,
+							"translator": {
+								"type": "TabularTranslator",
+								"typeConversion": true,
+								"typeConversionSettings": {
+									"allowDataTruncation": true,
+									"treatBooleanAsNumber": false
+								}
+							}
+						},
+						"inputs": [
+							{
+								"referenceName": "DelimitedText1",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "DelimitedText2",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						]
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {}
+				},
+				"annotations": [],
+				"lastPublishTime": "2024-05-03T07:16:51Z"
+			},
+			"dependsOn": []
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/P01Brick02')]",
 			"type": "Microsoft.DataFactory/factories/pipelines",
 			"apiVersion": "2018-06-01",
@@ -1410,7 +1572,7 @@
 						"userProperties": [],
 						"typeProperties": {
 							"expression": {
-								"value": "@equals(variables('LoopCount'),variables('TotalLoop'))",
+								"value": "@equals(variables('LoopCount'),add(variables('TotalLoop'),1))",
 								"type": "Expression"
 							},
 							"activities": [
@@ -1449,19 +1611,19 @@
 												"type": "Expression"
 											},
 											"extract_criteria_dim": {
-												"value": "@json(activity('VarControl01').output.runOutput).extract_criteria_dim\r\n",
+												"value": "@activity('VarControl01').output.runOutput.extract_criteria_dim\n",
 												"type": "Expression"
 											},
 											"extract_date_fix_dim": {
-												"value": "@json(activity('VarControl01').output.runOutput).extract_date_fix_dim\n",
+												"value": "@activity('VarControl01').output.runOutput.extract_date_fix_dim",
 												"type": "Expression"
 											},
 											"end_date_fact": {
-												"value": "@json(activity('VarControl01').output.runOutput).end_date_fact\n",
+												"value": "@activity('VarControl01').output.runOutput.end_date_fact",
 												"type": "Expression"
 											},
 											"start_date_fact": {
-												"value": "@json(activity('VarControl01').output.runOutput).start_date_fact\n",
+												"value": "@activity('VarControl01').output.runOutput.start_date_fact",
 												"type": "Expression"
 											},
 											"mode": {
@@ -1469,15 +1631,15 @@
 												"type": "Expression"
 											},
 											"table_name": {
-												"value": "@json(activity('VarControl01').output.runOutput).table_name_fact",
+												"value": "@activity('VarControl01').output.runOutput.table_name_fact",
 												"type": "Expression"
 											},
 											"extract_criteria_fact": {
-												"value": "@json(activity('VarControl01').output.runOutput).extract_criteria_fact",
+												"value": "@activity('VarControl01').output.runOutput.extract_criteria_fact",
 												"type": "Expression"
 											},
 											"extract_date_fix_fact": {
-												"value": "@json(activity('VarControl01').output.runOutput).extract_date_fix_fact",
+												"value": "@activity('VarControl01').output.runOutput.extract_date_fix_fact",
 												"type": "Expression"
 											}
 										}
@@ -1526,7 +1688,7 @@
 												"value": "@pipeline().parameters.table_name",
 												"type": "Expression"
 											},
-											"LoopCount": {
+											"loop_count": {
 												"value": "@string(variables('LoopCount'))",
 												"type": "Expression"
 											}
@@ -1606,7 +1768,7 @@
 									"typeProperties": {
 										"variableName": "TotalLoop",
 										"value": {
-											"value": "@json(activity('VarControl01').output.runOutput).months_diff",
+											"value": "@activity('VarControl01').output.runOutput.months_diff",
 											"type": "Expression"
 										}
 									}
@@ -1716,6 +1878,47 @@
 								"type": "Expression"
 							}
 						}
+					},
+					{
+						"name": "Finishing",
+						"type": "GetMetadata",
+						"dependsOn": [
+							{
+								"activity": "Until1",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "0.12:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"dataset": {
+								"referenceName": "FactProfitAndLoss",
+								"type": "DatasetReference",
+								"parameters": {}
+							},
+							"fieldList": [
+								"exists",
+								"childItems",
+								"itemName",
+								"itemType",
+								"lastModified"
+							],
+							"storeSettings": {
+								"type": "AzureBlobFSReadSettings",
+								"enablePartitionDiscovery": false
+							},
+							"formatSettings": {
+								"type": "ParquetReadSettings"
+							}
+						}
 					}
 				],
 				"policy": {
@@ -1748,11 +1951,11 @@
 					},
 					"end_date_fact": {
 						"type": "string",
-						"defaultValue": "2024-12-31"
+						"defaultValue": "2023-03-31"
 					},
 					"start_date_fact": {
 						"type": "string",
-						"defaultValue": "2024-01-01"
+						"defaultValue": "2023-01-01"
 					},
 					"extract_criteria_fact": {
 						"type": "string",
