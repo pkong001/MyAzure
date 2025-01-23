@@ -267,7 +267,7 @@
 							"typeProperties": {
 								"variableName": "TotalLoop",
 								"value": {
-									"value": "@json(activity('VarControl01').output.runOutput).months_diff",
+									"value": "@activity('VarControl01').output.runOutput.months_diff",
 									"type": "Expression"
 								}
 							}
