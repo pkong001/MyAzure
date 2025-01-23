@@ -112,28 +112,31 @@
 										"type": "Expression"
 									},
 									"extract_date_fix_dim": {
-										"value": "@pipeline().parameters.extract_date_fix_dim",
+										"value": "@activity('VarControl01').output.runOutput.extract_date_fix_dim",
 										"type": "Expression"
 									},
 									"end_date_fact": {
-										"value": "@pipeline().parameters.end_date_fact",
+										"value": "@activity('VarControl01').output.runOutput.end_date_fact",
 										"type": "Expression"
 									},
 									"start_date_fact": {
-										"value": "@pipeline().parameters.start_date_fact",
+										"value": "@activity('VarControl01').output.runOutput.start_date_fact",
 										"type": "Expression"
 									},
 									"mode": {
 										"value": "@pipeline().parameters.mode",
 										"type": "Expression"
 									},
-									"table_name": "s",
+									"table_name": {
+										"value": "@activity('VarControl01').output.runOutput.table_name_fact",
+										"type": "Expression"
+									},
 									"extract_criteria_fact": {
-										"value": "@pipeline().parameters.extract_criteria_fact",
+										"value": "@activity('VarControl01').output.runOutput.extract_criteria_fact",
 										"type": "Expression"
 									},
 									"extract_date_fix_fact": {
-										"value": "@pipeline().parameters.extract_date_fix_fact",
+										"value": "@activity('VarControl01').output.runOutput.extract_date_fix_fact",
 										"type": "Expression"
 									}
 								}
