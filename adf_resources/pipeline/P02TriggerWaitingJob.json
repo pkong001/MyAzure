@@ -41,7 +41,7 @@
 		"parameters": {
 			"host_server": {
 				"type": "string",
-				"defaultValue": "adb-1346410883415134.14.azuredatabricks.net"
+				"defaultValue": "https://adb-1346410883415134.14.azuredatabricks.net"
 			},
 			"job_id": {
 				"type": "string",
