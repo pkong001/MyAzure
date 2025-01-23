@@ -451,6 +451,12 @@
 				"type": "string"
 			}
 		},
+		"variables": {
+			"dummy": {
+				"type": "Boolean",
+				"defaultValue": true
+			}
+		},
 		"annotations": []
 	}
 }
