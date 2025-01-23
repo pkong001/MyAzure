@@ -69,404 +69,6 @@
 	},
 	"resources": [
 		{
-			"name": "[concat(parameters('factoryName'), '/P01Brick-LOOP')]",
-			"type": "Microsoft.DataFactory/factories/pipelines",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"activities": [
-					{
-						"name": "extract_date_fix_dim",
-						"type": "SetVariable",
-						"dependsOn": [],
-						"policy": {
-							"secureOutput": false,
-							"secureInput": false
-						},
-						"userProperties": [],
-						"typeProperties": {
-							"variableName": "extract_date_fix_dim",
-							"value": {
-								"value": "@pipeline().parameters.extract_date_fix_dim",
-								"type": "Expression"
-							}
-						}
-					},
-					{
-						"name": "Until1",
-						"type": "Until",
-						"dependsOn": [
-							{
-								"activity": "extract_date_fix_dim",
-								"dependencyConditions": [
-									"Succeeded"
-								]
-							},
-							{
-								"activity": "extract_criteria_dim",
-								"dependencyConditions": [
-									"Succeeded"
-								]
-							},
-							{
-								"activity": "extract_date_fix_fact",
-								"dependencyConditions": [
-									"Succeeded"
-								]
-							},
-							{
-								"activity": "extract_criteria_fact",
-								"dependencyConditions": [
-									"Succeeded"
-								]
-							},
-							{
-								"activity": "table_name",
-								"dependencyConditions": [
-									"Succeeded"
-								]
-							},
-							{
-								"activity": "start_date_fact",
-								"dependencyConditions": [
-									"Succeeded"
-								]
-							},
-							{
-								"activity": "end_date_fact",
-								"dependencyConditions": [
-									"Succeeded"
-								]
-							}
-						],
-						"userProperties": [],
-						"typeProperties": {
-							"expression": {
-								"value": "@equals(variables('LoopCount'),12)",
-								"type": "Expression"
-							},
-							"activities": [
-								{
-									"name": "P01Brick01",
-									"type": "ExecutePipeline",
-									"state": "Inactive",
-									"onInactiveMarkAs": "Skipped",
-									"dependsOn": [
-										{
-											"activity": "Notebook1_copy1",
-											"dependencyConditions": [
-												"Succeeded"
-											]
-										}
-									],
-									"policy": {
-										"secureInput": false
-									},
-									"userProperties": [],
-									"typeProperties": {
-										"pipeline": {
-											"referenceName": "P01Brick01",
-											"type": "PipelineReference"
-										},
-										"waitOnCompletion": true,
-										"parameters": {}
-									}
-								},
-								{
-									"name": "Notebook1_copy1",
-									"type": "DatabricksNotebook",
-									"dependsOn": [],
-									"policy": {
-										"timeout": "0.12:00:00",
-										"retry": 0,
-										"retryIntervalInSeconds": 30,
-										"secureOutput": false,
-										"secureInput": false
-									},
-									"userProperties": [],
-									"typeProperties": {
-										"notebookPath": "/Users/pkongdan01@gmail.com/P01/_P1-VARIABLES-CONTROL",
-										"baseParameters": {
-											"extract_date_fix_dim": {
-												"value": "@pipeline().parameters.extract_date_fix_dim",
-												"type": "Expression"
-											},
-											"extract_criteria_dim": {
-												"value": "@pipeline().parameters.extract_criteria_dim",
-												"type": "Expression"
-											},
-											"extract_date_fix_fact": {
-												"value": "@pipeline().parameters.extract_date_fix_fact",
-												"type": "Expression"
-											},
-											"extract_criteria_fact": {
-												"value": "@pipeline().parameters.extract_criteria_fact",
-												"type": "Expression"
-											},
-											"start_date_fact": {
-												"value": "@pipeline().parameters.start_date_fact",
-												"type": "Expression"
-											},
-											"end_date_fact": {
-												"value": "@pipeline().parameters.end_date_fact",
-												"type": "Expression"
-											},
-											"table_name": {
-												"value": "@pipeline().parameters.table_name",
-												"type": "Expression"
-											},
-											"LoopCount": {
-												"value": "@variables('LoopCount')",
-												"type": "Expression"
-											}
-										}
-									},
-									"linkedServiceName": {
-										"referenceName": "AzureDatabricksP01",
-										"type": "LinkedServiceReference"
-									}
-								},
-								{
-									"name": "Increment Loop Count",
-									"type": "SetVariable",
-									"dependsOn": [
-										{
-											"activity": "P01Brick01",
-											"dependencyConditions": [
-												"Succeeded"
-											]
-										}
-									],
-									"policy": {
-										"secureOutput": false,
-										"secureInput": false
-									},
-									"userProperties": [],
-									"typeProperties": {
-										"variableName": "LoopCount",
-										"value": {
-											"value": "@add(variables('TempCount'),1)",
-											"type": "Expression"
-										}
-									}
-								},
-								{
-									"name": "Increment Temp Count",
-									"type": "SetVariable",
-									"dependsOn": [
-										{
-											"activity": "Increment Loop Count",
-											"dependencyConditions": [
-												"Succeeded"
-											]
-										}
-									],
-									"policy": {
-										"secureOutput": false,
-										"secureInput": false
-									},
-									"userProperties": [],
-									"typeProperties": {
-										"variableName": "TempCount",
-										"value": {
-											"value": "@variables('LoopCount')",
-											"type": "Expression"
-										}
-									}
-								}
-							],
-							"timeout": "0.12:00:00"
-						}
-					},
-					{
-						"name": "extract_criteria_dim",
-						"type": "SetVariable",
-						"dependsOn": [],
-						"policy": {
-							"secureOutput": false,
-							"secureInput": false
-						},
-						"userProperties": [],
-						"typeProperties": {
-							"variableName": "extract_criteria_dim",
-							"value": {
-								"value": "@pipeline().parameters.extract_criteria_dim",
-								"type": "Expression"
-							}
-						}
-					},
-					{
-						"name": "extract_date_fix_fact",
-						"type": "SetVariable",
-						"dependsOn": [],
-						"policy": {
-							"secureOutput": false,
-							"secureInput": false
-						},
-						"userProperties": [],
-						"typeProperties": {
-							"variableName": "extract_date_fix_fact",
-							"value": {
-								"value": "@pipeline().parameters.extract_date_fix_fact",
-								"type": "Expression"
-							}
-						}
-					},
-					{
-						"name": "extract_criteria_fact",
-						"type": "SetVariable",
-						"dependsOn": [],
-						"policy": {
-							"secureOutput": false,
-							"secureInput": false
-						},
-						"userProperties": [],
-						"typeProperties": {
-							"variableName": "extract_criteria_fact",
-							"value": {
-								"value": "@pipeline().parameters.extract_criteria_fact",
-								"type": "Expression"
-							}
-						}
-					},
-					{
-						"name": "table_name",
-						"type": "SetVariable",
-						"dependsOn": [],
-						"policy": {
-							"secureOutput": false,
-							"secureInput": false
-						},
-						"userProperties": [],
-						"typeProperties": {
-							"variableName": "table_name",
-							"value": {
-								"value": "@pipeline().parameters.table_name",
-								"type": "Expression"
-							}
-						}
-					},
-					{
-						"name": "start_date_fact",
-						"type": "SetVariable",
-						"dependsOn": [],
-						"policy": {
-							"secureOutput": false,
-							"secureInput": false
-						},
-						"userProperties": [],
-						"typeProperties": {
-							"variableName": "start_date_fact",
-							"value": {
-								"value": "@pipeline().parameters.start_date_fact",
-								"type": "Expression"
-							}
-						}
-					},
-					{
-						"name": "end_date_fact",
-						"type": "SetVariable",
-						"dependsOn": [],
-						"policy": {
-							"secureOutput": false,
-							"secureInput": false
-						},
-						"userProperties": [],
-						"typeProperties": {
-							"variableName": "end_date_fact",
-							"value": {
-								"value": "@pipeline().parameters.end_date_fact",
-								"type": "Expression"
-							}
-						}
-					}
-				],
-				"policy": {
-					"elapsedTimeMetric": {}
-				},
-				"parameters": {
-					"Condition1": {
-						"type": "string",
-						"defaultValue": "fact"
-					},
-					"Condition2": {
-						"type": "string",
-						"defaultValue": "pnl"
-					},
-					"Condition3": {
-						"type": "string",
-						"defaultValue": "full"
-					},
-					"extract_criteria_dim": {
-						"type": "string"
-					},
-					"extract_date_fix_dim": {
-						"type": "string"
-					},
-					"dummy": {
-						"type": "string"
-					},
-					"end_date_fact": {
-						"type": "string"
-					},
-					"start_date_fact": {
-						"type": "string"
-					},
-					"extract_criteria_fact": {
-						"type": "string"
-					},
-					"extract_date_fix_fact": {
-						"type": "string"
-					},
-					"mode": {
-						"type": "string"
-					},
-					"table_name": {
-						"type": "string"
-					}
-				},
-				"variables": {
-					"dummy": {
-						"type": "Boolean",
-						"defaultValue": true
-					},
-					"extract_criteria_dim": {
-						"type": "String"
-					},
-					"extract_date_fix_dim": {
-						"type": "String"
-					},
-					"end_date_fact": {
-						"type": "String"
-					},
-					"start_date_fact": {
-						"type": "String"
-					},
-					"extract_criteria_fact": {
-						"type": "String"
-					},
-					"extract_date_fix_fact": {
-						"type": "String"
-					},
-					"table_name": {
-						"type": "String"
-					},
-					"LoopCount": {
-						"type": "Integer",
-						"defaultValue": 1
-					},
-					"TempCount": {
-						"type": "Integer",
-						"defaultValue": 1
-					}
-				},
-				"annotations": []
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/pipelines/P01Brick01')]",
-				"[concat(variables('factoryId'), '/linkedServices/AzureDatabricksP01')]"
-			]
-		},
-		{
 			"name": "[concat(parameters('factoryName'), '/CopyFromOnPremise')]",
 			"type": "Microsoft.DataFactory/factories/pipelines",
 			"apiVersion": "2018-06-01",
@@ -1256,6 +858,486 @@
 			]
 		},
 		{
+			"name": "[concat(parameters('factoryName'), '/P01Brick-LOOP')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "extract_date_fix_dim",
+						"type": "SetVariable",
+						"dependsOn": [],
+						"policy": {
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"variableName": "extract_date_fix_dim",
+							"value": {
+								"value": "@pipeline().parameters.extract_date_fix_dim",
+								"type": "Expression"
+							}
+						}
+					},
+					{
+						"name": "Until1",
+						"type": "Until",
+						"dependsOn": [
+							{
+								"activity": "extract_date_fix_dim",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							},
+							{
+								"activity": "extract_criteria_dim",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							},
+							{
+								"activity": "extract_date_fix_fact",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							},
+							{
+								"activity": "extract_criteria_fact",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							},
+							{
+								"activity": "table_name",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							},
+							{
+								"activity": "start_date_fact",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							},
+							{
+								"activity": "end_date_fact",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"userProperties": [],
+						"typeProperties": {
+							"expression": {
+								"value": "@equals(variables('LoopCount'),variables('TotalLoop'))",
+								"type": "Expression"
+							},
+							"activities": [
+								{
+									"name": "P01Brick01",
+									"type": "ExecutePipeline",
+									"dependsOn": [
+										{
+											"activity": "VarControl01",
+											"dependencyConditions": [
+												"Succeeded"
+											]
+										}
+									],
+									"policy": {
+										"secureInput": false
+									},
+									"userProperties": [],
+									"typeProperties": {
+										"pipeline": {
+											"referenceName": "P01Brick01",
+											"type": "PipelineReference"
+										},
+										"waitOnCompletion": true,
+										"parameters": {
+											"Condition1": {
+												"value": "@pipeline().parameters.Condition1",
+												"type": "Expression"
+											},
+											"Condition2": {
+												"value": "@pipeline().parameters.Condition2",
+												"type": "Expression"
+											},
+											"Condition3": {
+												"value": "@pipeline().parameters.Condition3",
+												"type": "Expression"
+											},
+											"extract_criteria_dim": {
+												"value": "@json(activity('VarControl01').output.runOutput).extract_criteria_dim\r\n",
+												"type": "Expression"
+											},
+											"extract_date_fix_dim": {
+												"value": "@json(activity('VarControl01').output.runOutput).extract_date_fix_dim\n",
+												"type": "Expression"
+											},
+											"end_date_fact": {
+												"value": "@json(activity('VarControl01').output.runOutput).end_date_fact\n",
+												"type": "Expression"
+											},
+											"start_date_fact": {
+												"value": "@json(activity('VarControl01').output.runOutput).start_date_fact\n",
+												"type": "Expression"
+											},
+											"mode": {
+												"value": "@pipeline().parameters.mode",
+												"type": "Expression"
+											},
+											"table_name": {
+												"value": "@json(activity('VarControl01').output.runOutput).table_name_fact",
+												"type": "Expression"
+											},
+											"extract_criteria_fact": {
+												"value": "@json(activity('VarControl01').output.runOutput).extract_criteria_fact",
+												"type": "Expression"
+											},
+											"extract_date_fix_fact": {
+												"value": "@json(activity('VarControl01').output.runOutput).extract_date_fix_fact",
+												"type": "Expression"
+											}
+										}
+									}
+								},
+								{
+									"name": "VarControl01",
+									"type": "DatabricksNotebook",
+									"dependsOn": [],
+									"policy": {
+										"timeout": "0.12:00:00",
+										"retry": 0,
+										"retryIntervalInSeconds": 30,
+										"secureOutput": false,
+										"secureInput": false
+									},
+									"userProperties": [],
+									"typeProperties": {
+										"notebookPath": "/Users/pkongdan01@gmail.com/P01/_P1-VARIABLES-CONTROL",
+										"baseParameters": {
+											"extract_date_fix_dim": {
+												"value": "@pipeline().parameters.extract_date_fix_dim",
+												"type": "Expression"
+											},
+											"extract_criteria_dim": {
+												"value": "@pipeline().parameters.extract_criteria_dim",
+												"type": "Expression"
+											},
+											"extract_date_fix_fact": {
+												"value": "@pipeline().parameters.extract_date_fix_fact",
+												"type": "Expression"
+											},
+											"extract_criteria_fact": {
+												"value": "@pipeline().parameters.extract_criteria_fact",
+												"type": "Expression"
+											},
+											"start_date_fact": {
+												"value": "@pipeline().parameters.start_date_fact",
+												"type": "Expression"
+											},
+											"end_date_fact": {
+												"value": "@pipeline().parameters.end_date_fact",
+												"type": "Expression"
+											},
+											"table_name": {
+												"value": "@pipeline().parameters.table_name",
+												"type": "Expression"
+											},
+											"LoopCount": {
+												"value": "@string(variables('LoopCount'))",
+												"type": "Expression"
+											}
+										}
+									},
+									"linkedServiceName": {
+										"referenceName": "AzureDatabricksP01",
+										"type": "LinkedServiceReference"
+									}
+								},
+								{
+									"name": "Increment Loop Count",
+									"type": "SetVariable",
+									"dependsOn": [
+										{
+											"activity": "P01Brick01",
+											"dependencyConditions": [
+												"Succeeded",
+												"Skipped"
+											]
+										}
+									],
+									"policy": {
+										"secureOutput": false,
+										"secureInput": false
+									},
+									"userProperties": [],
+									"typeProperties": {
+										"variableName": "LoopCount",
+										"value": {
+											"value": "@add(variables('TempCount'),1)",
+											"type": "Expression"
+										}
+									}
+								},
+								{
+									"name": "Increment Temp Count",
+									"type": "SetVariable",
+									"dependsOn": [
+										{
+											"activity": "Increment Loop Count",
+											"dependencyConditions": [
+												"Succeeded"
+											]
+										}
+									],
+									"policy": {
+										"secureOutput": false,
+										"secureInput": false
+									},
+									"userProperties": [],
+									"typeProperties": {
+										"variableName": "TempCount",
+										"value": {
+											"value": "@variables('LoopCount')",
+											"type": "Expression"
+										}
+									}
+								},
+								{
+									"name": "Set Total Loop",
+									"type": "SetVariable",
+									"dependsOn": [
+										{
+											"activity": "P01Brick01",
+											"dependencyConditions": [
+												"Succeeded",
+												"Skipped"
+											]
+										}
+									],
+									"policy": {
+										"secureOutput": false,
+										"secureInput": false
+									},
+									"userProperties": [],
+									"typeProperties": {
+										"variableName": "TotalLoop",
+										"value": {
+											"value": "@json(activity('VarControl01').output.runOutput).months_diff",
+											"type": "Expression"
+										}
+									}
+								}
+							],
+							"timeout": "0.12:00:00"
+						}
+					},
+					{
+						"name": "extract_criteria_dim",
+						"type": "SetVariable",
+						"dependsOn": [],
+						"policy": {
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"variableName": "extract_criteria_dim",
+							"value": {
+								"value": "@pipeline().parameters.extract_criteria_dim",
+								"type": "Expression"
+							}
+						}
+					},
+					{
+						"name": "extract_date_fix_fact",
+						"type": "SetVariable",
+						"dependsOn": [],
+						"policy": {
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"variableName": "extract_date_fix_fact",
+							"value": {
+								"value": "@pipeline().parameters.extract_date_fix_fact",
+								"type": "Expression"
+							}
+						}
+					},
+					{
+						"name": "extract_criteria_fact",
+						"type": "SetVariable",
+						"dependsOn": [],
+						"policy": {
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"variableName": "extract_criteria_fact",
+							"value": {
+								"value": "@pipeline().parameters.extract_criteria_fact",
+								"type": "Expression"
+							}
+						}
+					},
+					{
+						"name": "table_name",
+						"type": "SetVariable",
+						"dependsOn": [],
+						"policy": {
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"variableName": "table_name",
+							"value": {
+								"value": "@pipeline().parameters.table_name",
+								"type": "Expression"
+							}
+						}
+					},
+					{
+						"name": "start_date_fact",
+						"type": "SetVariable",
+						"dependsOn": [],
+						"policy": {
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"variableName": "start_date_fact",
+							"value": {
+								"value": "@pipeline().parameters.start_date_fact",
+								"type": "Expression"
+							}
+						}
+					},
+					{
+						"name": "end_date_fact",
+						"type": "SetVariable",
+						"dependsOn": [],
+						"policy": {
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"variableName": "end_date_fact",
+							"value": {
+								"value": "@pipeline().parameters.end_date_fact",
+								"type": "Expression"
+							}
+						}
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {}
+				},
+				"parameters": {
+					"Condition1": {
+						"type": "string",
+						"defaultValue": "fact"
+					},
+					"Condition2": {
+						"type": "string",
+						"defaultValue": "pnl"
+					},
+					"Condition3": {
+						"type": "string",
+						"defaultValue": "full"
+					},
+					"extract_criteria_dim": {
+						"type": "string",
+						"defaultValue": "full"
+					},
+					"extract_date_fix_dim": {
+						"type": "string",
+						"defaultValue": "2026-01-01"
+					},
+					"dummy": {
+						"type": "string",
+						"defaultValue": "true"
+					},
+					"end_date_fact": {
+						"type": "string",
+						"defaultValue": "2024-12-31"
+					},
+					"start_date_fact": {
+						"type": "string",
+						"defaultValue": "2024-01-01"
+					},
+					"extract_criteria_fact": {
+						"type": "string",
+						"defaultValue": "2000-01-01"
+					},
+					"extract_date_fix_fact": {
+						"type": "string",
+						"defaultValue": "2026-01-01"
+					},
+					"mode": {
+						"type": "string",
+						"defaultValue": "dev"
+					},
+					"table_name": {
+						"type": "string",
+						"defaultValue": "Z1FI3MP01"
+					}
+				},
+				"variables": {
+					"dummy": {
+						"type": "Boolean",
+						"defaultValue": true
+					},
+					"extract_criteria_dim": {
+						"type": "String"
+					},
+					"extract_date_fix_dim": {
+						"type": "String"
+					},
+					"end_date_fact": {
+						"type": "String"
+					},
+					"start_date_fact": {
+						"type": "String"
+					},
+					"extract_criteria_fact": {
+						"type": "String"
+					},
+					"extract_date_fix_fact": {
+						"type": "String"
+					},
+					"table_name": {
+						"type": "String"
+					},
+					"LoopCount": {
+						"type": "Integer",
+						"defaultValue": 1
+					},
+					"TempCount": {
+						"type": "Integer",
+						"defaultValue": 1
+					},
+					"TotalLoop": {
+						"type": "Integer",
+						"defaultValue": 999
+					}
+				},
+				"annotations": []
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/pipelines/P01Brick01')]",
+				"[concat(variables('factoryId'), '/linkedServices/AzureDatabricksP01')]"
+			]
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/P01Brick01')]",
 			"type": "Microsoft.DataFactory/factories/pipelines",
 			"apiVersion": "2018-06-01",
@@ -1299,11 +1381,11 @@
 												"notebookPath": "/Users/pkongdan01@gmail.com/P01/_P1-ELT-dim-profit&loss-source-to-pre-tx-bronze",
 												"baseParameters": {
 													"extract_criteria": {
-														"value": "@variables('extract_criteria_dim')",
+														"value": "@pipeline().parameters.extract_criteria_dim",
 														"type": "Expression"
 													},
 													"extract_date_fix": {
-														"value": "@variables('extract_date_fix_dim')",
+														"value": "@pipeline().parameters.extract_date_fix_dim",
 														"type": "Expression"
 													}
 												}
@@ -1353,27 +1435,27 @@
 												"notebookPath": "/Users/pkongdan01@gmail.com/P01/_P1-ELT-fact-profit&loss-source-to-pre-tx-bronze",
 												"baseParameters": {
 													"start_date": {
-														"value": "@variables('start_date_fact')",
+														"value": "@pipeline().parameters.start_date_fact",
 														"type": "Expression"
 													},
 													"end_date": {
-														"value": "@variables('end_date_fact')",
+														"value": "@pipeline().parameters.end_date_fact",
 														"type": "Expression"
 													},
 													"extract_criteria": {
-														"value": "@variables('extract_criteria_fact')",
+														"value": "@pipeline().parameters.extract_criteria_fact",
 														"type": "Expression"
 													},
 													"extrace_date_fix": {
-														"value": "@variables('extract_date_fix_fact')",
+														"value": "@pipeline().parameters.extract_date_fix_fact",
 														"type": "Expression"
 													},
 													"mode": {
-														"value": "@variables('mode')",
+														"value": "@pipeline().parameters.mode",
 														"type": "Expression"
 													},
 													"table_name": {
-														"value": "@variables('table_name')",
+														"value": "@pipeline().parameters.table_name",
 														"type": "Expression"
 													}
 												}
@@ -1456,27 +1538,27 @@
 												"notebookPath": "/Users/pkongdan01@gmail.com/P01/_P1-ELT-fact-profit&loss-source-to-pre-tx-bronze",
 												"baseParameters": {
 													"start_date": {
-														"value": "@variables('start_date_fact')",
+														"value": "@pipeline().parameters.start_date_fact",
 														"type": "Expression"
 													},
 													"end_date": {
-														"value": "@variables('end_date_fact')",
+														"value": "@pipeline().parameters.end_date_fact",
 														"type": "Expression"
 													},
 													"extract_criteria": {
-														"value": "@variables('extract_criteria_fact')",
+														"value": "@pipeline().parameters.extract_criteria_fact",
 														"type": "Expression"
 													},
 													"extrace_date_fix": {
-														"value": "@variables('extract_date_fix_fact')",
+														"value": "@pipeline().parameters.extract_date_fix_fact",
 														"type": "Expression"
 													},
 													"mode": {
-														"value": "@variables('mode')",
+														"value": "@pipeline().parameters.mode",
 														"type": "Expression"
 													},
 													"table_name": {
-														"value": "@variables('table_name')",
+														"value": "@pipeline().parameters.table_name",
 														"type": "Expression"
 													}
 												}
@@ -1532,11 +1614,11 @@
 												"notebookPath": "/Users/pkongdan01@gmail.com/P01/_P1-ELT-dim-profit&loss-source-to-pre-tx-bronze",
 												"baseParameters": {
 													"extract_criteria": {
-														"value": "@variables('extract_criteria_dim')",
+														"value": "@pipeline().parameters.extract_criteria_dim",
 														"type": "Expression"
 													},
 													"extract_date_fix": {
-														"value": "@variables('extract_date_fix_dim')",
+														"value": "@pipeline().parameters.extract_date_fix_dim",
 														"type": "Expression"
 													}
 												}
@@ -1633,11 +1715,11 @@
 									"type": "Expression"
 								},
 								"extract_criteria_dim": {
-									"value": "@variables('extract_criteria_dim')",
+									"value": "@pipeline().parameters.extract_criteria_dim",
 									"type": "Expression"
 								},
 								"extract_date_fix_dim": {
-									"value": "@variables('extract_date_fix_dim')",
+									"value": "@pipeline().parameters.extract_date_fix_dim",
 									"type": "Expression"
 								},
 								"dummy": {
@@ -1645,27 +1727,27 @@
 									"type": "Expression"
 								},
 								"end_date_fact": {
-									"value": "@variables('end_date_fact')",
+									"value": "@pipeline().parameters.end_date_fact",
 									"type": "Expression"
 								},
 								"start_date_fact": {
-									"value": "@variables('start_date_fact')",
+									"value": "@pipeline().parameters.start_date_fact",
 									"type": "Expression"
 								},
 								"extract_criteria_fact": {
-									"value": "@variables('extract_criteria_fact')",
+									"value": "@pipeline().parameters.extract_criteria_fact",
 									"type": "Expression"
 								},
 								"extract_date_fix_fact": {
-									"value": "@variables('extract_date_fix_fact')",
+									"value": "@pipeline().parameters.extract_date_fix_fact",
 									"type": "Expression"
 								},
 								"mode": {
-									"value": "@variables('mode')",
+									"value": "@pipeline().parameters.mode",
 									"type": "Expression"
 								},
 								"table_name": {
-									"value": "@variables('table_name')",
+									"value": "@pipeline().parameters.table_name",
 									"type": "Expression"
 								}
 							}
@@ -1687,44 +1769,36 @@
 					"Condition3": {
 						"type": "string",
 						"defaultValue": "full"
+					},
+					"extract_criteria_dim": {
+						"type": "string"
+					},
+					"extract_date_fix_dim": {
+						"type": "string"
+					},
+					"end_date_fact": {
+						"type": "string"
+					},
+					"start_date_fact": {
+						"type": "string"
+					},
+					"mode": {
+						"type": "string"
+					},
+					"table_name": {
+						"type": "string"
+					},
+					"extract_criteria_fact": {
+						"type": "string"
+					},
+					"extract_date_fix_fact": {
+						"type": "string"
 					}
 				},
 				"variables": {
-					"extract_criteria_dim": {
-						"type": "String",
-						"defaultValue": "full"
-					},
-					"extract_date_fix_dim": {
-						"type": "String",
-						"defaultValue": "2025-12-11"
-					},
 					"dummy": {
 						"type": "Boolean",
 						"defaultValue": true
-					},
-					"end_date_fact": {
-						"type": "String",
-						"defaultValue": "2023-12-31"
-					},
-					"start_date_fact": {
-						"type": "String",
-						"defaultValue": "2023-12-01"
-					},
-					"extract_criteria_fact": {
-						"type": "String",
-						"defaultValue": "full"
-					},
-					"extract_date_fix_fact": {
-						"type": "String",
-						"defaultValue": "2000-01-01"
-					},
-					"mode": {
-						"type": "String",
-						"defaultValue": "dev"
-					},
-					"table_name": {
-						"type": "String",
-						"defaultValue": "Z1FI3MP02"
 					}
 				},
 				"annotations": []
