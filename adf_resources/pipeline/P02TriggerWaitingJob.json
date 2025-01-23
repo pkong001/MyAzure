@@ -17,6 +17,12 @@
 				"userProperties": [],
 				"typeProperties": {
 					"method": "POST",
+					"headers": {
+						"Content-Type": {
+							"value": "@variables('content_type')",
+							"type": "Expression"
+						}
+					},
 					"url": {
 						"value": "@concat(     pipeline().parameters.host_server,     '/api/2.1/jobs/run-now' )",
 						"type": "Expression"
@@ -53,7 +59,7 @@
 			},
 			"wait_time": {
 				"type": "Integer",
-				"defaultValue": 30
+				"defaultValue": 10
 			}
 		},
 		"annotations": []
