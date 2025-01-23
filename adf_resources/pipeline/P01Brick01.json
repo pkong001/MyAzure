@@ -40,11 +40,11 @@
 										"notebookPath": "/Users/pkongdan01@gmail.com/P01/_P1-ELT-dim-profit&loss-source-to-pre-tx-bronze",
 										"baseParameters": {
 											"extract_criteria": {
-												"value": "@variables('extract_criteria_dim')",
+												"value": "@pipeline().parameters.extract_criteria_dim",
 												"type": "Expression"
 											},
 											"extract_date_fix": {
-												"value": "@variables('extract_date_fix_dim')",
+												"value": "@pipeline().parameters.extract_date_fix_dim",
 												"type": "Expression"
 											}
 										}
@@ -94,27 +94,27 @@
 										"notebookPath": "/Users/pkongdan01@gmail.com/P01/_P1-ELT-fact-profit&loss-source-to-pre-tx-bronze",
 										"baseParameters": {
 											"start_date": {
-												"value": "@variables('start_date_fact')",
+												"value": "@pipeline().parameters.start_date_fact",
 												"type": "Expression"
 											},
 											"end_date": {
-												"value": "@variables('end_date_fact')",
+												"value": "@pipeline().parameters.end_date_fact",
 												"type": "Expression"
 											},
 											"extract_criteria": {
-												"value": "@variables('extract_criteria_fact')",
+												"value": "@pipeline().parameters.extract_criteria_fact",
 												"type": "Expression"
 											},
 											"extrace_date_fix": {
-												"value": "@variables('extract_date_fix_fact')",
+												"value": "@pipeline().parameters.extract_date_fix_fact",
 												"type": "Expression"
 											},
 											"mode": {
-												"value": "@variables('mode')",
+												"value": "@pipeline().parameters.mode",
 												"type": "Expression"
 											},
 											"table_name": {
-												"value": "@variables('table_name')",
+												"value": "@pipeline().parameters.table_name",
 												"type": "Expression"
 											}
 										}
@@ -197,27 +197,27 @@
 										"notebookPath": "/Users/pkongdan01@gmail.com/P01/_P1-ELT-fact-profit&loss-source-to-pre-tx-bronze",
 										"baseParameters": {
 											"start_date": {
-												"value": "@variables('start_date_fact')",
+												"value": "@pipeline().parameters.start_date_fact",
 												"type": "Expression"
 											},
 											"end_date": {
-												"value": "@variables('end_date_fact')",
+												"value": "@pipeline().parameters.end_date_fact",
 												"type": "Expression"
 											},
 											"extract_criteria": {
-												"value": "@variables('extract_criteria_fact')",
+												"value": "@pipeline().parameters.extract_criteria_fact",
 												"type": "Expression"
 											},
 											"extrace_date_fix": {
-												"value": "@variables('extract_date_fix_fact')",
+												"value": "@pipeline().parameters.extract_date_fix_fact",
 												"type": "Expression"
 											},
 											"mode": {
-												"value": "@variables('mode')",
+												"value": "@pipeline().parameters.mode",
 												"type": "Expression"
 											},
 											"table_name": {
-												"value": "@variables('table_name')",
+												"value": "@pipeline().parameters.table_name",
 												"type": "Expression"
 											}
 										}
@@ -273,11 +273,11 @@
 										"notebookPath": "/Users/pkongdan01@gmail.com/P01/_P1-ELT-dim-profit&loss-source-to-pre-tx-bronze",
 										"baseParameters": {
 											"extract_criteria": {
-												"value": "@variables('extract_criteria_dim')",
+												"value": "@pipeline().parameters.extract_criteria_dim",
 												"type": "Expression"
 											},
 											"extract_date_fix": {
-												"value": "@variables('extract_date_fix_dim')",
+												"value": "@pipeline().parameters.extract_date_fix_dim",
 												"type": "Expression"
 											}
 										}
@@ -374,11 +374,11 @@
 							"type": "Expression"
 						},
 						"extract_criteria_dim": {
-							"value": "@variables('extract_criteria_dim')",
+							"value": "@pipeline().parameters.extract_criteria_dim",
 							"type": "Expression"
 						},
 						"extract_date_fix_dim": {
-							"value": "@variables('extract_date_fix_dim')",
+							"value": "@pipeline().parameters.extract_date_fix_dim",
 							"type": "Expression"
 						},
 						"dummy": {
@@ -386,27 +386,27 @@
 							"type": "Expression"
 						},
 						"end_date_fact": {
-							"value": "@variables('end_date_fact')",
+							"value": "@pipeline().parameters.end_date_fact",
 							"type": "Expression"
 						},
 						"start_date_fact": {
-							"value": "@variables('start_date_fact')",
+							"value": "@pipeline().parameters.start_date_fact",
 							"type": "Expression"
 						},
 						"extract_criteria_fact": {
-							"value": "@variables('extract_criteria_fact')",
+							"value": "@pipeline().parameters.extract_criteria_fact",
 							"type": "Expression"
 						},
 						"extract_date_fix_fact": {
-							"value": "@variables('extract_date_fix_fact')",
+							"value": "@pipeline().parameters.extract_date_fix_fact",
 							"type": "Expression"
 						},
 						"mode": {
-							"value": "@variables('mode')",
+							"value": "@pipeline().parameters.mode",
 							"type": "Expression"
 						},
 						"table_name": {
-							"value": "@variables('table_name')",
+							"value": "@pipeline().parameters.table_name",
 							"type": "Expression"
 						}
 					}
@@ -443,44 +443,12 @@
 			},
 			"table_name": {
 				"type": "string"
-			}
-		},
-		"variables": {
-			"extract_criteria_dim": {
-				"type": "String",
-				"defaultValue": "full"
-			},
-			"extract_date_fix_dim": {
-				"type": "String",
-				"defaultValue": "2025-12-11"
-			},
-			"dummy": {
-				"type": "Boolean",
-				"defaultValue": true
-			},
-			"end_date_fact": {
-				"type": "String",
-				"defaultValue": "2023-12-31"
-			},
-			"start_date_fact": {
-				"type": "String",
-				"defaultValue": "2023-12-01"
 			},
 			"extract_criteria_fact": {
-				"type": "String",
-				"defaultValue": "full"
+				"type": "string"
 			},
 			"extract_date_fix_fact": {
-				"type": "String",
-				"defaultValue": "2000-01-01"
-			},
-			"mode": {
-				"type": "String",
-				"defaultValue": "dev"
-			},
-			"table_name": {
-				"type": "String",
-				"defaultValue": "Z1FI3MP02"
+				"type": "string"
 			}
 		},
 		"annotations": []

@@ -80,7 +80,7 @@
 							"onInactiveMarkAs": "Skipped",
 							"dependsOn": [
 								{
-									"activity": "Notebook1_copy1",
+									"activity": "VarControl01",
 									"dependencyConditions": [
 										"Succeeded"
 									]
@@ -95,11 +95,37 @@
 									"referenceName": "P01Brick01",
 									"type": "PipelineReference"
 								},
-								"waitOnCompletion": true
+								"waitOnCompletion": true,
+								"parameters": {
+									"extract_criteria_dim": {
+										"value": "@json(activity('VarControl01').output.runOutput).extract_criteria_dim\r\n",
+										"type": "Expression"
+									},
+									"extract_date_fix_dim": {
+										"value": "@json(activity('VarControl01').output.runOutput).extract_date_fix_dim\n",
+										"type": "Expression"
+									},
+									"end_date_fact": {
+										"value": "@json(activity('VarControl01').output.runOutput).end_date_fact\n",
+										"type": "Expression"
+									},
+									"start_date_fact": {
+										"value": "@json(activity('VarControl01').output.runOutput).start_date_fact\n",
+										"type": "Expression"
+									},
+									"mode": {
+										"value": "@pipeline().parameters.mode",
+										"type": "Expression"
+									},
+									"table_name": {
+										"value": "@json(activity('VarControl01').output.runOutput).table_name_fact",
+										"type": "Expression"
+									}
+								}
 							}
 						},
 						{
-							"name": "Notebook1_copy1",
+							"name": "VarControl01",
 							"type": "DatabricksNotebook",
 							"dependsOn": [],
 							"policy": {
