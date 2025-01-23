@@ -425,6 +425,24 @@
 			"Condition3": {
 				"type": "string",
 				"defaultValue": "full"
+			},
+			"extract_criteria_dim": {
+				"type": "string"
+			},
+			"extract_date_fix_dim": {
+				"type": "string"
+			},
+			"end_date_fact": {
+				"type": "string"
+			},
+			"start_date_fact": {
+				"type": "string"
+			},
+			"mode": {
+				"type": "string"
+			},
+			"table_name": {
+				"type": "string"
 			}
 		},
 		"variables": {
