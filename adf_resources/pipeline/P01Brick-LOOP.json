@@ -69,7 +69,7 @@
 				"userProperties": [],
 				"typeProperties": {
 					"expression": {
-						"value": "@equals(variables('LoopCount'),12)",
+						"value": "@equals(variables('LoopCount'),variables('TotalLoop'))",
 						"type": "Expression"
 					},
 					"activities": [
@@ -243,6 +243,31 @@
 								"variableName": "TempCount",
 								"value": {
 									"value": "@variables('LoopCount')",
+									"type": "Expression"
+								}
+							}
+						},
+						{
+							"name": "Set Total Loop",
+							"type": "SetVariable",
+							"dependsOn": [
+								{
+									"activity": "P01Brick01",
+									"dependencyConditions": [
+										"Succeeded",
+										"Skipped"
+									]
+								}
+							],
+							"policy": {
+								"secureOutput": false,
+								"secureInput": false
+							},
+							"userProperties": [],
+							"typeProperties": {
+								"variableName": "TotalLoop",
+								"value": {
+									"value": "@json(activity('VarControl01').output.runOutput).months_diff",
 									"type": "Expression"
 								}
 							}
@@ -437,6 +462,10 @@
 			"TempCount": {
 				"type": "Integer",
 				"defaultValue": 1
+			},
+			"TotalLoop": {
+				"type": "Integer",
+				"defaultValue": 999
 			}
 		},
 		"annotations": []
