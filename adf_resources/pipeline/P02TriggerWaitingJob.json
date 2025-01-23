@@ -1,0 +1,61 @@
+{
+	"name": "P02TriggerWaitingJob",
+	"properties": {
+		"activities": [
+			{
+				"name": "Trigger Wait Job",
+				"description": "Trigger Waiting Job on the Databrick",
+				"type": "WebActivity",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 3,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"method": "POST",
+					"url": {
+						"value": "@concat(     pipeline().parameters.host_server,     '/api/2.1/jobs/run-now' )",
+						"type": "Expression"
+					},
+					"body": {
+						"value": "{\n  \"job_id\": \"@{pipeline().parameters.job_id}\",\n  \"job_parameters\": {\n    \"wait_time\": string(variables('wait_time'))\n  }\n}",
+						"type": "Expression"
+					},
+					"authentication": {
+						"type": "MSI",
+						"resource": "644352f5-68f7-4e10-af40-21904b2680f2"
+					}
+				}
+			}
+		],
+		"parameters": {
+			"host_server": {
+				"type": "string",
+				"defaultValue": "adb-1346410883415134.14.azuredatabricks.net"
+			},
+			"job_id": {
+				"type": "string",
+				"defaultValue": "923521278098169"
+			}
+		},
+		"variables": {
+			"job_status": {
+				"type": "String",
+				"defaultValue": "Running"
+			},
+			"content_type": {
+				"type": "String",
+				"defaultValue": "application/json"
+			},
+			"wait_time": {
+				"type": "Integer",
+				"defaultValue": 30
+			}
+		},
+		"annotations": []
+	}
+}
