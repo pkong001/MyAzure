@@ -1,0 +1,269 @@
+{
+	"name": "FactProfitAndLoss",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "ADLS",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Parquet",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"folderPath": "Fact/FactProfitAndLoss",
+				"fileSystem": "dw01silver"
+			},
+			"compressionCodec": "snappy"
+		},
+		"schema": [
+			{
+				"name": "col-8a2bb771-c5ec-49cf-98a9-22cee4d6631b",
+				"type": "INT64"
+			},
+			{
+				"name": "col-55916534-96f5-4e15-8653-9565ccfed514",
+				"type": "UTF8"
+			},
+			{
+				"name": "col-a92e8496-270f-491a-918b-24caf8d55526",
+				"type": "UTF8"
+			},
+			{
+				"name": "col-d5aabfea-a29a-4712-9e86-e866356dc4c2",
+				"type": "INT64"
+			},
+			{
+				"name": "col-700ef557-9851-48da-a94a-0bbb1472f836",
+				"type": "UTF8"
+			},
+			{
+				"name": "col-1d78fdb3-b7a2-4152-9c4d-17ae7c33ac79",
+				"type": "INT64"
+			},
+			{
+				"name": "col-e1032a18-708f-4e1d-acf1-31294062cad5",
+				"type": "UTF8"
+			},
+			{
+				"name": "col-f32da3bd-68b9-4d08-a165-19a35b30602d",
+				"type": "INT64"
+			},
+			{
+				"name": "col-f3ce79a6-b5e7-4ed3-a901-486ead7c9fd0",
+				"type": "UTF8"
+			},
+			{
+				"name": "col-53f6d411-6d4e-4451-b7a5-bc13f9a0775b",
+				"type": "INT64"
+			},
+			{
+				"name": "col-19b975bf-6592-443c-a8ab-da1faefe94f4",
+				"type": "UTF8"
+			},
+			{
+				"name": "col-87833bd1-b1fa-4a99-ae79-c1d42f15b775",
+				"type": "INT64"
+			},
+			{
+				"name": "col-212352fa-fd80-4f0d-9977-f8806b4f2e27",
+				"type": "UTF8"
+			},
+			{
+				"name": "col-b512b9d5-faeb-4e08-aaeb-bd0e948bc0e9",
+				"type": "INT64"
+			},
+			{
+				"name": "col-b6fb9f74-7398-45eb-aec4-3a83023cd766",
+				"type": "UTF8"
+			},
+			{
+				"name": "col-fe5ddb99-8d4d-4fc3-8137-ac9ee4e1672f",
+				"type": "INT64"
+			},
+			{
+				"name": "col-2d2d8c4f-8bfb-49f4-b4e2-20afe9a0b5e1",
+				"type": "UTF8"
+			},
+			{
+				"name": "col-811270c9-0777-4eb0-9063-254f87d20abd",
+				"type": "INT64"
+			},
+			{
+				"name": "col-e8dccb68-b2d0-4ca5-84d9-1bb4fb49bab4",
+				"type": "UTF8"
+			},
+			{
+				"name": "col-1411e861-6c54-44d9-a103-d03b78204fa0",
+				"type": "INT64"
+			},
+			{
+				"name": "col-a9e4bb6d-7b17-4cc7-8af0-48651cc1b64c",
+				"type": "UTF8"
+			},
+			{
+				"name": "col-515e429d-7724-48ff-a386-ea7d81eb5ed2",
+				"type": "INT64"
+			},
+			{
+				"name": "col-0639c7c8-8379-4277-9110-939991a6200a",
+				"type": "UTF8"
+			},
+			{
+				"name": "col-84dac897-42ad-43c8-a02e-13f4be746ffe",
+				"type": "UTF8"
+			},
+			{
+				"name": "col-341ae74e-47d6-4146-9d37-3f55eec29fa3",
+				"type": "UTF8"
+			},
+			{
+				"name": "col-b172099e-8489-4cdf-a7fc-ce41ac6274d5",
+				"type": "UTF8"
+			},
+			{
+				"name": "col-c8f0f966-2ced-4067-bd19-fa0c163ae6f8",
+				"type": "UTF8"
+			},
+			{
+				"name": "col-406db771-c678-4aac-b11c-ae94db0156a8",
+				"type": "UTF8"
+			},
+			{
+				"name": "col-48b657b9-4683-4fd6-a3a0-01eee68c9c1f",
+				"type": "UTF8"
+			},
+			{
+				"name": "col-6b9f24f2-f843-432d-a808-f9086f62fe1f",
+				"type": "UTF8"
+			},
+			{
+				"name": "col-4ed1a698-6051-4b2a-97e3-bb9097c99e1c",
+				"type": "UTF8"
+			},
+			{
+				"name": "col-31ad35f3-e77f-4273-a007-6be772029841",
+				"type": "UTF8"
+			},
+			{
+				"name": "col-c7938ce9-d55f-4d8a-a6f9-199737e665e3",
+				"type": "UTF8"
+			},
+			{
+				"name": "col-802f4d25-2758-4508-af76-2a44924b24f4",
+				"type": "UTF8"
+			},
+			{
+				"name": "col-0b08f756-68fb-4f6f-9a29-e1f9b5b58b3b",
+				"type": "UTF8"
+			},
+			{
+				"name": "col-958d57fe-b219-438e-a08f-16386db09838",
+				"type": "INT96"
+			},
+			{
+				"name": "col-b155640d-7146-4aae-9f44-560733eac19d",
+				"type": "DOUBLE"
+			},
+			{
+				"name": "col-38a17add-5f43-448e-8846-a69557fb13c9",
+				"type": "DOUBLE"
+			},
+			{
+				"name": "col-68070596-7dab-48b8-932e-e9f2fc4f2c60",
+				"type": "DOUBLE"
+			},
+			{
+				"name": "col-844b4c7d-5d84-4bc2-a4df-37c37bc2b343",
+				"type": "DOUBLE"
+			},
+			{
+				"name": "col-abe2a423-6db9-4c0a-8b24-5cbeb4d5924f",
+				"type": "DOUBLE"
+			},
+			{
+				"name": "col-7f9cbc08-be68-4ffa-9abb-2bf85977ed3b",
+				"type": "DOUBLE"
+			},
+			{
+				"name": "col-252a22c9-0410-4ec8-ae60-1995bb98c2ad",
+				"type": "DOUBLE"
+			},
+			{
+				"name": "col-37896223-af5d-4567-bb8d-b913f1babd80",
+				"type": "DOUBLE"
+			},
+			{
+				"name": "col-a105c832-d71a-447a-a861-2b9fe5e4535b",
+				"type": "DOUBLE"
+			},
+			{
+				"name": "col-01cd41db-03f5-451c-8411-4e0ae0241687",
+				"type": "DOUBLE"
+			},
+			{
+				"name": "col-0fca8cd8-88db-47aa-ad53-8c464538bc61",
+				"type": "DOUBLE"
+			},
+			{
+				"name": "col-019c345b-6a5e-4d64-bc35-398e834a62fd",
+				"type": "DOUBLE"
+			},
+			{
+				"name": "col-ff09e808-9f39-4040-a54e-94275007de05",
+				"type": "DOUBLE"
+			},
+			{
+				"name": "col-0d559162-fabe-4275-a039-3ae0dedb4163",
+				"type": "DOUBLE"
+			},
+			{
+				"name": "col-9bb24437-3c26-4076-b348-994123ef7770",
+				"type": "DOUBLE"
+			},
+			{
+				"name": "col-131d81d2-681d-4cc6-8d45-aadd8f449812",
+				"type": "DOUBLE"
+			},
+			{
+				"name": "col-61306479-5ec5-4d8a-86ed-ad57e1fb7851",
+				"type": "DOUBLE"
+			},
+			{
+				"name": "col-4f018cd4-ddc1-46a4-8b7a-1f4f38d8dcf2",
+				"type": "DOUBLE"
+			},
+			{
+				"name": "col-97054731-c7bd-48de-a908-1ee507197a93",
+				"type": "DOUBLE"
+			},
+			{
+				"name": "col-19b1a255-6bc6-44ad-a77f-b8f57e9beefb",
+				"type": "BOOLEAN"
+			},
+			{
+				"name": "col-95a47dc4-cfe3-42ae-9444-fb94af3745a3",
+				"type": "UTF8"
+			},
+			{
+				"name": "col-8cbaca1c-40e7-4174-8303-49ff2404d888",
+				"type": "INT96"
+			},
+			{
+				"name": "col-8863bb07-447a-4445-9f5e-715f07334163",
+				"type": "UTF8"
+			},
+			{
+				"name": "col-bc6e5244-4c96-49aa-a807-c813169d8b1d",
+				"type": "INT96"
+			},
+			{
+				"name": "col-fb323b46-a356-4a2c-965d-855f00c40c89",
+				"type": "UTF8"
+			},
+			{
+				"name": "col-0a4fa185-359b-4f15-8c2b-e52650f2c4e1",
+				"type": "INT96"
+			}
+		]
+	}
+}
