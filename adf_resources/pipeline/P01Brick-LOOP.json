@@ -76,6 +76,8 @@
 						{
 							"name": "P01Brick01",
 							"type": "ExecutePipeline",
+							"state": "Inactive",
+							"onInactiveMarkAs": "Succeeded",
 							"dependsOn": [
 								{
 									"activity": "VarControl01",
@@ -404,11 +406,11 @@
 			},
 			"end_date_fact": {
 				"type": "string",
-				"defaultValue": "2024-12-31"
+				"defaultValue": "2023-03-31"
 			},
 			"start_date_fact": {
 				"type": "string",
-				"defaultValue": "2024-01-01"
+				"defaultValue": "2023-01-01"
 			},
 			"extract_criteria_fact": {
 				"type": "string",
