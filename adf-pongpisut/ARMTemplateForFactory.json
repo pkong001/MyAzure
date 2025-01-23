@@ -1317,7 +1317,7 @@
 					},
 					"extract_criteria_fact": {
 						"type": "string",
-						"defaultValue": "2000-01-01"
+						"defaultValue": "full"
 					},
 					"extract_date_fix_fact": {
 						"type": "string",
