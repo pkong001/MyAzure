@@ -97,6 +97,18 @@
 								},
 								"waitOnCompletion": true,
 								"parameters": {
+									"Condition1": {
+										"value": "@pipeline().parameters.Condition1",
+										"type": "Expression"
+									},
+									"Condition2": {
+										"value": "@pipeline().parameters.Condition2",
+										"type": "Expression"
+									},
+									"Condition3": {
+										"value": "@pipeline().parameters.Condition3",
+										"type": "Expression"
+									},
 									"extract_criteria_dim": {
 										"value": "@json(activity('VarControl01').output.runOutput).extract_criteria_dim\r\n",
 										"type": "Expression"
@@ -119,6 +131,14 @@
 									},
 									"table_name": {
 										"value": "@json(activity('VarControl01').output.runOutput).table_name_fact",
+										"type": "Expression"
+									},
+									"extract_criteria_fact": {
+										"value": "@json(activity('VarControl01').output.runOutput).extract_criteria_fact",
+										"type": "Expression"
+									},
+									"extract_date_fix_fact": {
+										"value": "@json(activity('VarControl01').output.runOutput).extract_date_fix_fact",
 										"type": "Expression"
 									}
 								}
