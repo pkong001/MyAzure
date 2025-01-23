@@ -108,35 +108,32 @@
 										"type": "Expression"
 									},
 									"extract_criteria_dim": {
-										"value": "@json(activity('VarControl01').output.runOutput).extract_criteria_dim\r\n",
+										"value": "@activity('VarControl01').output.runOutput.extract_criteria_dim\n",
 										"type": "Expression"
 									},
 									"extract_date_fix_dim": {
-										"value": "@json(activity('VarControl01').output.runOutput).extract_date_fix_dim\n",
+										"value": "@pipeline().parameters.extract_date_fix_dim",
 										"type": "Expression"
 									},
 									"end_date_fact": {
-										"value": "@json(activity('VarControl01').output.runOutput).end_date_fact\n",
+										"value": "@pipeline().parameters.end_date_fact",
 										"type": "Expression"
 									},
 									"start_date_fact": {
-										"value": "@json(activity('VarControl01').output.runOutput).start_date_fact\n",
+										"value": "@pipeline().parameters.start_date_fact",
 										"type": "Expression"
 									},
 									"mode": {
 										"value": "@pipeline().parameters.mode",
 										"type": "Expression"
 									},
-									"table_name": {
-										"value": "@json(activity('VarControl01').output.runOutput).table_name_fact",
-										"type": "Expression"
-									},
+									"table_name": "s",
 									"extract_criteria_fact": {
-										"value": "@json(activity('VarControl01').output.runOutput).extract_criteria_fact",
+										"value": "@pipeline().parameters.extract_criteria_fact",
 										"type": "Expression"
 									},
 									"extract_date_fix_fact": {
-										"value": "@json(activity('VarControl01').output.runOutput).extract_date_fix_fact",
+										"value": "@pipeline().parameters.extract_date_fix_fact",
 										"type": "Expression"
 									}
 								}
