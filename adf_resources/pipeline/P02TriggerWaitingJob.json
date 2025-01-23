@@ -32,8 +32,18 @@
 						"type": "Expression"
 					},
 					"authentication": {
-						"type": "MSI",
-						"resource": "2ff814a6-3304-4ab8-85cb-cd0e6f879c1d"
+						"type": "ServicePrincipal",
+						"userTenant": "955ebd7f-b597-44e8-a47a-378925afa7a2",
+						"username": "90ffb4429022e073ed9656dcbc519a074a8a10c0a685c081ddb318cbc7459a6e",
+						"resource": "2ff814a6-3304-4ab8-85cb-cd0e6f879c1d",
+						"password": {
+							"type": "AzureKeyVaultSecret",
+							"store": {
+								"referenceName": "AzureKeyVault1",
+								"type": "LinkedServiceReference"
+							},
+							"secretName": "90ffb4429022e073ed9656dcbc519a074a8a10c0a685c081ddb318cbc7459a6e"
+						}
 					}
 				}
 			}
