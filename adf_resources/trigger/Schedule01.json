@@ -1,0 +1,47 @@
+{
+	"name": "Schedule01",
+	"properties": {
+		"annotations": [],
+		"runtimeState": "Started",
+		"pipelines": [
+			{
+				"pipelineReference": {
+					"referenceName": "P01Brick-LOOP",
+					"type": "PipelineReference"
+				},
+				"parameters": {
+					"Condition1": "fact",
+					"Condition2": "full",
+					"Condition3": "full",
+					"extract_criteria_dim": "full",
+					"extract_date_fix_dim": "2000-01-01",
+					"dummy": "true",
+					"end_date_fact": "2022-12-31",
+					"start_date_fact": "2022-01-01",
+					"extract_criteria_fact": "full",
+					"extract_date_fix_fact": "2000-01-01",
+					"mode": "dev",
+					"table_name": "Z1FI3MP01"
+				}
+			}
+		],
+		"type": "ScheduleTrigger",
+		"typeProperties": {
+			"recurrence": {
+				"frequency": "Day",
+				"interval": 1,
+				"startTime": "2025-01-23T04:03:00",
+				"endTime": "2025-01-24T18:00:00",
+				"timeZone": "SE Asia Standard Time",
+				"schedule": {
+					"minutes": [
+						0
+					],
+					"hours": [
+						7
+					]
+				}
+			}
+		}
+	}
+}
