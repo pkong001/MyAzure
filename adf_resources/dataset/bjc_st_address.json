@@ -1,0 +1,20 @@
+{
+	"name": "bjc_st_address",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "ADLS",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Parquet",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"folderPath": "share-to-bjc",
+				"fileSystem": "public-folder"
+			},
+			"compressionCodec": "snappy"
+		},
+		"schema": []
+	}
+}
